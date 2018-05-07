@@ -156,6 +156,11 @@ $baseurl: '{{ site.baseurl }}/images';
 		top: -0.5em;
 	}
 
+	.mon_titre {
+		margin-left: 2em;
+		padding-top: 1em;
+	}
+
 	hr {
 		border: 0;
 		border-bottom: solid 2px _palette(border);
@@ -459,10 +464,13 @@ $baseurl: '{{ site.baseurl }}/images';
 
 /* Icon */
 
+
+
 	.icon {
 		@include icon;
 		border-bottom: none;
 		position: relative;
+
 
 		> .label {
 			display: none;
@@ -503,7 +511,13 @@ $baseurl: '{{ site.baseurl }}/images';
 		}
 	}
 
+
 /* Image */
+
+	.lien {
+		margin-left: auto;
+		margin-right: auto;
+	}
 
 	.image {
 		border-radius: 3px;
@@ -550,6 +564,7 @@ $baseurl: '{{ site.baseurl }}/images';
 
 /* List */
 
+
 	ol {
 		list-style: decimal;
 		margin: 0 0 _size(element-margin) 0;
@@ -557,6 +572,7 @@ $baseurl: '{{ site.baseurl }}/images';
 
 		li {
 			padding-left: 0.25em;
+			color : #000;
 		}
 	}
 
@@ -576,6 +592,7 @@ $baseurl: '{{ site.baseurl }}/images';
 			li {
 				border-top: solid 1px _palette(border);
 				padding: 0.5em 0;
+
 
 				&:first-child {
 					border-top: 0;
@@ -813,7 +830,7 @@ $baseurl: '{{ site.baseurl }}/images';
 		border-radius: 3px;
 		border: 0;
 		box-shadow: inset 0 0 0 2px _palette(border);
-		color: _palette(fg-bold);
+	  color: _palette(fg-bold);
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.8em;
@@ -858,12 +875,13 @@ $baseurl: '{{ site.baseurl }}/images';
 		}
 
 		&.special {
-			background-color: _palette(accent6, bg);
+			//background-color: _palette(accent6, bg);
+			background-color: #FFCE00;
 			box-shadow: none !important;
 			color: _palette(accent6, fg-bold) !important;
 
 			&:hover {
-				background-color: lighten(_palette(accent6, bg), 5) !important;
+				background-color: lighten(#FFCE00, 15) !important;
 			}
 
 			&:active {
@@ -965,7 +983,7 @@ $baseurl: '{{ site.baseurl }}/images';
 		@include vendor('display', 'flex');
 
 		.image {
-			@include vendor('order', '1');
+		//	@include vendor('order', '1');
 			border-radius: 0;
 			width: 40%;
 
@@ -1134,7 +1152,9 @@ $baseurl: '{{ site.baseurl }}/images';
 				color: _palette($p, fg-light) !important;
 			}
 
-		// Icon
+		// Icon;
+
+
 
 			.icon {
 				&.major {
@@ -1237,18 +1257,22 @@ $baseurl: '{{ site.baseurl }}/images';
 
 		&.alt {
 			padding: 0;
+			//padding: -top: 0;
 		}
 
 		&.style1 {
-			@include wrapper(accent1);
+			//@include wrapper(accent1);
+			background-color: #eac769;
 		}
 
 		&.style2 {
-			background-color: _palette(bg);
+		//	background-color: _palette(bg);
+		background-color: #3a4d5e;
 		}
 
 		&.style3 {
-			@include wrapper(accent5);
+			//@include wrapper(accent5);
+			background-color: #dfa995;
 		}
 
 		&.style4 {
@@ -1293,7 +1317,8 @@ $baseurl: '{{ site.baseurl }}/images';
 		@include vendor('transform', 'translateX(20em)');
 		@include vendor('transition', 'transform #{_duration(menu)} ease');
 		-webkit-overflow-scrolling: touch;
-		background: _palette(accent1, bg);
+		//background: _palette(accent1, bg);
+		background-color: #3a4d5e;
 		color: _palette(accent1, fg-bold);
 		height: 100%;
 		max-width: 80%;

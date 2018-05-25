@@ -49,6 +49,21 @@ social:
   #forumbee:
   #tripadvisor:
   #amazon:
+  defaults:
+    -
+     scope:
+         path: ""
+     values:
+         author: "moi"
+         layout: monLayout
+         lang: fr
+         base-url: "/"
+    -
+      scope:
+             path: en
+         values:
+             lang: en
+             base-url: "/en/"
 
 # Build settings
 markdown: kramdown

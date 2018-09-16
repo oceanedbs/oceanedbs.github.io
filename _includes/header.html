@@ -24,12 +24,9 @@
             <li><a href="index.html/#contact"> Contact </a> </li>
             <li> Langue <div class="lang">
               <ul>
-                  {% for post in posts %}
-                  <li>
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                  </li>
-                  {% endfor %}
-                </ul>
+                <li><a class="FR" href="{{ site.base-url }}{{ postFR.url }}">FR</a></li>
+                <li><a class="EN" href="{{ site.base-url }}{{ postEN.url }}">EN</a></li>
+              </ul>
            </div></ul>
           </ul>
         </div>

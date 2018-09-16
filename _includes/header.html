@@ -28,8 +28,8 @@
           <a class="en" href="{{ site.baseurl }}/">FR</a>
           <a class="de" href="{{ site.baseurl | append: "/en" }}">EN</a>
         {% else %}
-          <a class="en" href="{{ site.baseurl | append: page.handle }}">FR</a>
-          <a class="de" href="{{ site.baseurl | append: "/en" | append: page.handle }}">EN</a>
+          <a class="en" href="{{ site.baseurl | append: page.path }}">FR</a>
+          <a class="de" href="{{ site.baseurl | append: "/en" | append: page.path }}">EN</a>
         {% endif %}
       </nav>
            </div></ul>

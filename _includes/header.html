@@ -23,10 +23,17 @@
             {% endfor %}
             <li><a href="index.html/#contact"> Contact </a> </li>
             <li> Langue <div class="lang">
-              <ul>
-                <li><a class="FR" href="{{ site.base-url }}{{ postFR.url }}">FR</a></li>
-                <li><a class="EN" href="{{ site.base-url }}{{ postEN.url }}">EN</a></li>
-              </ul>
+              <nav class="language-switcher">
+        {% if page.name contains "index" %}
+          <a class="en" href="{{ site.baseurl }}/">EN</a>
+          <a class="de" href="{{ site.baseurl | append: "/de" }}">DE</a>
+          <a class="it" href="{{ site.baseurl | append: "/it" }}">IT</a>
+        {% else %}
+          <a class="en" href="{{ site.baseurl | append: page.handle }}">EN</a>
+          <a class="de" href="{{ site.baseurl | append: "/de" | append: page.handle }}">DE</a>
+          <a class="it" href="{{ site.baseurl | append: "/it" | append: page.handle }}">IT</a>
+        {% endif %}
+      </nav>
            </div></ul>
           </ul>
         </div>

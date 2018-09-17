@@ -25,11 +25,11 @@
             <li> Langue <div class="lang">
               <nav class="language-switcher">
         {% if page.name contains "index" %}
-          <a class="en" href="{{ site.baseurl }}/">FR</a>
-          <a class="de" href="{{ site.baseurl | append: "/en" | append "/index.html"}}">EN</a>
+          <a class="fr" href="{{ site.baseurl }}/">FR</a>
+          <a class="en" href="{{ site.baseurl | append: "/en" }}">EN</a>
         {% else %}
-          <a class="en" href="{{ site.baseurl | append: page.title }}">FR</a>
-          <a class="de" href="{{ site.baseurl | append: "/en" | append: page.tittle }}">EN</a>
+          <a class="fr" href="{{ site.baseurl | append: "/index.html" }}">FR</a>
+          <a class="en" href="{{ site.baseurl | append: "/en" | append: "/index.html" }}">EN</a>
         {% endif %}
       </nav>
            </div></ul>

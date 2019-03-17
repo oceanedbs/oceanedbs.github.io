@@ -17,21 +17,7 @@ social:
   github: https://github.com/oceanedbs
   linkedin-square: https://www.linkedin.com/in/océane-dubois-184a50119/
   facebook-official: https://www.facebook.com/oceanedphoto/?ref=br_rs
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      author: "Océane"
-      #   layout: monLayout
-      lang: fr
-      base-url: "/"
-  -
-    scope:
-      path: en
-    values:
-      lang: en
-      base-url: "/en/"
+
   #email: /contact/
   #flickr:
   #instagram:

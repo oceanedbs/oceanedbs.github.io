@@ -6,11 +6,9 @@ language : en
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<h2>{{ site.title }}</h2>
-							<p>{{ site.description | markdownify }}</p>
-							<!--<ul class="actions">
-								<li><a href="#" class="button special">Découvrir ! </a></li>
-							</ul> -->
+							<h2>{{ site.t['title'] }}</h2>
+							<p>{{ site.t['description'][page.lang] | markdownify }}</p>
+
 						</div>
 						<a href="#one" class="more scrolly">Discover</a>
 					</section>
@@ -198,7 +196,7 @@ python.</p>
 						<div class="inner">
 							<header>
 								<h2 id="contact">Contact</h2>
-								<p>Vous pouvez me contacter via ce bouton</p>
+								<p>You can contact me with this button</p>
 							</header>
 							<ul class="actions vertical">
 								<li><a href="mailto:oceanedubois1805@gmail.com" class="button fit special">Contact</a></li>

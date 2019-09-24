@@ -18,6 +18,7 @@
 
             {% for my_page in site.pages %}
             {% if my_page.title %}
+            {% if lang=fr %}
             <li><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
             {% endif %}
             {% endfor %}

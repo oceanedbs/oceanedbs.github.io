@@ -1,36 +1,56 @@
 <!-- Header -->
 <header id="header"{% if page.layout == 'landing' %} class="alt"{% endif %}>
+  {% if page.lang == 'fr' %}
   <h1><a href="/index.html">{{ site.t['title'] }}</a></h1>
+  {%else%}
+  <h1><a href="/en/index.html">{{ site.t['title'] }}</a></h1>
+  {%endif%}
+<center>
+{% assign posts=site.posts | where:"ref", page.ref | sort: 'lang' %}
+{% for post in posts %}
+     <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
+{% endfor %}
+
+{% assign pages=site.pages | where:"ref", page.ref | sort: 'lang' %}
+{% for page in pages %}
+    <a href="{{ page.url }}" class="{{ page.lang }}">{{ page.lang }}</a>  
+{% endfor %}
+</center>
+
   <nav id="nav">
     <ul>
       <li class="special">
         <a href="#menu" class="menuToggle"><span>Menu</span></a>
         <div id="menu">
           <ul>
-            <li><a href="/index.html">Page d'accueil</a></li>
-            <li><a href="/index.html#education">Education</a></li>
-            <li><a href="/index.html#projets_informatique">Projets informatiques</a></li>
-            <li><a href="/index.html#experience">Experiences professionelles informatiques</a></li>
-            <li><a href="/index.html#projets_associatifs">Projets associatifs</a></li>
-            <li><a href="/index.html#experienceAutre">Autres Experiences Professionelles</a></li>
-            <li><a href="/posts/competence.html"> Compétence </a></li>
-            <li><a href="/posts/information.html"> Information </a></li>
+            {% if page.lang == 'fr' %}
 
+              <li><a href="/index.html">Page d'accueil</a></li>
+              <li><a href="/index.html#education">Education</a></li>
+              <li><a href="/index.html#projets_informatique">Projets informatiques</a></li>
+              <li><a href="/index.html#experience">Experiences professionelles informatiques</a></li>
+              <li><a href="/index.html#projets_associatifs">Projets associatifs</a></li>
+              <li><a href="/index.html#experienceAutre">Autres Experiences Professionelles</a></li>
+              <li><a href="/posts/competence.html"> Compétence </a></li>
+              <li><a href="/posts/information.html"> Information </a></li>
+              <li><a href=https://oceanedbs.github.io/index.html#contact"> Contact </a> </li>
+            {%endif%}
 
+            {% if page.lang == 'en' %}
 
+              <li><a href="/en/index.html">Home Page</a></li>
+              <li><a href="/en/index.html#education">Education</a></li>
+              <li><a href="/en/index.html#projets_informatique">Computer Science Projetct</a></li>
+              <li><a href="/en/index.html#experience">Work Experience in Computer Science</a></li>
+              <li><a href="/en/index.html#projets_associatifs">Community Project</a></li>
+              <li><a href="/en/index.html#experienceAutre">Other Experiences</a></li>
+              <li><a href="/en/posts/competence.html"> Competence </a></li>
+              <li><a href="/en/posts/information.html"> Information </a></li>
+              <li><a href=https://oceanedbs.github.io/en/index.html#contact"> Contact </a> </li>
+            {%endif%}
+            </ul>
+           </div>
 
-            {% for my_page in site.pages %}
-            {% if my_page.title %}
-            {% if lang=fr %}
-            <li><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-            <li><a href=https://oceanedbs.github.io/index.html#contact"> Contact </a> </li>
-
-
-
-           </div></ul>
 
 
   </nav>

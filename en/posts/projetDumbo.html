@@ -1,21 +1,22 @@
 ---
 layout: page
-title: Projet Dumbo
+title: Dumbo Project
 lang: en
 ref: dumbo
 ---
       <section>
-        <h4> Projet Dumbo : Des véhicules autonomes qui communiquent entre eux et avec leur(s) passager(s) (EN)</h4>
+        <h4> Dumbo project : Autonomous vehicules that can communicate together and with their passengers</h4>
 
-        <p> Comment faire pour que les utilisateurs des futurs véhicules autonomes leurs fasse plus confiance ? </p>
-        <p> Le projet Dumbo propose une solution permettant de lutter contre la défaillance des capteurs (trop de luminosité, trop de brouillard ect ... peuvent perturber les capteurs d'une voiture). Pour pallier à cela nous proposont la mise en place d'une communication V2V (Vehicule to Vehicule), permetant aux voitures de communiquer les données de leurs capteurs entre elles. Nous avons présenté le cas simple de 2 voitures qui se suivent en ligne droite. La pemière est équipée d'un détecteur d'obstacle à ultrasons, la deuxième n'en a pas, on considère qu'il est cassé. Les deux voitures communiquent entre elles par ondes radio. Les 2 voitures roulent, la première détecte un obstacle, s'arrête et prévient la voiture derrière elle qu'elle s'est arrêtée. La deuxième voiture s'arrête et ainsi on évite la collision qui aurait pu être fatidique pour les usagers. </p>
-        <p>De plus, à l'intérieur du véhicule, une interface permet à l'utilisateur de visualiser la carte avec les voitures détectées autour. Un code couleur permet à l'utilisateur de savoir si les voitures autour de lui freinent, accélèrent ... Ainsi il peut mieux comprendre le comportement de sa propre voiture (ex : sur l'autoroute, sa voiture freine, en regardant l'interface il comprend que c'est parce que 3 voitures devant, une voiture à commencé à freiné et que donc sa voiture anticipe (mieux que lui) la situation).</p>
-        <p> Ce projet à été désigné comme projet vainqueur du Hackathon UTC 2017 en partenariat avec Faurecia </p>
-        <p> On parle de nous <a href="https://www.utc.fr/utc/actualites-de-lutc/breves/le-cockpit-du-futur-au-hackathon-de-lutc.html">ici</a>  et <a href="https://www.france-faurecia.fr/tempete-de-neurones-lutc"> là </a></p>
+        <p> What can we do to improve autonomous vehicule reliability so that passenger will trust them more ? </p>
+        <p> Dumbo's project has a solution in order to avoid problems when sensors are broken or are giving false informations (too much light, fog ...). We developed a solution that allows vehicules to communicate between each other, so if a sensor is broken , the vehicule can still use data's from the other vehicules (V2V communication) around to drive its passenger to their destnation. <br>
+          We've presented a simple case : 2 cars are following each other in a straight line. The first one has an ultrasonic sensor to detect obstacles. The second one doesn't have one (it's broken). The 2 cars are driving and sending informations between each other via radio.  The first car detects a pedestrian crossing the road, it stops and informs the second one that it has to stop too. The second car stops, an accident has been avoided. </p>
+        <p>Inside of the car, we've built a graphical interface that allows passengers to visualize datas of the vehicule around. The main point is to be able to see if vehicules around are slowing down or not. For exemple on the highway, if your car is suddenly slowing down and you have no idea why, you could check the interface and see that many cars in front of you are slowing down, your car is just anticipating this and is already slowing down. You can easily see if cars around are slowing down or speeding up thanks to colors (red if slowing down, green when speeding up).</p>
+        <p> This project has been choosen as the winning project of UTC's hackathon 2017, sponsored by Faurecia.</p>
+        <p> They are talking about us <a href="https://www.utc.fr/utc/actualites-de-lutc/breves/le-cockpit-du-futur-au-hackathon-de-lutc.html">here</a>  and <a href="https://www.france-faurecia.fr/tempete-de-neurones-lutc"> here </a></p>
         <img src="/images/dumbo.jpg" width="50%"/>
         <iframe width="976" height="549" src="/ressources/dumbo.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
-        <p><a href="https://gitlab.utc.fr/loriotbe/dumbo.git" target="_blank"> Le code </a></p>
+        <p><a href="https://gitlab.utc.fr/loriotbe/dumbo.git" target="_blank"> The complete code </a></p>
       </section>

@@ -1,14 +1,14 @@
 ---
 layout: page
-title: Projet Hermès
+title: Hermes Project
 lang: en
 ref: hermes
 ---
 			<section>
-			<h4> Projet Hermès : téléopération de véhicule autonome (EN) </h4>
-      <p> Le projet Hermès consiste donc à la téléopération d'un véhicule autonome. </p>
-      <p> Depuis l'interface de téléopération, le téléopérateur se connecte au véhicule (via l'adresse IP du véhicule) et peut définir une mission (point d'arrivé, vitesse, conduite à l'anglaise ou à la française ...), il envoie ensuite cette mission au véhicule. Puis, lorsqu'il le souhaite il appuie sur "Start", mettant en marche le véhicule. Ce dernier execute donc la mission. Un contrôleur latéral et longitudinal ont été implémentés afin de suivre au mieux le trajet ainsi que la vitesse demandée. </p>
-      <p>Lorsque le véhicule détecte des obstacles grâce à son Lidar, il s'arrête et demande de l'aide au téléopérateur. Ce dernier peut donc définir une déviation afin de contourner l'obstacle. La définition de cette déviation est facilitée grâce aux boîtes englobantes symbolisant les obstacles, et des points de contrôles que l'utilisateur peut déplacer afin de créer un nouveau chemin. Un algorithme des courbes de Bézier est implémenté entre chaque point de contrôle et la largeur de la voiture est aussi simulée, permettant au téléopérateur de mieux se rendre compte si le nouveau chemin va être réalisable ou non. </p>
+			<h4> Hermes  Project : autonomous vehicule teleoperation </h4>
+      <p> The Hermes Project is an application that allows a vehicule to be teleoperated. </p>
+      <p> From the intereface the teleoperator can connect itself to the vehicule (thanks to the vehciule's IP address), he can then create a mission (end point of the mission, maximum speed ... ), and then he sends the mission to the car. He can start the mission whenever he wants, stop it or abort it too. When "Start" is pressed on the interface, the vehicule begins the mission. Inside the vehicule, various controller have been implemented to be sure that the vehicules follows the right trajectory with the right speed. </p>
+      <p>When the vehicules encounters an obstacles, the obstacle is detected thanks to a LiDar, if the obstacle is on the vehicule path, it stops, and ask for help to the teleoperator. The teleoperator can now define a new trajectory in order to avoid a collision   The new path definition implements Bezier algorithm, we've also simulated the vehicule's width so that the teleoperator knows if the new path really avoid a collision</p>
       <iframe width="976" height="549" src="https://www.youtube.com/embed/Yfy2fOdhzhc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <p> Télécharger le rapport <a href="/ressources/Hermes.pdf"> ici </a></p>
+  <p> Download the report <a href="/ressources/Hermes.pdf"> here </a></p>
     	</section>

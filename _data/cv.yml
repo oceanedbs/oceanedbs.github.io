@@ -2,31 +2,37 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
+      value: Océane Dubois
     - name: Date of Birth
-      value: 14th March 1879
+      value: 19th June 1997
     - name: Languages
-      value: English, German
+      value: French, English, Italian, German
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: PhD Student
+      institution: Institut des Systèmes Intelligents et de Robotique (ISIR), Sorbonne Université, Paris, France
+      year: 2021-now
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
+        - PhD student in the IRIS Team
+        - Supervised by Nathanaël Jarrassé
+        - Working on human coordination modification when exposed repeatedly to a robotic upper-arm exoskeleton
+        - title: Teaching Assistant
           contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+            - C Programming teaching classes
+            - C Student projets supervision
+    - title: Master in Biomechanics and Bioengineering
+      institution: Université de Technologie de Compiègne (UTC), Compiègne, France
+      year: 2020-2021
       description:
-        - Description 1.
-        - Description 2.
+        - Master classes during the last year of engineering school
+        - Graduated in September 2021
+    - title: Computer Science engieneer, major in Real-Time Systems and Embedded Systems
+      institution: Université de Technologie de Compiègne (UTC), Compiègne, France
+      year: 2015-2021
+      description:
+        - Graduated in September 2021
 
 - title: Experience
   type: time_table

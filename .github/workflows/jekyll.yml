@@ -58,14 +58,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-      - name: Install Node.js for Mermaid CLI
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
+    steps: 
       - name: Install Mermaid CLI
         run: npm install -g @mermaid-js/mermaid-cli
 
@@ -76,3 +69,12 @@ jobs:
 
       - name: Install Jupyter
         run: pip install jupyter
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Install Node.js for Mermaid CLI
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+     

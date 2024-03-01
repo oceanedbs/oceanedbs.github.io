@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /blog/
-title: Last News
+title: news
 nav: true
 nav_order: 5
 pagination:

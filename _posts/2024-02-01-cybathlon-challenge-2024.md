@@ -13,7 +13,7 @@ categories: research
 featured: true
 ---
 
-
+More about my research [here]({% post_url 2024-01-01-more-about-research %})
 
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">

@@ -2,7 +2,7 @@
 
 I started practicing triathlon in 2022.
 
-Triathlon : 
+Personal Bests : 
 <ul>
     <li> T24 Le Touquet - 24h Triathlon in teams of 6 - 10km of swim, 353,40 km of bike and 115km of run in 24h - 7/18 mix team </li> 
     <li> Impérial triathlon - June 2024 - (M : 1500m swim / 39km bike / 10km run) : 3h17min18, 26th/34 women, 17th/23 senior women</li>

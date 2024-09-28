@@ -1,6 +1,6 @@
 # Running
 
-I'm running regularly since 2020 and completed my first marathon in 2021. 
+I'm running regularly since 2020 and completed my first marathon in 2021. I'm now training for Ultra-trails.
 
 Actual Personal Bests : 
 <ul>

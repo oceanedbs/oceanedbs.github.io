@@ -3,8 +3,8 @@ layout: post
 date: 2024-01-01 15:09:00
 inline : false
 related_posts: false
-title: My research project
-description: My research project consists in understanding  better human-exoskeleton interactions
+title: My PhD thesis project
+description: My PhD project consists in understanding better human-exoskeleton interactions
 tags:  research
 categories: research
 featured: true

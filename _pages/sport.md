@@ -2,7 +2,7 @@
 layout: profiles
 permalink: /sport/
 title: sport
-description: Running and Triathlon
+description: Running, Triathlon and Other
 nav: true
 nav_order: 4
 
@@ -18,6 +18,12 @@ profiles:
   - align: right
     image: triathlon_2.png
     content: about_triathlon.md
+    image_circular: false # crops the image to make it circular
+    more_info: >
+
+  - align: left
+    image: hyrox.png
+    content: other_sport.md
     image_circular: false # crops the image to make it circular
     more_info: >
      

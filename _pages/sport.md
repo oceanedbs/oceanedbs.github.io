@@ -15,8 +15,8 @@ profiles:
     image_circular: false # crops the image to make it circular
     more_info: >
      
-  - align: left
-    image: triathlon.png
+  - align: right
+    image: triathlon_2.png
     content: about_triathlon.md
     image_circular: false # crops the image to make it circular
     more_info: >

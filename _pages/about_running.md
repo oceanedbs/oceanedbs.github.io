@@ -13,6 +13,7 @@ Actual Personal Bests :
 
 Trail : 
 <ul>
+    <li> Ultra-Trail des montagnes du Jura - La Franco-Suisse - 105km - 4400m D+ - 19h47 - 538/1200 overall - 47/120 women - 14/21 senior women </li>
     <li> XTerra Tahiti Trail - May 2024 - 44km - 1900 m D+ - 9h17min34 - 13/46 woman, 4th senior woman </li>
     <li> Ultra-Trail Evre-Mauges - March 2024 - 90km - 2200m D+ - 14h15min30 - 3rd Woman ex-aequo </li>
     <li> Trail des Beaux-Monts - September 2023 - 40km - 1500m D+ - 5h15min28 - 3rd Woman</li>

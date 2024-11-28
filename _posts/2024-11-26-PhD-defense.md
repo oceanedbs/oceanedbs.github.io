@@ -4,7 +4,7 @@ title: PhD defense
 date: 2024-11-26 09:00:00
 description: PhD defense "Characterizing the after-effects of wearing an upper-limb exoskeleton on inter-joint coordination"
 tags: research
-thumbnail: assets/img/post_preview/phd_defense.png
+thumbnail: assets/img/post_preview/phd_defense.jpg
 categories: research
 featured: true
 ---
@@ -34,6 +34,6 @@ Initial results reveal that joint-level perturbations modify inter-joint coordin
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpeg" title="PhD defense" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpg" title="PhD defense" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>

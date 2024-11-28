@@ -13,13 +13,13 @@ I defended my Phd, entitled "Characterizing the after-effects of wearing an uppe
 
 The jury was composed of:
 
-    Jan Babic (Reviewer): Professor, Jozef Stefan Institute, Ljubljana, Slovenia
-    Bruno Watier (Reviewer): Professor, LAAS, University of Toulouse III, Toulouse
-    Catherine Achard (Examiner): Professor, ISIR, Sorbonne University, Paris
-    Lorenzo Masia (Examiner): Professor, MIRMI, Technical University of Munich, Germany
-    Pauline Maurice (Examiner): CNRS Researcher, LORIA, University of Lorraine, Nancy
-    Nathanaël Jarrassé (Thesis Director): CNRS Research Director, ISIR, Sorbonne University, Paris
-    Agnès Roby-Brami (Advisor): INSERM Research Director, ISIR, Sorbonne University, Paris
+Jan Babic (Reviewer): Professor, Jozef Stefan Institute, Ljubljana, Slovenia
+Bruno Watier (Reviewer): Professor, LAAS, University of Toulouse III, Toulouse
+Catherine Achard (Examiner): Professor, ISIR, Sorbonne University, Paris
+Lorenzo Masia (Examiner): Professor, MIRMI, Technical University of Munich, Germany
+Pauline Maurice (Examiner): CNRS Researcher, LORIA, University of Lorraine, Nancy
+Nathanaël Jarrassé (Thesis Director): CNRS Research Director, ISIR, Sorbonne University, Paris
+Agnès Roby-Brami (Advisor): INSERM Research Director, ISIR, Sorbonne University, Paris
 
 
 Summary:
@@ -34,6 +34,6 @@ Initial results reveal that joint-level perturbations modify inter-joint coordin
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpg" title="PhD defense" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpeg" title="PhD defense" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>

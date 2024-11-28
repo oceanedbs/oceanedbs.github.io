@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Exhibiting 
-date: 2024-11-22 15:09:00
+date: 2024-11-25 15:09:00
 inline: false
 related_posts: false
 tags: photography

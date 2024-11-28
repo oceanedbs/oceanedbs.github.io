@@ -121,7 +121,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Océane Dubois # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_description: All latest informations are here
 permalink: /blog/:year/:title/
 
 # Pagination

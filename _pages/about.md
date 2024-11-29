@@ -20,6 +20,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I'm a PhD Stutdent at the [Institut des Systèmes Intelligents et de Robotique](https://www.isir.upmc.fr/) (ISIR), suppervised by Nathanaël Jarrassé. My work consists in studying human upper-limb movement variability when repeatedly exposed to an exoskeleton. 
+I'm a PhD Stutdent at the [Institut des Systèmes Intelligents et de Robotique](https://www.isir.upmc.fr/) (ISIR), suppervised by Nathanaël Jarrassé. My work consists in studying human upper-limb movement variability when repeatedly exposed to an exoskeleton.
 
-I also practice photography and running. 
+I also practice photography and running.

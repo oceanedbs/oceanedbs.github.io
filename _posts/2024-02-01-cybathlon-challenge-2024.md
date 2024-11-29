@@ -15,7 +15,6 @@ featured: true
 
 More about my research [here]({% post_url 2024-01-01-more-about-research %})
 
-
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2024_02_cybathlon/2.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2024_02_cybathlon/3.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>

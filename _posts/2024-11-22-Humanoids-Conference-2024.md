@@ -7,6 +7,7 @@ tags: research
 categories: research
 featured: true
 ---
-I presented, at the Humanoids 2024 conference, my poster about my work entitled :  Identifying Individual Characteristics Influencing Post-Adaptation of Motor Behavior in Upper-Limb Exoskeleton Users. This work was done thanks to Agnès Roby-Brami, Ross Pary and Nathanaël Jarrassé. 
+
+I presented, at the Humanoids 2024 conference, my poster about my work entitled : Identifying Individual Characteristics Influencing Post-Adaptation of Motor Behavior in Upper-Limb Exoskeleton Users. This work was done thanks to Agnès Roby-Brami, Ross Pary and Nathanaël Jarrassé.
 
 The paper liked to this presentation can be found in my publications.

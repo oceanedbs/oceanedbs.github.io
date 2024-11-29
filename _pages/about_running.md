@@ -2,7 +2,8 @@
 
 I'm running regularly since 2020 and completed my first marathon in 2021. I'm now training for Ultra-trails.
 
-Actual Personal Bests : 
+Actual Personal Bests :
+
 <ul>
     <li>10km : 45'37 (10km d'Adidas Paris - 2022) </li>
     <li>Half-marathon : 1h47min00 (Paris - 2022) </li>
@@ -11,7 +12,8 @@ Actual Personal Bests :
 
 </ul>
 
-Trail : 
+Trail :
+
 <ul>
     <li> Ultra-Trail des montagnes du Jura - La Franco-Suisse - 105km - 4400m D+ - 19h47 - 538/1200 overall - 47/120 women - 14/21 senior women </li>
     <li> XTerra Tahiti Trail - May 2024 - 44km - 1900 m D+ - 9h17min34 - 13/46 woman, 4th senior woman </li>
@@ -20,6 +22,5 @@ Trail :
     <li> Trail d'Auffagis - March 2023 - 44km - 1550mD+ - 5h54min20 </li>
     <li> Trail des Flambeaux - Novembre 2021 - 18km by night - 400mD+ - 1h44min02 - 10/61 woman </li>
     <li> Trail des Echelles de la mort - September 2021 - 12km by night - 400mD+ - 1h16min14 - 8/68 woman, 3rd senior woman </li>
-
 
 </ul>

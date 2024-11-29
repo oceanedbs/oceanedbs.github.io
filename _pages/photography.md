@@ -8,18 +8,12 @@ nav: true
 nav_order: 3
 ---
 
-I started to steal my parents camera when I was 10, got my first camera at 15 and then never stoped. 
-Today I use my camera mostly to capture small moments of the every day life and to document my work. 
+I started to steal my parents camera when I was 10, got my first camera at 15 and then never stoped.
+Today I use my camera mostly to capture small moments of the every day life and to document my work.
 
 Here are exemple of few pictures and video I've taken in the past years.
 
-
-
-
-
 Sound of Love
-
-
 
 <ul>
  {% if page.pagination.enabled %}
@@ -28,7 +22,7 @@ Sound of Love
       {% assign postlist = site.posts %}
     {% endif %}
 
-  {% for post in site.categories.photography %}
+{% for post in site.categories.photography %}
 
     {% if post.external_source == blank %}
       {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
@@ -84,7 +78,8 @@ Sound of Love
               {% endfor %}
           {% endif %}
     </p>
-  {% if post.thumbnail %}
+
+{% if post.thumbnail %}
 
 </div>
 
@@ -94,13 +89,10 @@ Sound of Love
 </div>
 {% endif %}
       {% endfor %}
-  
+
 
   </ul>
 
 {% if page.pagination.enabled %}
 {% include pagination.liquid %}
 {% endif %}
-
-
-

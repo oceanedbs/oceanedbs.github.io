@@ -14,7 +14,7 @@ profiles:
     content: about_running.md
     image_circular: false # crops the image to make it circular
     more_info: >
-     
+
   - align: right
     image: triathlon_2.png
     content: about_triathlon.md
@@ -26,5 +26,4 @@ profiles:
     content: other_sport.md
     image_circular: false # crops the image to make it circular
     more_info: >
-     
 ---

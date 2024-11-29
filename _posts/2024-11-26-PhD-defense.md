@@ -21,7 +21,6 @@ Pauline Maurice (Examiner): CNRS Researcher, LORIA, University of Lorraine, Nanc
 Nathanaël Jarrassé (Thesis Director): CNRS Research Director, ISIR, Sorbonne University, Paris
 Agnès Roby-Brami (Advisor): INSERM Research Director, ISIR, Sorbonne University, Paris
 
-
 Summary:
 
 There is growing interest in assistive robotics, particularly wearable devices such as exoskeletons. These systems interact not only with the user's hands in task space but also with their limbs in joint space to provide optimal support. However, while the effects of robotic interactions on the hand have been widely studied, joint-level perturbations remain poorly understood. The complexity of studying such interactions lies in the redundancy of the human body: the same task-space movement (e.g., hand displacement) can be achieved using different combinations of joint movements (shoulder, elbow, wrist).

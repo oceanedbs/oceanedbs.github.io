@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Exhibiting 
+title: Exhibiting
 date: 2024-11-25 15:09:00
 inline: false
 related_posts: false
@@ -10,7 +10,7 @@ categories: photography
 featured: true
 ---
 
-Exhibition in Compiègne 
+Exhibition in Compiègne
 
 ---
 

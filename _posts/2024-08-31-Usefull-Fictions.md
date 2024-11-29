@@ -10,11 +10,11 @@ categories: photography
 featured: true
 ---
 
-Participation to the Art and Science summer school : Useful fictions. Creation of zoïmorphism. 
+Participation to the Art and Science summer school : Useful fictions. Creation of zoïmorphism.
 
 ---
 
-Group of 6 
+Group of 6
 Zoimorphism
 Add vidéo
 

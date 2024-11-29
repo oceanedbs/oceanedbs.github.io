@@ -5,7 +5,7 @@ title: cv
 nav: true
 nav_order: 6
 cv_pdf: CV_Oceane_Dubois.pdf
-description: 
+description:
 toc:
   sidebar: left
 ---

@@ -20,7 +20,5 @@ I took part in developing a solution to aid Etienne, a wheelchair user, in safel
 
 The TOM (Tikkun Olam Makers) Hackathon is an international initiative uniting engineers, designers, makers, and end users to create practical, innovative technologies that enhance the quality of life for individuals with disabilities. This year's edition brought together participants from diverse backgrounds for an intense two-day collaboration, demonstrating the power of technology to transform daily life.
 
-<video width="420" height="315" controls>
-    <source src="https://youtu.be/YbwRYdWsCLY" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+
+{% include youtube.html id="YbwRYdWsCLY" %}

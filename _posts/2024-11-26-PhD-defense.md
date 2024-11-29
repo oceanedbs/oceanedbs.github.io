@@ -12,16 +12,17 @@ featured: true
 I defended my Phd, entitled "Characterizing the after-effects of wearing an upper-limb exoskeleton on inter-joint coordination", and supervised by Nathanaël Jarrassé on the 26th of November 2024
 
 The jury was composed of:
+<ul>
+    <li>Jan Babic (Reviewer): Professor, Jozef Stefan Institute, Ljubljana, Slovenia</li>
+    <li>Bruno Watier (Reviewer): Professor, LAAS, University of Toulouse III, Toulouse</li>
+    <li>Catherine Achard (Examiner): Professor, ISIR, Sorbonne University, Paris</li>
+    <li>Lorenzo Masia (Examiner): Professor, MIRMI, Technical University of Munich, Germany</li>
+    <li>Pauline Maurice (Examiner): CNRS Researcher, LORIA, University of Lorraine, Nancy</li>
+    <li>Nathanaël Jarrassé (Thesis Director): CNRS Research Director, ISIR, Sorbonne University, Paris</li>
+    <li>Agnès Roby-Brami (Advisor): INSERM Research Director, ISIR, Sorbonne University, Paris</li>
+</ul>
 
-Jan Babic (Reviewer): Professor, Jozef Stefan Institute, Ljubljana, Slovenia
-Bruno Watier (Reviewer): Professor, LAAS, University of Toulouse III, Toulouse
-Catherine Achard (Examiner): Professor, ISIR, Sorbonne University, Paris
-Lorenzo Masia (Examiner): Professor, MIRMI, Technical University of Munich, Germany
-Pauline Maurice (Examiner): CNRS Researcher, LORIA, University of Lorraine, Nancy
-Nathanaël Jarrassé (Thesis Director): CNRS Research Director, ISIR, Sorbonne University, Paris
-Agnès Roby-Brami (Advisor): INSERM Research Director, ISIR, Sorbonne University, Paris
-
-Summary:
+**Summary:**
 
 There is growing interest in assistive robotics, particularly wearable devices such as exoskeletons. These systems interact not only with the user's hands in task space but also with their limbs in joint space to provide optimal support. However, while the effects of robotic interactions on the hand have been widely studied, joint-level perturbations remain poorly understood. The complexity of studying such interactions lies in the redundancy of the human body: the same task-space movement (e.g., hand displacement) can be achieved using different combinations of joint movements (shoulder, elbow, wrist).
 

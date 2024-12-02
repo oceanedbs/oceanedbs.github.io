@@ -8,7 +8,7 @@ images:
     compare: true
     slider: true
 tags: photography
-thumbnail: assets/img/photography/exhibition.png
+thumbnail: assets/img/ClairObscure1.jpg
 categories: photography
 featured: true
 ---

@@ -22,4 +22,6 @@ This educational approach combines technical skills and interpersonal abilities,
 
 We participated with the Hermes Project, which goal was to teleoperate an autonomous vehicule for some specific situations where the help of a human, to take the decision, was needed.
 
-{% include youtube.html id="Wy-Sd6zwuPI" %}
+<div align="center">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Yfy2fOdhzhc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>

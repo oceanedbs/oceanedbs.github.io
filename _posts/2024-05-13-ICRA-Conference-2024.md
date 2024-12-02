@@ -17,3 +17,9 @@ The study tested 55 people using an arm exoskeleton that applied little, simulat
 The results showed that even small forces can change the way joints work together, although overall task performance (like successfully reaching, precision and time completion) stayed the same. The type of force affected coordination differently, changing how much each joint contributed and how well their movements were synchronized.
 
 The key takeaway is that monitoring and understanding these coordination changes is crucial to ensuring exoskeletons are safe and effective for widespread use.
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yvJz1w1Yxdo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+I also participated to the workshop "Innovations and Applications of Human Modelling in Physical Human-Robot Interaction" where I presented a poster. 

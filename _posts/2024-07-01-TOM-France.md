@@ -7,6 +7,7 @@ title: Participation to TOM France Hackathon
 description: Contributing to TOM France Hackathon to design solution for people with disabilities
 tags: research
 categories: research
+thumbnail: assets/img/post_preview/TOM2024.png
 featured: true
 ---
 
@@ -21,4 +22,6 @@ I took part in developing a solution to aid Etienne, a wheelchair user, in safel
 The TOM (Tikkun Olam Makers) Hackathon is an international initiative uniting engineers, designers, makers, and end users to create practical, innovative technologies that enhance the quality of life for individuals with disabilities. This year's edition brought together participants from diverse backgrounds for an intense two-day collaboration, demonstrating the power of technology to transform daily life.
 
 
-{% include youtube.html id="YbwRYdWsCLY" %}
+<div align="center">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/YbwRYdWsCLY" frameborder="0" allowfullscreen></iframe>
+</div>

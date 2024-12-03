@@ -30,3 +30,5 @@ I am exhibiting 5 cyanotypes (4 A1 and 1 A0) that are about the "human-technolog
     <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/ClairObscure5.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
 </swiper-container>
 </div>
+
+

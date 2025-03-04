@@ -9,7 +9,7 @@ profile:
   image: oceane_2.jpg
   image_circular: True # crops the image to make it circular
   more_info: >
-    <p>555 Campus Pierre et Marie Curie</p>
+    <p>Campus Pierre et Marie Curie</p>
     <p>4 places Jussieu</p>
     <p>Tours 55/56, 1er étage</p>
     <p>75005 Paris</p>

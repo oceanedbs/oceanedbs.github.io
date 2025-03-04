@@ -1,10 +1,17 @@
 # Oceane Dubois' personal website
 
+<<<<<<< HEAD
 This website uses the Jekyll template **al-folio**. 
 
 Access the website [here](https://oceanedbs.github.io/)
 
 <!--
+=======
+Realized using **al-folio** template
+
+Access the website through this [link](https://oceanedbs.github.io/).
+<!---
+>>>>>>> branch 'master' of git@github.com:oceanedbs/oceanedbs.github.io.git
 <div align="center">
 
 [![Preview](assets/img/readme_preview/al-folio-preview.png)](https://alshedivat.github.io/al-folio/)

@@ -9,11 +9,7 @@ profile:
   image: oceane_2.jpg
   image_circular: True # crops the image to make it circular
   more_info: >
-<<<<<<< HEAD
     <p> Campus Pierre et Marie Curie </p>
-=======
-    <p>Campus Pierre et Marie Curie</p>
->>>>>>> branch 'master' of git@github.com:oceanedbs/oceanedbs.github.io.git
     <p>4 places Jussieu</p>
     <p>Tours 55/56, 1er étage</p>
     <p>75005 Paris</p>

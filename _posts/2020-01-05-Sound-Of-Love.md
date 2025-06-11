@@ -15,23 +15,4 @@ Interactive narratives, video games, digital art... To what extent can the chara
 
 This project is a video story that evolves differently according to the user's choices. At different times, users can choose between 2 different sounds. Depending on their choice, the story will evolve differently.
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.liquid path="assets/video/Concours.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true %}
-    </div>
-</div>
-<div class="caption">
-Video Project : The Sound Of Love
-
-</div>
-
-<!--It does also support embedding videos from different sources. Here are some examples:
-
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.liquid path="https://www.youtube.com/embed/jNQXAC9IVRw" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.liquid path="https://player.vimeo.com/video/524933864?h=1ac4fd9fb4&title=0&byline=0&portrait=0" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div> -->
+You can view the project [here](/assets/Sound_Of_Love/index.html). It's better to use Chrome and to listen with a headset.

@@ -34,6 +34,6 @@ Initial results reveal that joint-level perturbations modify inter-joint coordin
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpg" title="PhD defense" class="img-fluid rounded z-depth-1" %}
+          {% include figure.liquid loading="eager" path="assets/img/research/phd_defense.jpg" title="PhD Defense" width="600" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>

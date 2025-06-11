@@ -8,12 +8,12 @@ nav: true
 nav_order: 3
 ---
 
-I started to steal my parents camera when I was 10, got my first camera at 15 and then never stoped.
+I started to steal my parents camera when I was 10, got my first camera at 15 and then never stopped.
 Today I use my camera mostly to capture small moments of the every day life and to document my work.
 
-Here are exemple of few pictures and video I've taken in the past years.
+Here are example of few pictures and video I've taken in the past years.
 
-Sound of Love
+<div style="text-align:center;"><div style="margin:8px 0px 4px;"><a href="https://www.calameo.com/books/007434200456086370d88" target="_blank">Portfolio - Océane DUBOIS</a></div><iframe src="//v.calameo.com/?bkcode=007434200456086370d88" width="800" height="800" frameborder="0" scrolling="no" allowtransparency allowfullscreen style="margin:0 auto;"></iframe><div style="margin:4px 0px 8px;"><a href="http://www.calameo.com/">Publish at Calameo</a></div></div>
 
 <ul>
  {% if page.pagination.enabled %}

@@ -14,4 +14,4 @@ I presented, at the Humanoids 2024 conference, my poster about my work entitled 
 The paper liked to this presentation can be found in my publications.
 
 You can view the poster directly below:
-<img src="{{ '/assets/img/posterHumanoids2024.png' | relative_url }}" alt="Humanoids 2024 Poster" style="width:100%; height:auto;">
+<img src="{{ '/assets/img/research/posterHumanoids2024.jpg' | relative_url }}" alt="Humanoids 2024 Poster" style="width:100%; height:auto;">

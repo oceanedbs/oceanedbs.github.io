@@ -72,7 +72,8 @@ featured: true
 
 </swiper-container>
 
-
+<!-->
 <div style="position:relative;padding-top:56.25%;">
   <iframe src="https://player.vimeo.com/video/909162257?loop=false&amp;autoplay=false&amp;muted=false&amp;gesture=media&amp;playsinline=true&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=false&amp;customControls=true&amp" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 </div>
+-->

@@ -8,6 +8,7 @@ thumbnail: assets/img/post_preview/CoordiMotion.png
 categories: research
 featured: true
 ---
-An application to evaluate inter-joint coordination will soon be available on this page. 
+
+An application to evaluate inter-joint coordination will soon be available on this page.
 
 <iframe width="315" height="560" src="https://www.youtube.com/embed/Ev7WnlEINFE?mute=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>

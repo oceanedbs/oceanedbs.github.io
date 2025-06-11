@@ -49,7 +49,7 @@
       institution: Institute of Cognitive and Integrative Neurosciences of Aquitaine (INCIA)
       year: 2021
       description:
-        - This project transferred a prosthesis control system from virtual reality to a 7-DoF robotic arm. Using an HTC Vive Pro headset and Vive Trackers, data was gathered and applied to two control modes. The teleoperation mode replicates the user’s joint positions, and neural network-based prediction, that uses contextual and kinematic data to estimate joint positions. 
+        - This project transferred a prosthesis control system from virtual reality to a 7-DoF robotic arm. Using an HTC Vive Pro headset and Vive Trackers, data was gathered and applied to two control modes. The teleoperation mode replicates the user’s joint positions, and neural network-based prediction, that uses contextual and kinematic data to estimate joint positions.
         - Demonstration video <a href="https://www.youtube.com/watch?v=AJm9vPHVdj0">https://www.youtube.com/watch?v=AJm9vPHVdj0</a>
         - In the team of Hybrid Sensorimotor control, supervised by Aymar de Rugy
     - title: Master 1 Internship
@@ -70,8 +70,6 @@
       description:
         - Participation in the organization of the Journée des Jeunes Chercheurs en Robotique (JNRR) 2022.
         - Realization of the website, management of registrations and participations, programming, overall organization of the day.
-
-
 
 - title: Scientific Broadcasting
   type: time_table
@@ -140,7 +138,6 @@
     - title: Participation in a round table organized by the COREGAL DR02 network of CNRS
       year: June 2023
       description: Invited by the Paris Centre delegation of the CNRS to discuss “gender equality in research, from the point of view of laboratory organization and the representation of women in research projects”.
-
 
 - title: Skills
   type: nested_list

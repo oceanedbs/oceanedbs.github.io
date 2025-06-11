@@ -8,7 +8,7 @@ categories: research
 featured: true
 ---
 
-I presented, at the ICRA 2024 conference, in Yokohama, Japan,  a paper named "Short term after-effects of small force fields applied by an upper-limb exoskeleton on inter-joint coordination" written with the help of Agnès Roby-Brami , Ross Parry , and Nathanaël Jarrassé. 
+I presented, at the ICRA 2024 conference, in Yokohama, Japan, a paper named "Short term after-effects of small force fields applied by an upper-limb exoskeleton on inter-joint coordination" written with the help of Agnès Roby-Brami , Ross Parry , and Nathanaël Jarrassé.
 
 This study explores how wearing an exoskeleton—a device designed to assist with movement—affects our inter-joint coordination. Exoskeletons can be helpful in many areas, like improving physical abilities or making work tasks easier. However, we know little about how they influence the body's natural movement patterns.
 
@@ -18,8 +18,6 @@ The results showed that even small forces can change the way joints work togethe
 
 The key takeaway is that monitoring and understanding these coordination changes is crucial to ensuring exoskeletons are safe and effective for widespread use.
 
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yvJz1w1Yxdo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-I also participated to the workshop "Innovations and Applications of Human Modelling in Physical Human-Robot Interaction" where I presented a poster. 
+I also participated to the workshop "Innovations and Applications of Human Modelling in Physical Human-Robot Interaction" where I presented a poster.

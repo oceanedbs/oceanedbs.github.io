@@ -12,6 +12,7 @@ thumbnail: assets/img/2024_02_cybathlon/46.jpg
 categories: research
 featured: true
 ---
+
 <ul>
   <li>The smart arm team, competed to the Cybathlon Challenge 2024 in the ARM race. The competition took place in Zürich, in February 2024.</li>
   <li>In the ARM category, 4 tasks were presented to the pilots:
@@ -23,7 +24,6 @@ featured: true
     </ul>
   </li>
 </ul>
-
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2024_02_cybathlon/2.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>

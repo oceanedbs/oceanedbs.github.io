@@ -12,6 +12,7 @@ featured: true
 I defended my Phd, entitled "Characterizing the after-effects of wearing an upper-limb exoskeleton on inter-joint coordination", and supervised by Nathanaël Jarrassé on the 26th of November 2024
 
 The jury was composed of:
+
 <ul>
     <li>Jan Babic (Reviewer): Professor, Jozef Stefan Institute, Ljubljana, Slovenia</li>
     <li>Bruno Watier (Reviewer): Professor, LAAS, University of Toulouse III, Toulouse</li>

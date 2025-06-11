@@ -1,6 +1,6 @@
 # Oceane Dubois' personal website
 
-This website uses the Jekyll template **al-folio**. 
+This website uses the Jekyll template **al-folio**.
 
 Access the website [here](https://oceanedbs.github.io/)
 

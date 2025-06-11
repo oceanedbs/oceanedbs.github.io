@@ -3,7 +3,7 @@ layout: post
 date: 2019-12-05 15:09:00
 inline: false
 related_posts: false
-title : Participation to the EEA Competition
+title: Participation to the EEA Competition
 description: Participation to the EEA Competition
 tags: research
 categories: research

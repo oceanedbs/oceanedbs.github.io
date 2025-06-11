@@ -101,7 +101,6 @@ The aim of my research is to analyze the **impact of exoskeletons on inter-joint
 {% endif %}
       {% endfor %}
 
-
   </ul>
 
 {% if page.pagination.enabled %}

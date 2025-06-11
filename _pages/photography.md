@@ -90,7 +90,6 @@ Here are example of few pictures and video I've taken in the past years.
 {% endif %}
       {% endfor %}
 
-
   </ul>
 
 {% if page.pagination.enabled %}

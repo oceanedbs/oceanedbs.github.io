@@ -19,9 +19,6 @@ This project is a video story that evolves differently according to the user's c
     <div class="col-sm mt-3 mt-md-0">
         {% include video.liquid path="assets/video/Concours.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true %}
     </div>
-   <!-- <div class="col-sm mt-3 mt-md-0">
-        {% include video.liquid path="assets/video/Concours.mp4" class="img-fluid rounded z-depth-1" controls=true %}
-    </div> -->
 </div>
 <div class="caption">
 Video Project : The Sound Of Love

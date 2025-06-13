@@ -11,4 +11,6 @@ featured: true
 
 An application to evaluate inter-joint coordination will soon be available on this page.
 
+Here is a demo video of the soon available application : 
+
 <iframe width="315" height="560" src="https://www.youtube.com/embed/Ev7WnlEINFE?mute=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>

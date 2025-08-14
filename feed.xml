@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://oceanedbs.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oceanedbs.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-14T15:07:59+00:00</updated><id>https://oceanedbs.github.io/feed.xml</id><title type="html">blank</title><subtitle></subtitle><entry><title type="html">Science Taille XX Elles</title><link href="https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle/" rel="alternate" type="text/html" title="Science Taille XX Elles" /><published>2025-08-08T14:00:00+00:00</published><updated>2025-08-08T14:00:00+00:00</updated><id>https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle</id><content type="html" xml:base="https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle/"><![CDATA[<p>I’m excited to share that along with my colleague Inès Lacôte, am featured in the Science XX elles initiative! We are both postdoctoral researchers at the ISIR – Institute for Intelligent Systems and Robotics.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://oceanedbs.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://oceanedbs.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-14T15:17:09+00:00</updated><id>https://oceanedbs.github.io/feed.xml</id><title type="html">blank</title><subtitle></subtitle><entry><title type="html">Science Taille XX Elles</title><link href="https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle/" rel="alternate" type="text/html" title="Science Taille XX Elles" /><published>2025-08-08T14:00:00+00:00</published><updated>2025-08-08T14:00:00+00:00</updated><id>https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle</id><content type="html" xml:base="https://oceanedbs.github.io/blog/2025/CNRS-SciencesTailleXXElle/"><![CDATA[<p>I’m excited to share that along with my colleague Inès Lacôte, am featured in the Science XX elles initiative! We are both postdoctoral researchers at the ISIR – Institute for Intelligent Systems and Robotics.</p>
 
 <p>What do we have in common?
 We study human–machine interactions, in different fields but with the same goal: to make our research meaningful and beneficial to society.</p>
@@ -7,7 +7,28 @@ We study human–machine interactions, in different fields but with the same goa
 
 <p><a href="https://www.paris-centre.cnrs.fr/fr/personne/oceane-dubois-ines-lacote">More information here.</a></p>
 
-<p><img src="assets/img/post_preview/SciencesTailleXXElles2025.jpeg" alt="Science Taille XX Elles 2025" /></p>]]></content><author><name></name></author><category term="research" /><category term="research" /><summary type="html"><![CDATA[2025 Ambassador for the Sciences Taille XX Rlles initiative of the CNRS and the Femmes et Sciences association]]></summary></entry><entry><title type="html">CoordiMotion</title><link href="https://oceanedbs.github.io/blog/2025/Coordimotion/" rel="alternate" type="text/html" title="CoordiMotion" /><published>2025-05-06T14:00:00+00:00</published><updated>2025-05-06T14:00:00+00:00</updated><id>https://oceanedbs.github.io/blog/2025/Coordimotion</id><content type="html" xml:base="https://oceanedbs.github.io/blog/2025/Coordimotion/"><![CDATA[<p>An application to evaluate inter-joint coordination will soon be available on this page.</p>
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+          
+
+<figure>
+  <picture>
+    <!-- Auto scaling with imagemagick -->
+    <!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    -->
+    
+      <source class="responsive-img-srcset" srcset="/assets/img/post_preview/SciencesTailleXXElles2025-480.webp 480w,/assets/img/post_preview/SciencesTailleXXElles2025-800.webp 800w,/assets/img/post_preview/SciencesTailleXXElles2025-1400.webp 1400w," sizes="95vw" type="image/webp" />
+    
+    <img src="/assets/img/post_preview/SciencesTailleXXElles2025.jpeg" class="img-fluid rounded z-depth-1" width="600" height="auto" title="PhD Defense" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+  </picture>
+
+  
+</figure>
+
+    </div>
+</div>]]></content><author><name></name></author><category term="research" /><category term="research" /><summary type="html"><![CDATA[2025 Ambassador for the Sciences Taille XX Rlles initiative of the CNRS and the Femmes et Sciences association]]></summary></entry><entry><title type="html">CoordiMotion</title><link href="https://oceanedbs.github.io/blog/2025/Coordimotion/" rel="alternate" type="text/html" title="CoordiMotion" /><published>2025-05-06T14:00:00+00:00</published><updated>2025-05-06T14:00:00+00:00</updated><id>https://oceanedbs.github.io/blog/2025/Coordimotion</id><content type="html" xml:base="https://oceanedbs.github.io/blog/2025/Coordimotion/"><![CDATA[<p>An application to evaluate inter-joint coordination will soon be available on this page.</p>
 
 <p>Here is a demo video of the soon available application :</p>
 

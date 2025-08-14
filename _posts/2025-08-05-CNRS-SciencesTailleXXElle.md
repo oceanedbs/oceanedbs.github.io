@@ -19,4 +19,8 @@ Together, hand in hand, we explore robotics with one mission: to make technology
 [More information here.](https://www.paris-centre.cnrs.fr/fr/personne/oceane-dubois-ines-lacote)
 
 
-![Science Taille XX Elles 2025](assets/img/post_preview/SciencesTailleXXElles2025.jpeg)
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+          {% include figure.liquid loading="eager" path="assets/img/post_preview/SciencesTailleXXElles2025.jpeg" title="PhD Defense" width="600" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>

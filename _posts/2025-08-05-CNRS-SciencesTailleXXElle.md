@@ -6,6 +6,9 @@ description: 2025 Ambassador for the Sciences Taille XX Rlles initiative of the 
 tags: research
 thumbnail: assets/img/post_preview/SciencesTailleXXElles2025.jpeg
 categories: research
+images:
+  compare: true
+  slider: true
 featured: true
 ---
 

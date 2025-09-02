@@ -5,7 +5,7 @@ date: 2024-11-22 10:00:00
 description: Poster Presentation at Humanoids 2024 Conference
 tags: research
 categories: research
-thumbnail: assets/img/posterHumanoids2024.jpg
+thumbnail: assets/img/research/posterHumanoids2024.jpg
 featured: true
 ---
 

@@ -19,8 +19,12 @@ Together, hand in hand, we explore robotics with one mission: to make technology
 [More information here.](https://www.paris-centre.cnrs.fr/fr/personne/oceane-dubois-ines-lacote)
 
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-          {% include figure.liquid loading="eager" path="assets/img/post_preview/SciencesTailleXXElles2025.jpeg" title="PhD Defense" width="600" class="img-fluid rounded z-depth-1" %}
-    </div>
+
+
+<div style="max-width: 500px; margin: auto;">
+<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+    <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/post_preview/SciencesTailleXXElles2025.jpeg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+    <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/research/XXelles.png" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+    <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/research/groupe_XXelles.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+</swiper-container>
 </div>

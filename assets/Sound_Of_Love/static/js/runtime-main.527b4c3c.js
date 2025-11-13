@@ -1,7 +1,13 @@
 !(function (e) {
   function r(r) {
-    for (var n, i, l = r[0], c = r[1], f = r[2], p = 0, s = []; p < l.length; p++)
-      (i = l[p]), Object.prototype.hasOwnProperty.call(o, i) && o[i] && s.push(o[i][0]), (o[i] = 0);
+    for (
+      var n, i, l = r[0], c = r[1], f = r[2], p = 0, s = [];
+      p < l.length;
+      p++
+    )
+      (i = l[p]),
+        Object.prototype.hasOwnProperty.call(o, i) && o[i] && s.push(o[i][0]),
+        (o[i] = 0);
     for (n in c) Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]);
     for (a && a(r); s.length; ) s.shift()();
     return u.push.apply(u, f || []), t();
@@ -30,21 +36,27 @@
       i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t });
     }),
     (i.r = function (e) {
-      "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
-        Object.defineProperty(e, "__esModule", { value: !0 });
+      'undefined' !== typeof Symbol &&
+        Symbol.toStringTag &&
+        Object.defineProperty(e, Symbol.toStringTag, { value: 'Module' }),
+        Object.defineProperty(e, '__esModule', { value: !0 });
     }),
     (i.t = function (e, r) {
       if ((1 & r && (e = i(e)), 8 & r)) return e;
-      if (4 & r && "object" === typeof e && e && e.__esModule) return e;
+      if (4 & r && 'object' === typeof e && e && e.__esModule) return e;
       var t = Object.create(null);
-      if ((i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: e }), 2 & r && "string" != typeof e))
+      if (
+        (i.r(t),
+        Object.defineProperty(t, 'default', { enumerable: !0, value: e }),
+        2 & r && 'string' != typeof e)
+      )
         for (var n in e)
           i.d(
             t,
             n,
             function (r) {
               return e[r];
-            }.bind(null, n)
+            }.bind(null, n),
           );
       return t;
     }),
@@ -57,13 +69,14 @@
           : function () {
               return e;
             };
-      return i.d(r, "a", r), r;
+      return i.d(r, 'a', r), r;
     }),
     (i.o = function (e, r) {
       return Object.prototype.hasOwnProperty.call(e, r);
     }),
-    (i.p = "./");
-  var l = (window["webpackJsonpsi28-sound-choices"] = window["webpackJsonpsi28-sound-choices"] || []),
+    (i.p = './');
+  var l = (window['webpackJsonpsi28-sound-choices'] =
+      window['webpackJsonpsi28-sound-choices'] || []),
     c = l.push.bind(l);
   (l.push = r), (l = l.slice());
   for (var f = 0; f < l.length; f++) r(l[f]);

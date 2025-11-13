@@ -2,14 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Laboratory of Neuromechanics and Biorobotics, Dept. for Automation, Biocybernetics and Robotics, Jožef Stefan Institute, Ljubljana, Slovenia. 
+subtitle: <a href='#'>Affiliations</a>. Laboratory of Neuromechanics and Biorobotics, Dept. for Automation, Biocybernetics and Robotics, Jožef Stefan Institute, Ljubljana, Slovenia.
 
 profile:
   align: left
   image: oceane_2.jpg
   image_circular: True # crops the image to make it circular
-  more_info: 
-    <p> Laboratory for Neuromechanics and Biorobotics </p>
+  more_info: <p> Laboratory for Neuromechanics and Biorobotics </p>
     <p> Jožef Stefan Institute</p>
     <p> Jamova cesta 39</p>
     <p> SI-1000 Ljubljana</p>

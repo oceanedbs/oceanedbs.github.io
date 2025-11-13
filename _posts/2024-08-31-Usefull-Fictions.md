@@ -64,5 +64,4 @@ Participants: Océane Dubois, Juan-Pablo Guzman-Alvarez, Morgane Porcheron, Dziy
    <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/useful_fiction_4/usefull_fiction36.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
     <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/useful_fiction_4/usefull_fiction37.jpg" class="img-fluid rounded z-depth-1" %}</swiper-slide>
 
-
 </swiper-container>

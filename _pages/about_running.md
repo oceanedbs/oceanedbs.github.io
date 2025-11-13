@@ -7,7 +7,7 @@ Actual Personal Bests :
 <ul>
     <li>10km : 45'37 (10km d'Adidas Paris - 2022) </li>
     <li>Half-marathon : 1h42min00 (Paris - 2024) </li>
-    <li>Marathon : 3h46min35 (Premier Challenge sur Route de France - Cernay-la-ville - 2024) </li>
+    <li>Marathon : 3h44min54 (Ljubljana's Marathon 2025) </li>
     <li> 50km : 4h35min45 (Sri Chinmoy - Paris - 2025) - 1st women </li>
 
 </ul>

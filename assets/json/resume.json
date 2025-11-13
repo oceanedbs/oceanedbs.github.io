@@ -8,7 +8,7 @@
     "url": "https://oceanedbs.github.io/",
     "summary": "PhD student at the Institut des Systèmes Intelligent et de Robotique (ISIR), at Sorbonne University",
     "location": {
-      "address": "4 place Jussieu, Campus Puerre et Marie Curie",
+      "address": "4 place Jussieu, Campus Pierre et Marie Curie",
       "postalCode": "75005",
       "city": "Paris",
       "countryCode": "FR",
@@ -22,29 +22,16 @@
       }
     ]
   },
-
-  
-}
-
-[
-  {
-    "title": "General Information",
-    "type": "map",
-    "contents": [
-      {
-        "name": "Full Name",
-        "value": "Océane Dubois"
-      },
-      {
-        "name": "Date of Birth",
-        "value": "19th June 1997"
-      },
-      {
-        "name": "Languages",
-        "value": "French, English, Italian, German"
-      }
-    ]
-  },
+  "sections": [
+    {
+      "title": "General Information",
+      "type": "map",
+      "contents": [
+        { "name": "Full Name", "value": "Océane Dubois" },
+        { "name": "Date of Birth", "value": "19th June 1997" },
+        { "name": "Languages", "value": "French, English, Italian, German" }
+      ]
+    },
   {
     "title": "Education",
     "type": "time_table",
@@ -282,3 +269,4 @@
     ]
   }
 ]
+}

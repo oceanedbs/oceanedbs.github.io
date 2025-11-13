@@ -17,7 +17,7 @@ I had the opportunity to present two research studies at the French Society of B
   O. Dubois, G. Brunelli, A. Roby-Brami, R. Parry, N. Jarrassé  
   [Link to the article](https://hal.science/hal-05191758/document)
 
-Assessing Inter-Joint Coordination in CrossFit: A Pilot Study Comparing Advanced and Beginner Practitioners  
+- Assessing Inter-Joint Coordination in CrossFit: A Pilot Study Comparing Advanced and Beginner Practitioners  
 O. Dubois, A. Roby-Brami, R. Parry, N. Jarrassé  
 [Link to the article](https://hal.science/hal-05191758/document)
 

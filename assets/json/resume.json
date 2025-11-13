@@ -6,12 +6,12 @@
     "email": "dubois@isir.upmc.fr",
     "phone": "",
     "url": "https://oceanedbs.github.io/",
-    "summary": "PhD student at the Institut des Systèmes Intelligent et de Robotique (ISIR), at Sorbonne University",
+    "summary": "Post Doctoral Researcher at the Jožef Stefan Institute, in the Department of Automatic, Biocybernetic, and Robotic Systems, within the Laboratory for neuromechanics and biorobotics (NBR)",
     "location": {
-      "address": "4 place Jussieu, Campus Pierre et Marie Curie",
-      "postalCode": "75005",
-      "city": "Paris",
-      "countryCode": "FR",
+      "address": "Jamova cesta 39",
+      "postalCode": "1000",
+      "city": "Ljubljana",
+      "countryCode": "SI",
       "region": ""
     },
     "profiles": [
@@ -22,251 +22,263 @@
       }
     ]
   },
-  "sections": [
-    {
-      "title": "General Information",
-      "type": "map",
-      "contents": [
-        { "name": "Full Name", "value": "Océane Dubois" },
-        { "name": "Date of Birth", "value": "19th June 1997" },
-        { "name": "Languages", "value": "French, English, Italian, German" }
-      ]
-    },
-    {
-      "title": "Education",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "PhD Student",
-          "institution": "Institut des Systèmes Intelligents et de Robotique (ISIR), Sorbonne Université, Paris, France",
-          "year": "2021-now",
-          "description": [
-            "PhD student in the IRIS Team",
-            "Supervised by Nathanaël Jarrassé",
-            "Working on human coordination modification when exposed repeatedly to a robotic upper-arm exoskeleton",
-            {
-              "title": "Teaching Assistant",
-              "contents": [
-                "C Programming teaching classes",
-                "C Student projects supervision"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Master in Biomechanics and Bioengineering",
-          "institution": "Université de Technologie de Compiègne (UTC), Compiègne, France",
-          "year": "2020-2021",
-          "description": [
-            "Master classes during the last year of engineering school",
-            "Graduated in September 2021"
-          ]
-        },
-        {
-          "title": "Computer Science engineer, major in Real-Time Systems and Embedded Systems",
-          "institution": "Université de Technologie de Compiègne (UTC), Compiègne, France",
-          "year": "2015-2021",
-          "description": [
-            "Graduated in September 2021",
-            "Minor in Technologies and digital culture"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Research Experience",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "Membre de l'équipe Smart Arm",
-          "institution": "<a href=\"https://team-sam.fr\">https://team-sam.fr</a>",
-          "year": "2021 - now",
-          "description": [
-            "The Smart Arm team participates in the Cybathlon, an international competition designed to showcase assistive devices for people with disabilities.",
-            "The Smart Arm team is developing an arm prosthesis for individuals with transhumeral amputations.",
-            "Organizing and coordinating training sessions between the pilot and the engineers, as well as managing the team's communication efforts, including producing photos and videos for the ISIR website and the team's social media, and managing the Instagram account (@team_smart_arm)."
-          ]
-        },
-        {
-          "title": "Master 2 Internship",
-          "institution": "Institute of Cognitive and Integrative Neurosciences of Aquitaine (INCIA)",
-          "year": "2021",
-          "description": [
-            "Project - Control of an upper limb robotic prosthesis",
-            "In the team of Hybrid Sensorimotor control, supervised by Aymar de Rugy"
-          ]
-        },
-        {
-          "title": "Master 1 Internship",
-          "institution": "Institute of Movement Sciences, Aix-Marseille University",
-          "year": "2018",
-          "description": [
-            "Active resonance control for the optimization of a haptic surface using acoustic levitation",
-            "In the team of Bio-robotics, supervised by Michael Wiertlewski"
-          ]
-        },
-        {
-          "title": "Team Leader of the Winning Team at the 2017 Hackathon-UTC, Compiègne",
-          "institution": "University of Technology of Compiègne",
-          "year": "November 2017",
-          "description": [
-            "Hackathon co-organized between the University of Technology of Compiègne and the equipment manufacturer Faurecia",
-            "Main theme was the 'cockpit of the future'",
-            "Team of 5 students",
-            "Development of a communication system between multiple autonomous vehicles"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Scientific Broadcasting",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "Production of a documentary about the Smart Arm team",
-          "year": "2022 - now",
-          "description": [
-            "Production of a documentary about the history of the team and the design of the robotic prosthesis, as well as their participation in the Cybathlon 2024.",
-            "Interviews with team members who contributed to the design of the prosthesis and training sessions, and a report on the competition.",
-            "Special focus on the women involved in the project."
-          ]
-        },
-        {
-          "title": "Participation in the Fête de la science at ISIR laboratory",
-          "year": "2022/2023/2024",
-          "description": [
-            "Demonstration of robotic prostheses for the general public.",
-            "Demonstration of Art and Science projects."
-          ]
-        },
-        {
-          "title": "Participation in Déclics, Roissy-en-Brie, Lycée Charles le Chauve",
-          "year": "November 2022",
-          "description": "Discussions between researchers and high-school students to interest them in the construction of knowledge. A time of exchange with high school students to discuss research careers."
-        },
-        {
-          "title": "Participation in the Fête de la science at the University of Technology of Compiègne",
-          "year": "2018 and 2019",
-          "description": [
-            "Welcoming and guiding primary, middle and high school classes during the week.",
-            "Weekends open to the general public.",
-            "Production of photos during the week for future communication of the event."
-          ]
-        },
-        {
-          "title": "University of Technology of Compiègne Fablab instructor",
-          "year": "2016 - 2018",
-          "description": [
-            "Welcoming students to the fablab and assisting them with projects.",
-            "Helping them to use the machines (3D printer, laser cutter, sewing machine, sticker printing, etc.)",
-            "Setting up training courses"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Teaching Experience",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "Advanced C language teaching at Sorbonne University",
-          "year": "2021 - 2024",
-          "description": "Management of groups of around 25 students, correction of papers, writing of exam subjects."
-        },
-        {
-          "title": "C language project supervision in Polytech engineering school (Sorbonne University)",
-          "year": "2021 - 2024",
-          "description": "Supervision of around 8 groups of 2 to 3 students on C programming projects involving Arduino cards and servomotors as well as a camera and OpenCV image processing."
-        },
-        {
-          "title": "Supervision of an intern",
-          "year": "2024",
-          "description": [
-            "Supervision of a master 2 trainee for 6 months on the subject of the 'Study of the Variability of Human Movement with a Commercial Upper Limb Exoskeleton'.",
-            "Definition of the subject, interviews and supervision."
-          ]
-        },
-        {
-          "title": "Acadomia Teacher in Cholet (49) and Compiègne (60)",
-          "year": "2019 - 2021",
-          "description": "Teacher in Maths, Physics-Chemistry and Life and Earth Sciences for high school and college students."
-        }
-      ]
-    },
-    {
-      "title": "Parity and Equity Engagements",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "Member of the parity-equity team of ISIR laboratory",
-          "year": "2022 - now",
-          "description": [
-            "Member of the Parity-Equity team, participation in the organization of awareness-raising activities (March 8, Orange Day, etc.).",
-            "Raising awareness of sexual and gender-based violence (SGBV) within my team.",
-            "Action for March 8, 2024 - Organization of a photo exhibition of portraits of women working at ISIR. Production of around thirty portraits of women."
-          ]
-        },
-        {
-          "title": "Contribution to the development of a MOOC on Sexual and Gender-Based Violence",
-          "year": "2023 - 2024",
-          "description": "Exchange on the implementation of training to specialize certain parts of the training for doctoral students at Sorbonne University."
-        },
-        {
-          "title": "Participation in a round table organized by the COREGAL DR02 network of CNRS",
-          "year": "June 2023",
-          "description": "Invited by the Paris Centre delegation of the CNRS to discuss “gender equality in research, from the point of view of laboratory organization and the representation of women in research projects”."
-        }
-      ]
-    },
-    {
-      "title": "Other Commitments and Experience",
-      "type": "time_table",
-      "contents": [
-        {
-          "title": "Non-permanent member representative on the Laboratory Council",
-          "year": "2022 - now",
-          "description": "Representative of non-permanent members on the laboratory board. Meeting with non-permanent members to discuss their requests, introduction of lunch vouchers for trainees."
-        },
-        {
-          "title": "Organizing team for the Journée des Jeunes Chercheurs en Robotique (Young Robotics Researchers Day)",
-          "year": "October 2022",
-          "description": [
-            "Participation in the organization of the Journée des Jeunes Chercheurs en Robotique (JNRR) 2022.",
-            "Realization of the website, management of registrations and participations, programming, overall organization of the day."
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Skills",
-      "type": "nested_list",
-      "contents": [
-        {
-          "title": "Languages",
-          "items": [
-            "French (Mother tongue)",
-            "English (Fluent, First Certificate of Cambridge)",
-            "Italian (Intermediate, CELI3)",
-            "German (Beginner)"
-          ]
-        },
-        {
-          "title": "Programming",
-          "items": [
-            "Languages - Python, Matlab/Simulink, C, C++, bash, Assembler IA32, SQL, Java, HTML, PHP",
-            "Framework - ROS, Unity, Qt, ZendFramework 1"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Other Interests",
-      "type": "list",
-      "contents": [
-        "<u>Art and Music:</u> Clarinet in conservatories and orchestras. Orchestra conducting. Photography. Manual activity for over 15 years, sewing, drawing (see Page 'Photography')",
-        "<u>Sport :</u> Road running, trail, triathlon and crossfit (see page 'Sport')",
-        "<u>Associations :</u> Help with administrative management for Secours Catholique, homework help and lessons for Cordées de l'Espoir, volunteering for 6 months in Southeast Asia (welcoming migrants, teaching English to children)"
-      ]
-    }
-  ]
+
+  
 }
+
+[
+  {
+    "title": "General Information",
+    "type": "map",
+    "contents": [
+      {
+        "name": "Full Name",
+        "value": "Océane Dubois"
+      },
+      {
+        "name": "Date of Birth",
+        "value": "19th June 1997"
+      },
+      {
+        "name": "Languages",
+        "value": "French, English, Italian, German"
+      }
+    ]
+  },
+  {
+    "title": "Education",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "PhD Student",
+        "institution": "Institut des Systèmes Intelligents et de Robotique (ISIR), Sorbonne Université, Paris, France",
+        "year": "2021-now",
+        "description": [
+          "PhD student in the IRIS Team",
+          "Supervised by Nathanaël Jarrassé",
+          "Working on human coordination modification when exposed repeatedly to a robotic upper-arm exoskeleton",
+          {
+            "title": "Teaching Assistant",
+            "contents": [
+              "C Programming teaching classes",
+              "C Student projects supervision"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Master in Biomechanics and Bioengineering",
+        "institution": "Université de Technologie de Compiègne (UTC), Compiègne, France",
+        "year": "2020-2021",
+        "description": [
+          "Master classes during the last year of engineering school",
+          "Graduated in September 2021"
+        ]
+      },
+      {
+        "title": "Computer Science engineer, major in Real-Time Systems and Embedded Systems",
+        "institution": "Université de Technologie de Compiègne (UTC), Compiègne, France",
+        "year": "2015-2021",
+        "description": [
+          "Graduated in September 2021",
+          "Minor in Technologies and digital culture"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Research Experience",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "Membre de l'équipe Smart Arm",
+        "institution": "<a href=\"https://team-sam.fr\">https://team-sam.fr</a>",
+        "year": "2021 - now",
+        "description": [
+          "The Smart Arm team participates in the Cybathlon, an international competition designed to showcase assistive devices for people with disabilities.",
+          "The Smart Arm team is developing an arm prosthesis for individuals with transhumeral amputations.",
+          "Organizing and coordinating training sessions between the pilot and the engineers, as well as managing the team's communication efforts, including producing photos and videos for the ISIR website and the team's social media, and managing the Instagram account (@team_smart_arm)."
+        ]
+      },
+      {
+        "title": "Master 2 Internship",
+        "institution": "Institute of Cognitive and Integrative Neurosciences of Aquitaine (INCIA)",
+        "year": "2021",
+        "description": [
+          "Project - Control of an upper limb robotic prosthesis",
+          "In the team of Hybrid Sensorimotor control, supervised by Aymar de Rugy"
+        ]
+      },
+      {
+        "title": "Master 1 Internship",
+        "institution": "Institute of Movement Sciences, Aix-Marseille University",
+        "year": "2018",
+        "description": [
+          "Active resonance control for the optimization of a haptic surface using acoustic levitation",
+          "In the team of Bio-robotics, supervised by Michael Wiertlewski"
+        ]
+      },
+      {
+        "title": "Team Leader of the Winning Team at the 2017 Hackathon-UTC, Compiègne",
+        "institution": "University of Technology of Compiègne",
+        "year": "November 2017",
+        "description": [
+          "Hackathon co-organized between the University of Technology of Compiègne and the equipment manufacturer Faurecia",
+          "Main theme was the 'cockpit of the future'",
+          "Team of 5 students",
+          "Development of a communication system between multiple autonomous vehicles"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Scientific Broadcasting",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "Production of a documentary about the Smart Arm team",
+        "year": "2022 - now",
+        "description": [
+          "Production of a documentary about the history of the team and the design of the robotic prosthesis, as well as their participation in the Cybathlon 2024.",
+          "Interviews with team members who contributed to the design of the prosthesis and training sessions, and a report on the competition.",
+          "Special focus on the women involved in the project."
+        ]
+      },
+      {
+        "title": "Participation in the Fête de la science at ISIR laboratory",
+        "year": "2022/2023/2024",
+        "description": [
+          "Demonstration of robotic prostheses for the general public.",
+          "Demonstration of Art and Science projects."
+        ]
+      },
+      {
+        "title": "Participation in Déclics, Roissy-en-Brie, Lycée Charles le Chauve",
+        "year": "November 2022",
+        "description": "Discussions between researchers and high-school students to interest them in the construction of knowledge. A time of exchange with high school students to discuss research careers."
+      },
+      {
+        "title": "Participation in the Fête de la science at the University of Technology of Compiègne",
+        "year": "2018 and 2019",
+        "description": [
+          "Welcoming and guiding primary, middle and high school classes during the week.",
+          "Weekends open to the general public.",
+          "Production of photos during the week for future communication of the event."
+        ]
+      },
+      {
+        "title": "University of Technology of Compiègne Fablab instructor",
+        "year": "2016 - 2018",
+        "description": [
+          "Welcoming students to the fablab and assisting them with projects.",
+          "Helping them to use the machines (3D printer, laser cutter, sewing machine, sticker printing, etc.)",
+          "Setting up training courses"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Teaching Experience",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "Advanced C language teaching at Sorbonne University",
+        "year": "2021 - 2024",
+        "description": "Management of groups of around 25 students, correction of papers, writing of exam subjects."
+      },
+      {
+        "title": "C language project supervision in Polytech engineering school (Sorbonne University)",
+        "year": "2021 - 2024",
+        "description": "Supervision of around 8 groups of 2 to 3 students on C programming projects involving Arduino cards and servomotors as well as a camera and OpenCV image processing."
+      },
+      {
+        "title": "Supervision of an intern",
+        "year": "2024",
+        "description": [
+          "Supervision of a master 2 trainee for 6 months on the subject of the 'Study of the Variability of Human Movement with a Commercial Upper Limb Exoskeleton'.",
+          "Definition of the subject, interviews and supervision."
+        ]
+      },
+      {
+        "title": "Acadomia Teacher in Cholet (49) and Compiègne (60)",
+        "year": "2019 - 2021",
+        "description": "Teacher in Maths, Physics-Chemistry and Life and Earth Sciences for high school and college students."
+      }
+    ]
+  },
+  {
+    "title": "Parity and Equity Engagements",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "Member of the parity-equity team of ISIR laboratory",
+        "year": "2022 - now",
+        "description": [
+          "Member of the Parity-Equity team, participation in the organization of awareness-raising activities (March 8, Orange Day, etc.).",
+          "Raising awareness of sexual and gender-based violence (SGBV) within my team.",
+          "Action for March 8, 2024 - Organization of a photo exhibition of portraits of women working at ISIR. Production of around thirty portraits of women."
+        ]
+      },
+      {
+        "title": "Contribution to the development of a MOOC on Sexual and Gender-Based Violence",
+        "year": "2023 - 2024",
+        "description": "Exchange on the implementation of training to specialize certain parts of the training for doctoral students at Sorbonne University."
+      },
+      {
+        "title": "Participation in a round table organized by the COREGAL DR02 network of CNRS",
+        "year": "June 2023",
+        "description": "Invited by the Paris Centre delegation of the CNRS to discuss “gender equality in research, from the point of view of laboratory organization and the representation of women in research projects”."
+      }
+    ]
+  },
+  {
+    "title": "Other Commitments and Experience",
+    "type": "time_table",
+    "contents": [
+      {
+        "title": "Non-permanent member representative on the Laboratory Council",
+        "year": "2022 - now",
+        "description": "Representative of non-permanent members on the laboratory board. Meeting with non-permanent members to discuss their requests, introduction of lunch vouchers for trainees."
+      },
+      {
+        "title": "Organizing team for the Journée des Jeunes Chercheurs en Robotique (Young Robotics Researchers Day)",
+        "year": "October 2022",
+        "description": [
+          "Participation in the organization of the Journée des Jeunes Chercheurs en Robotique (JNRR) 2022.",
+          "Realization of the website, management of registrations and participations, programming, overall organization of the day."
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Skills",
+    "type": "nested_list",
+    "contents": [
+      {
+        "title": "Languages",
+        "items": [
+          "French (Mother tongue)",
+          "English (Fluent, First Certificate of Cambridge)",
+          "Italian (Intermediate, CELI3)",
+          "German (Beginner)"
+        ]
+      },
+      {
+        "title": "Programming",
+        "items": [
+          "Languages - Python, Matlab/Simulink, C, C++, bash, Assembler IA32, SQL, Java, HTML, PHP",
+          "Framework - ROS, Unity, Qt, ZendFramework 1"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Other Interests",
+    "type": "list",
+    "contents": [
+      "<u>Art and Music:</u> Clarinet in conservatories and orchestras. Orchestra conducting. Photography. Manual activity for over 15 years, sewing, drawing (see Page 'Photography')",
+      "<u>Sport :</u> Road running, trail, triathlon and crossfit (see page 'Sport')",
+      "<u>Associations :</u> Help with administrative management for Secours Catholique, homework help and lessons for Cordées de l'Espoir, volunteering for 6 months in Southeast Asia (welcoming migrants, teaching English to children)"
+    ]
+  }
+]

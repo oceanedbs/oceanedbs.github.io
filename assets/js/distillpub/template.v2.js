@@ -1,7 +1,7 @@
 (function (factory) {
-  typeof define === "function" && define.amd ? define(factory) : factory();
+  typeof define === 'function' && define.amd ? define(factory) : factory();
 })(function () {
-  "use strict";
+  'use strict';
 
   // Copyright 2018 The Distill Template Authors
   //
@@ -17,9 +17,30 @@
   // See the License for the specific language governing permissions and
   // limitations under the License.
 
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
-  const zeroPad = (n) => (n < 10 ? "0" + n : n);
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const months = [
+    'Jan.',
+    'Feb.',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'Aug.',
+    'Sept.',
+    'Oct.',
+    'Nov.',
+    'Dec.',
+  ];
+  const zeroPad = (n) => (n < 10 ? '0' + n : n);
 
   const RFC = function (date) {
     const day = days[date.getDay()].substring(0, 3);
@@ -35,7 +56,7 @@
   const objectFromMap = function (map) {
     const object = Array.from(map).reduce(
       (object, [key, value]) => Object.assign(object, { [key]: value }), // Be careful! Maps can have non-String keys; object literals can't.
-      {}
+      {},
     );
     return object;
   };
@@ -68,13 +89,13 @@
 
     // 'Chris'
     get firstName() {
-      const names = this.name.split(" ");
-      return names.slice(0, names.length - 1).join(" ");
+      const names = this.name.split(' ');
+      return names.slice(0, names.length - 1).join(' ');
     }
 
     // 'Olah'
     get lastName() {
-      const names = this.name.split(" ");
+      const names = this.name.split(' ');
       return names[names.length - 1];
     }
   }
@@ -94,11 +115,15 @@
       } else if (source.publishedDate.constructor === String) {
         target.publishedDate = new Date(source.publishedDate);
       } else {
-        console.error("Don't know what to do with published date: " + source.publishedDate);
+        console.error(
+          "Don't know what to do with published date: " + source.publishedDate,
+        );
       }
     }
     target.description = source.description;
-    target.authors = source.authors.map((authorObject) => new Author(authorObject));
+    target.authors = source.authors.map(
+      (authorObject) => new Author(authorObject),
+    );
     target.katex = source.katex;
     target.password = source.password;
     if (source.doi) {
@@ -108,8 +133,8 @@
 
   class FrontMatter {
     constructor() {
-      this.title = "unnamed article"; // 'Attention and Augmented Recurrent Neural Networks'
-      this.description = ""; // 'A visual overview of neural attention...'
+      this.title = 'unnamed article'; // 'Attention and Augmented Recurrent Neural Networks'
+      this.description = ''; // 'A visual overview of neural attention...'
       this.authors = []; // Array of Author(s)
 
       this.bibliography = new Map();
@@ -194,7 +219,7 @@
       if (this._url) {
         return this._url;
       } else if (this.distillPath && this.journal.url) {
-        return this.journal.url + "/" + this.distillPath;
+        return this.journal.url + '/' + this.distillPath;
       } else if (this.journal.url) {
         return this.journal.url;
       }
@@ -203,7 +228,7 @@
     // 'https://github.com/distillpub/post--augmented-rnns',
     get githubUrl() {
       if (this.githubPath) {
-        return "https://github.com/" + this.githubPath;
+        return 'https://github.com/' + this.githubPath;
       } else {
         return undefined;
       }
@@ -215,7 +240,7 @@
       this._previewURL = value;
     }
     get previewURL() {
-      return this._previewURL ? this._previewURL : this.url + "/thumbnail.jpg";
+      return this._previewURL ? this._previewURL : this.url + '/thumbnail.jpg';
     }
 
     // 'Thu, 08 Sep 2016 00:00:00 -0700',
@@ -254,13 +279,15 @@
     }
 
     get publishedISODateOnly() {
-      return this.publishedDate.toISOString().split("T")[0];
+      return this.publishedDate.toISOString().split('T')[0];
     }
 
     get volume() {
       const volume = this.publishedYear - 2015;
       if (volume < 1) {
-        throw new Error("Invalid publish date detected during computing volume");
+        throw new Error(
+          'Invalid publish date detected during computing volume',
+        );
       }
       return volume;
     }
@@ -272,9 +299,9 @@
     // 'Olah & Carter',
     get concatenatedAuthors() {
       if (this.authors.length > 2) {
-        return this.authors[0].lastName + ", et al.";
+        return this.authors[0].lastName + ', et al.';
       } else if (this.authors.length === 2) {
-        return this.authors[0].lastName + " & " + this.authors[1].lastName;
+        return this.authors[0].lastName + ' & ' + this.authors[1].lastName;
       } else if (this.authors.length === 1) {
         return this.authors[0].lastName;
       }
@@ -284,20 +311,20 @@
     get bibtexAuthors() {
       return this.authors
         .map((author) => {
-          return author.lastName + ", " + author.firstName;
+          return author.lastName + ', ' + author.firstName;
         })
-        .join(" and ");
+        .join(' and ');
     }
 
     // 'olah2016attention'
     get slug() {
-      let slug = "";
+      let slug = '';
       if (this.authors.length) {
         slug += this.authors[0].lastName.toLowerCase();
         slug += this.publishedYear;
-        slug += this.title.split(" ")[0].toLowerCase();
+        slug += this.title.split(' ')[0].toLowerCase();
       }
-      return slug || "Untitled";
+      return slug || 'Untitled';
     }
 
     get bibliographyEntries() {
@@ -305,14 +332,14 @@
         this.citations.map((citationKey) => {
           const entry = this.bibliography.get(citationKey);
           return [citationKey, entry];
-        })
+        }),
       );
     }
 
     set bibliography(bibliography) {
       if (bibliography instanceof Map) {
         this._bibliography = bibliography;
-      } else if (typeof bibliography === "object") {
+      } else if (typeof bibliography === 'object') {
         this._bibliography = mapFromObject(bibliography);
       }
     }
@@ -403,7 +430,9 @@
       }
 
       renderContent() {
-        console.error(`Your class ${this.constructor.name} must provide a custom renderContent() method!`);
+        console.error(
+          `Your class ${this.constructor.name} must provide a custom renderContent() method!`,
+        );
       }
     }; // end class
   }; // end mixin function
@@ -426,10 +455,10 @@
 
   const Template = (name, templateString, useShadow = true) => {
     return (superclass) => {
-      const template = document.createElement("template");
+      const template = document.createElement('template');
       template.innerHTML = templateString;
 
-      if (useShadow && "ShadyCSS" in window) {
+      if (useShadow && 'ShadyCSS' in window) {
         ShadyCSS.prepareTemplate(template, name);
       }
 
@@ -443,17 +472,17 @@
 
           this.clone = document.importNode(template.content, true);
           if (useShadow) {
-            this.attachShadow({ mode: "open" });
+            this.attachShadow({ mode: 'open' });
             this.shadowRoot.appendChild(this.clone);
           }
         }
 
         connectedCallback() {
-          if (this.hasAttribute("distill-prerendered")) {
+          if (this.hasAttribute('distill-prerendered')) {
             return;
           }
           if (useShadow) {
-            if ("ShadyCSS" in window) {
+            if ('ShadyCSS' in window) {
               ShadyCSS.styleElement(this);
             }
           } else {
@@ -514,13 +543,16 @@
     while (index < text.length) {
       const character = text[index];
 
-      if (braceLevel <= 0 && text.slice(index, index + delimLength) === delimiter) {
+      if (
+        braceLevel <= 0 &&
+        text.slice(index, index + delimLength) === delimiter
+      ) {
         return index;
-      } else if (character === "\\") {
+      } else if (character === '\\') {
         index++;
-      } else if (character === "{") {
+      } else if (character === '{') {
         braceLevel++;
-      } else if (character === "}") {
+      } else if (character === '}') {
         braceLevel--;
       }
 
@@ -530,11 +562,16 @@
     return -1;
   };
 
-  const splitAtDelimiters = function (startData, leftDelim, rightDelim, display) {
+  const splitAtDelimiters = function (
+    startData,
+    leftDelim,
+    rightDelim,
+    display,
+  ) {
     const finalData = [];
 
     for (let i = 0; i < startData.length; i++) {
-      if (startData[i].type === "text") {
+      if (startData[i].type === 'text') {
         const text = startData[i].data;
 
         let lookingForLeft = true;
@@ -545,7 +582,7 @@
         if (nextIndex !== -1) {
           currIndex = nextIndex;
           finalData.push({
-            type: "text",
+            type: 'text',
             data: text.slice(0, currIndex),
           });
           lookingForLeft = false;
@@ -560,19 +597,23 @@
             }
 
             finalData.push({
-              type: "text",
+              type: 'text',
               data: text.slice(currIndex, nextIndex),
             });
 
             currIndex = nextIndex;
           } else {
-            nextIndex = findEndOfMath(rightDelim, text, currIndex + leftDelim.length);
+            nextIndex = findEndOfMath(
+              rightDelim,
+              text,
+              currIndex + leftDelim.length,
+            );
             if (nextIndex === -1) {
               break;
             }
 
             finalData.push({
-              type: "math",
+              type: 'math',
               data: text.slice(currIndex + leftDelim.length, nextIndex),
               rawData: text.slice(currIndex, nextIndex + rightDelim.length),
               display: display,
@@ -585,7 +626,7 @@
         }
 
         finalData.push({
-          type: "text",
+          type: 'text',
           data: text.slice(currIndex),
         });
       } else {
@@ -597,10 +638,15 @@
   };
 
   const splitWithDelimiters = function (text, delimiters) {
-    let data = [{ type: "text", data: text }];
+    let data = [{ type: 'text', data: text }];
     for (let i = 0; i < delimiters.length; i++) {
       const delimiter = delimiters[i];
-      data = splitAtDelimiters(data, delimiter.left, delimiter.right, delimiter.display || false);
+      data = splitAtDelimiters(
+        data,
+        delimiter.left,
+        delimiter.right,
+        delimiter.display || false,
+      );
     }
     return data;
   };
@@ -613,10 +659,10 @@
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i].type === "text") {
+      if (data[i].type === 'text') {
         fragment.appendChild(document.createTextNode(data[i].data));
       } else {
-        const tag = document.createElement("d-math");
+        const tag = document.createElement('d-math');
         const math = data[i].data;
         // Override any display mode defined in the settings with that
         // defined by the text itself
@@ -624,13 +670,16 @@
         try {
           tag.textContent = math;
           if (optionsCopy.displayMode) {
-            tag.setAttribute("block", "");
+            tag.setAttribute('block', '');
           }
         } catch (e) {
           if (!(e instanceof katex.ParseError)) {
             throw e;
           }
-          optionsCopy.errorCallback("KaTeX auto-render: Failed to parse `" + data[i].data + "` with ", e);
+          optionsCopy.errorCallback(
+            'KaTeX auto-render: Failed to parse `' + data[i].data + '` with ',
+            e,
+          );
           fragment.appendChild(document.createTextNode(data[i].rawData));
           continue;
         }
@@ -654,7 +703,9 @@
         }
       } else if (childNode.nodeType === 1) {
         // Element node
-        const shouldRender = optionsCopy.ignoredTags.indexOf(childNode.nodeName.toLowerCase()) === -1;
+        const shouldRender =
+          optionsCopy.ignoredTags.indexOf(childNode.nodeName.toLowerCase()) ===
+          -1;
 
         if (shouldRender) {
           renderElem(childNode, optionsCopy);
@@ -666,14 +717,22 @@
 
   const defaultAutoRenderOptions = {
     delimiters: [
-      { left: "$$", right: "$$", display: true },
-      { left: "\\[", right: "\\]", display: true },
-      { left: "\\(", right: "\\)", display: false },
+      { left: '$$', right: '$$', display: true },
+      { left: '\\[', right: '\\]', display: true },
+      { left: '\\(', right: '\\)', display: false },
       // LaTeX uses this, but it ruins the display of normal `$` in text:
       // {left: '$', right: '$', display: false},
     ],
 
-    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "svg"],
+    ignoredTags: [
+      'script',
+      'noscript',
+      'style',
+      'textarea',
+      'pre',
+      'code',
+      'svg',
+    ],
 
     errorCallback: function (msg, err) {
       console.error(msg, err);
@@ -682,23 +741,28 @@
 
   const renderMathInElement = function (elem, options) {
     if (!elem) {
-      throw new Error("No element provided to render");
+      throw new Error('No element provided to render');
     }
 
     const optionsCopy = Object.assign({}, defaultAutoRenderOptions, options);
-    const delimiterStrings = optionsCopy.delimiters.flatMap((d) => [d.left, d.right]);
-    const mightHaveMath = (text) => delimiterStrings.some((d) => text.indexOf(d) !== -1);
+    const delimiterStrings = optionsCopy.delimiters.flatMap((d) => [
+      d.left,
+      d.right,
+    ]);
+    const mightHaveMath = (text) =>
+      delimiterStrings.some((d) => text.indexOf(d) !== -1);
     optionsCopy.mightHaveMath = mightHaveMath;
     renderElem(elem, optionsCopy);
   };
 
   // Copyright 2018 The Distill Template Authors
 
-  const katexJSURL = "https://distill.pub/third-party/katex/katex.min.js";
-  const katexCSSTag = '<link rel="stylesheet" href="https://distill.pub/third-party/katex/katex.min.css" crossorigin="anonymous">';
+  const katexJSURL = 'https://distill.pub/third-party/katex/katex.min.js';
+  const katexCSSTag =
+    '<link rel="stylesheet" href="https://distill.pub/third-party/katex/katex.min.css" crossorigin="anonymous">';
 
   const T = Template(
-    "d-math",
+    'd-math',
     `
 ${katexCSSTag}
 <style>
@@ -715,7 +779,7 @@ ${katexCSSTag}
 ${math}
 </style>
 <span id='katex-container'></span>
-`
+`,
   );
 
   // DMath, not Math, because that would conflict with the JS built-in
@@ -734,7 +798,7 @@ ${math}
     static get katexOptions() {
       if (!DMath._katexOptions) {
         DMath._katexOptions = {
-          delimiters: [{ left: "$$", right: "$$", display: false }],
+          delimiters: [{ left: '$$', right: '$$', display: false }],
         };
       }
       return DMath._katexOptions;
@@ -742,7 +806,7 @@ ${math}
 
     static katexLoadedCallback() {
       // render all d-math tags
-      const mathTags = document.querySelectorAll("d-math");
+      const mathTags = document.querySelectorAll('d-math');
       for (const mathTag of mathTags) {
         mathTag.renderContent();
       }
@@ -754,20 +818,20 @@ ${math}
 
     static addKatex() {
       // css tag can use this convenience function
-      document.head.insertAdjacentHTML("beforeend", katexCSSTag);
+      document.head.insertAdjacentHTML('beforeend', katexCSSTag);
       // script tag has to be created to work properly
-      const scriptTag = document.createElement("script");
+      const scriptTag = document.createElement('script');
       scriptTag.src = katexJSURL;
       scriptTag.async = true;
       scriptTag.onload = DMath.katexLoadedCallback;
-      scriptTag.crossorigin = "anonymous";
+      scriptTag.crossorigin = 'anonymous';
       document.head.appendChild(scriptTag);
 
       DMath.katexAdded = true;
     }
 
     get options() {
-      const localOptions = { displayMode: this.hasAttribute("block") };
+      const localOptions = { displayMode: this.hasAttribute('block') };
       return Object.assign(localOptions, DMath.katexOptions);
     }
 
@@ -779,8 +843,8 @@ ${math}
     }
 
     renderContent() {
-      if (typeof katex !== "undefined") {
-        const container = this.root.querySelector("#katex-container");
+      if (typeof katex !== 'undefined') {
+        const container = this.root.querySelector('#katex-container');
         katex.render(this.textContent, container, this.options);
       }
     }
@@ -806,10 +870,11 @@ ${math}
 
   function collect_citations(dom = document) {
     const citations = new Set();
-    const citeTags = dom.querySelectorAll("d-cite");
+    const citeTags = dom.querySelectorAll('d-cite');
     for (const tag of citeTags) {
-      const keyString = tag.getAttribute("key") || tag.getAttribute("bibtex-key");
-      const keys = keyString.split(",").map((k) => k.trim());
+      const keyString =
+        tag.getAttribute('key') || tag.getAttribute('bibtex-key');
+      const keys = keyString.split(',').map((k) => k.trim());
       for (const key of keys) {
         citations.add(key);
       }
@@ -819,29 +884,33 @@ ${math}
 
   function author_string(ent, template, sep, finalSep) {
     if (ent.author == null) {
-      return "";
+      return '';
     }
-    var names = ent.author.split(" and ");
+    var names = ent.author.split(' and ');
     let name_strings = names.map((name) => {
       name = name.trim();
-      if (name.indexOf(",") != -1) {
-        var last = name.split(",")[0].trim();
-        var firsts = name.split(",")[1];
-      } else if (name.indexOf(" ") != -1) {
-        var last = name.split(" ").slice(-1)[0].trim();
-        var firsts = name.split(" ").slice(0, -1).join(" ");
+      if (name.indexOf(',') != -1) {
+        var last = name.split(',')[0].trim();
+        var firsts = name.split(',')[1];
+      } else if (name.indexOf(' ') != -1) {
+        var last = name.split(' ').slice(-1)[0].trim();
+        var firsts = name.split(' ').slice(0, -1).join(' ');
       } else {
         var last = name.trim();
       }
-      var initials = "";
+      var initials = '';
       if (firsts != undefined) {
         initials = firsts
           .trim()
-          .split(" ")
+          .split(' ')
           .map((s) => s.trim()[0]);
-        initials = initials.join(".") + ".";
+        initials = initials.join('.') + '.';
       }
-      return template.replace("${F}", firsts).replace("${L}", last).replace("${I}", initials).trim(); // in case one of first or last was empty
+      return template
+        .replace('${F}', firsts)
+        .replace('${L}', last)
+        .replace('${I}', initials)
+        .trim(); // in case one of first or last was empty
     });
     if (names.length > 1) {
       var str = name_strings.slice(0, names.length - 1).join(sep);
@@ -853,69 +922,71 @@ ${math}
   }
 
   function venue_string(ent) {
-    var cite = ent.journal || ent.booktitle || "";
-    if ("volume" in ent) {
+    var cite = ent.journal || ent.booktitle || '';
+    if ('volume' in ent) {
       var issue = ent.issue || ent.number;
-      issue = issue != undefined ? "(" + issue + ")" : "";
-      cite += ", Vol " + ent.volume + issue;
+      issue = issue != undefined ? '(' + issue + ')' : '';
+      cite += ', Vol ' + ent.volume + issue;
     }
-    if ("pages" in ent) {
-      cite += ", pp. " + ent.pages;
+    if ('pages' in ent) {
+      cite += ', pp. ' + ent.pages;
     }
-    if (cite != "") cite += ". ";
-    if ("publisher" in ent) {
+    if (cite != '') cite += '. ';
+    if ('publisher' in ent) {
       cite += ent.publisher;
-      if (cite[cite.length - 1] != ".") cite += ".";
+      if (cite[cite.length - 1] != '.') cite += '.';
     }
     return cite;
   }
 
   function link_string(ent) {
-    if ("url" in ent) {
+    if ('url' in ent) {
       var url = ent.url;
       var arxiv_match = /arxiv\.org\/abs\/([0-9\.]*)/.exec(url);
       if (arxiv_match != null) {
         url = `http://arxiv.org/pdf/${arxiv_match[1]}.pdf`;
       }
 
-      if (url.slice(-4) == ".pdf") {
-        var label = "PDF";
-      } else if (url.slice(-5) == ".html") {
-        var label = "HTML";
+      if (url.slice(-4) == '.pdf') {
+        var label = 'PDF';
+      } else if (url.slice(-5) == '.html') {
+        var label = 'HTML';
       }
-      return ` &ensp;<a href="${url}">[${label || "link"}]</a>`;
+      return ` &ensp;<a href="${url}">[${label || 'link'}]</a>`;
     } /* else if ("doi" in ent){
       return ` &ensp;<a href="https://doi.org/${ent.doi}" >[DOI]</a>`;
     }*/ else {
-      return "";
+      return '';
     }
   }
   function doi_string(ent, new_line) {
-    if ("doi" in ent) {
-      return `${new_line ? "<br>" : ""} <a href="https://doi.org/${ent.doi}" style="text-decoration:inherit;">DOI: ${ent.doi}</a>`;
+    if ('doi' in ent) {
+      return `${new_line ? '<br>' : ''} <a href="https://doi.org/${
+        ent.doi
+      }" style="text-decoration:inherit;">DOI: ${ent.doi}</a>`;
     } else {
-      return "";
+      return '';
     }
   }
 
   function title_string(ent) {
-    return '<span class="title">' + ent.title + "</span> ";
+    return '<span class="title">' + ent.title + '</span> ';
   }
 
   function bibliography_cite(ent, fancy) {
     if (ent) {
       var cite = title_string(ent);
-      cite += link_string(ent) + "<br>";
+      cite += link_string(ent) + '<br>';
       if (ent.author) {
-        cite += author_string(ent, "${L}, ${I}", ", ", " and ");
+        cite += author_string(ent, '${L}, ${I}', ', ', ' and ');
         if (ent.year || ent.date) {
-          cite += ", ";
+          cite += ', ';
         }
       }
       if (ent.year || ent.date) {
-        cite += (ent.year || ent.date) + ". ";
+        cite += (ent.year || ent.date) + '. ';
       } else {
-        cite += ". ";
+        cite += '. ';
       }
       cite += venue_string(ent);
       cite += doi_string(ent);
@@ -932,33 +1003,38 @@ ${math}
       cite += link_string(ent);
       return cite*/
     } else {
-      return "?";
+      return '?';
     }
   }
 
   function hover_cite(ent) {
     if (ent) {
-      var cite = "";
-      cite += "<strong>" + ent.title + "</strong>";
+      var cite = '';
+      cite += '<strong>' + ent.title + '</strong>';
       cite += link_string(ent);
-      cite += "<br>";
+      cite += '<br>';
 
-      var a_str = author_string(ent, "${I} ${L}", ", ") + ".";
-      var v_str = venue_string(ent).trim() + " " + ent.year + ". " + doi_string(ent, true);
+      var a_str = author_string(ent, '${I} ${L}', ', ') + '.';
+      var v_str =
+        venue_string(ent).trim() +
+        ' ' +
+        ent.year +
+        '. ' +
+        doi_string(ent, true);
 
       if ((a_str + v_str).length < Math.min(40, ent.title.length)) {
-        cite += a_str + " " + v_str;
+        cite += a_str + ' ' + v_str;
       } else {
-        cite += a_str + "<br>" + v_str;
+        cite += a_str + '<br>' + v_str;
       }
       return cite;
     } else {
-      return "?";
+      return '?';
     }
   }
 
   function domContentLoaded() {
-    return ["interactive", "complete"].indexOf(document.readyState) !== -1;
+    return ['interactive', 'complete'].indexOf(document.readyState) !== -1;
   }
 
   // Copyright 2018 The Distill Template Authors
@@ -985,7 +1061,7 @@ ${math}
       if (!hasOldStyle) continue;
       if (hasNewStyle) {
         console.warn(
-          `Author ${author.author} has both old-style ("affiliation" & "affiliationURL") and new style ("affiliations") affiliation information!`
+          `Author ${author.author} has both old-style ("affiliation" & "affiliationURL") and new style ("affiliations") affiliation information!`,
         );
       } else {
         let newAffiliation = {
@@ -1001,17 +1077,19 @@ ${math}
   function parseFrontmatter(element) {
     const scriptTag = element.firstElementChild;
     if (scriptTag) {
-      const type = scriptTag.getAttribute("type");
-      if (type.split("/")[1] == "json") {
+      const type = scriptTag.getAttribute('type');
+      if (type.split('/')[1] == 'json') {
         const content = scriptTag.textContent;
         const parsed = JSON.parse(content);
         return _moveLegacyAffiliationFormatIntoArray(parsed);
       } else {
-        console.error("Distill only supports JSON frontmatter tags anymore; no more YAML.");
+        console.error(
+          'Distill only supports JSON frontmatter tags anymore; no more YAML.',
+        );
       }
     } else {
       console.error(
-        "You added a frontmatter tag but did not provide a script tag with front matter data in it. Please take a look at our templates."
+        'You added a frontmatter tag but did not provide a script tag with front matter data in it. Please take a look at our templates.',
       );
     }
     return {};
@@ -1019,7 +1097,7 @@ ${math}
 
   class FrontMatter$1 extends HTMLElement {
     static get is() {
-      return "d-front-matter";
+      return 'd-front-matter';
     }
 
     constructor() {
@@ -1032,7 +1110,10 @@ ${math}
       };
       const observer = new MutationObserver((entries) => {
         for (const entry of entries) {
-          if (entry.target.nodeName === "SCRIPT" || entry.type === "characterData") {
+          if (
+            entry.target.nodeName === 'SCRIPT' ||
+            entry.type === 'characterData'
+          ) {
             const data = parseFrontmatter(this);
             this.notify(data);
           }
@@ -1043,7 +1124,7 @@ ${math}
 
     notify(data) {
       const options = { detail: data, bubbles: true };
-      const event = new CustomEvent("onFrontMatterChanged", options);
+      const event = new CustomEvent('onFrontMatterChanged', options);
       document.dispatchEvent(event);
     }
   }
@@ -1073,44 +1154,49 @@ ${math}
 
   function optionalComponents(dom, data) {
     const body = dom.body;
-    const article = body.querySelector("d-article");
+    const article = body.querySelector('d-article');
 
     // If we don't have an article tag, something weird is going on—giving up.
     if (!article) {
-      console.warn("No d-article tag found; skipping adding optional components!");
+      console.warn(
+        'No d-article tag found; skipping adding optional components!',
+      );
       return;
     }
 
-    let byline = dom.querySelector("d-byline");
+    let byline = dom.querySelector('d-byline');
     if (!byline) {
       if (data.authors) {
-        byline = dom.createElement("d-byline");
+        byline = dom.createElement('d-byline');
         // body.insertBefore(byline, article);
       } else {
-        console.warn("No authors found in front matter; please add them before submission!");
+        console.warn(
+          'No authors found in front matter; please add them before submission!',
+        );
       }
     }
 
-    let title = dom.querySelector("d-title");
+    let title = dom.querySelector('d-title');
     if (!title) {
-      title = dom.createElement("d-title");
+      title = dom.createElement('d-title');
       body.insertBefore(title, byline);
     }
 
-    let h1 = title.querySelector("h1");
+    let h1 = title.querySelector('h1');
     if (!h1) {
-      h1 = dom.createElement("h1");
+      h1 = dom.createElement('h1');
       h1.textContent = data.title;
       title.insertBefore(h1, title.firstChild);
     }
 
-    const hasPassword = typeof data.password !== "undefined";
-    let interstitial = body.querySelector("d-interstitial");
+    const hasPassword = typeof data.password !== 'undefined';
+    let interstitial = body.querySelector('d-interstitial');
     if (hasPassword && !interstitial) {
-      const inBrowser = typeof window !== "undefined";
-      const onLocalhost = inBrowser && window.location.hostname.includes("localhost");
+      const inBrowser = typeof window !== 'undefined';
+      const onLocalhost =
+        inBrowser && window.location.hostname.includes('localhost');
       if (!inBrowser || !onLocalhost) {
-        interstitial = dom.createElement("d-interstitial");
+        interstitial = dom.createElement('d-interstitial');
         interstitial.password = data.password;
         body.insertBefore(interstitial, body.firstChild);
       }
@@ -1118,21 +1204,21 @@ ${math}
       interstitial.parentElement.removeChild(this);
     }
 
-    let appendix = dom.querySelector("d-appendix");
+    let appendix = dom.querySelector('d-appendix');
     if (!appendix) {
-      appendix = dom.createElement("d-appendix");
+      appendix = dom.createElement('d-appendix');
       dom.body.appendChild(appendix);
     }
 
-    let footnoteList = dom.querySelector("d-footnote-list");
+    let footnoteList = dom.querySelector('d-footnote-list');
     if (!footnoteList) {
-      footnoteList = dom.createElement("d-footnote-list");
+      footnoteList = dom.createElement('d-footnote-list');
       appendix.appendChild(footnoteList);
     }
 
-    let citationList = dom.querySelector("d-citation-list");
+    let citationList = dom.querySelector('d-citation-list');
     if (!citationList) {
-      citationList = dom.createElement("d-citation-list");
+      citationList = dom.createElement('d-citation-list');
       appendix.appendChild(citationList);
     }
   }
@@ -1154,14 +1240,18 @@ ${math}
         // ensure we have citations
         if (!frontMatter.citationsCollected) {
           // console.debug('onCiteKeyCreated, but unresolved dependency ("citations"). Enqueing.');
-          Controller.waitingOn.citations.push(() => Controller.listeners.onCiteKeyCreated(event));
+          Controller.waitingOn.citations.push(() =>
+            Controller.listeners.onCiteKeyCreated(event),
+          );
           return;
         }
 
         // ensure we have a loaded bibliography
         if (!frontMatter.bibliographyParsed) {
           // console.debug('onCiteKeyCreated, but unresolved dependency ("bibliography"). Enqueing.');
-          Controller.waitingOn.bibliography.push(() => Controller.listeners.onCiteKeyCreated(event));
+          Controller.waitingOn.bibliography.push(() =>
+            Controller.listeners.onCiteKeyCreated(event),
+          );
           return;
         }
 
@@ -1182,15 +1272,15 @@ ${math}
         }
 
         // update bibliography
-        const citationListTag = document.querySelector("d-citation-list");
+        const citationListTag = document.querySelector('d-citation-list');
         const bibliographyEntries = new Map(
           frontMatter.citations.map((citationKey) => {
             return [citationKey, frontMatter.bibliography.get(citationKey)];
-          })
+          }),
         );
         citationListTag.citations = bibliographyEntries;
 
-        const citeTags = document.querySelectorAll("d-cite");
+        const citeTags = document.querySelectorAll('d-cite');
         for (const citeTag of citeTags) {
           console.log(citeTag);
           const keys = citeTag.keys;
@@ -1206,7 +1296,7 @@ ${math}
       },
 
       onBibliographyChanged(event) {
-        const citationListTag = document.querySelector("d-citation-list");
+        const citationListTag = document.querySelector('d-citation-list');
 
         const bibliography = event.detail;
 
@@ -1227,13 +1317,13 @@ ${math}
           return;
         }
 
-        if (citationListTag.hasAttribute("distill-prerendered")) {
-          console.debug("Citation list was prerendered; not updating it.");
+        if (citationListTag.hasAttribute('distill-prerendered')) {
+          console.debug('Citation list was prerendered; not updating it.');
         } else {
           const entries = new Map(
             frontMatter.citations.map((citationKey) => {
               return [citationKey, frontMatter.bibliography.get(citationKey)];
-            })
+            }),
           );
           citationListTag.citations = entries;
         }
@@ -1242,9 +1332,9 @@ ${math}
       onFootnoteChanged() {
         // const footnote = event.detail;
         //TODO: optimize to only update current footnote
-        const footnotesList = document.querySelector("d-footnote-list");
+        const footnotesList = document.querySelector('d-footnote-list');
         if (footnotesList) {
-          const footnotes = document.querySelectorAll("d-footnote");
+          const footnotes = document.querySelectorAll('d-footnote');
           footnotesList.footnotes = footnotes;
         }
       },
@@ -1253,25 +1343,25 @@ ${math}
         const data = event.detail;
         mergeFromYMLFrontmatter(frontMatter, data);
 
-        const interstitial = document.querySelector("d-interstitial");
+        const interstitial = document.querySelector('d-interstitial');
         if (interstitial) {
-          if (typeof frontMatter.password !== "undefined") {
+          if (typeof frontMatter.password !== 'undefined') {
             interstitial.password = frontMatter.password;
           } else {
             interstitial.parentElement.removeChild(interstitial);
           }
         }
 
-        const prerendered = document.body.hasAttribute("distill-prerendered");
+        const prerendered = document.body.hasAttribute('distill-prerendered');
         if (!prerendered && domContentLoaded()) {
           optionalComponents(document, frontMatter);
 
-          const appendix = document.querySelector("distill-appendix");
+          const appendix = document.querySelector('distill-appendix');
           if (appendix) {
             appendix.frontMatter = frontMatter;
           }
 
-          const byline = document.querySelector("d-byline");
+          const byline = document.querySelector('d-byline');
           if (byline) {
             byline.frontMatter = frontMatter;
           }
@@ -1284,17 +1374,23 @@ ${math}
 
       DOMContentLoaded() {
         if (Controller.loaded) {
-          console.warn("Controller received DOMContentLoaded but was already loaded!");
+          console.warn(
+            'Controller received DOMContentLoaded but was already loaded!',
+          );
           return;
         } else if (!domContentLoaded()) {
-          console.warn("Controller received DOMContentLoaded at document.readyState: " + document.readyState + "!");
+          console.warn(
+            'Controller received DOMContentLoaded at document.readyState: ' +
+              document.readyState +
+              '!',
+          );
           return;
         } else {
           Controller.loaded = true;
-          console.debug("Runlevel 4: Controller running DOMContentLoaded");
+          console.debug('Runlevel 4: Controller running DOMContentLoaded');
         }
 
-        const frontMatterTag = document.querySelector("d-front-matter");
+        const frontMatterTag = document.querySelector('d-front-matter');
         if (frontMatterTag) {
           const data = parseFrontmatter(frontMatterTag);
           Controller.listeners.onFrontMatterChanged({ detail: data });
@@ -1313,9 +1409,9 @@ ${math}
           }
         }
 
-        const footnotesList = document.querySelector("d-footnote-list");
+        const footnotesList = document.querySelector('d-footnote-list');
         if (footnotesList) {
-          const footnotes = document.querySelectorAll("d-footnote");
+          const footnotes = document.querySelectorAll('d-footnote');
           footnotesList.footnotes = footnotes;
         }
       },
@@ -1345,15 +1441,15 @@ ${math}
   const styles = base + layout + title + byline + article + math + print;
 
   function makeStyleTag(dom) {
-    const styleTagId = "distill-prerendered-styles";
+    const styleTagId = 'distill-prerendered-styles';
     const prerenderedTag = dom.getElementById(styleTagId);
     if (!prerenderedTag) {
-      const styleTag = dom.createElement("style");
+      const styleTag = dom.createElement('style');
       styleTag.id = styleTagId;
-      styleTag.type = "text/css";
+      styleTag.type = 'text/css';
       const cssTextTag = dom.createTextNode(styles);
       styleTag.appendChild(cssTextTag);
-      const firstScriptTag = dom.head.querySelector("script");
+      const firstScriptTag = dom.head.querySelector('script');
       dom.head.insertBefore(styleTag, firstScriptTag);
     }
   }
@@ -1373,8 +1469,8 @@ ${math}
   // limitations under the License.
 
   function addPolyfill(polyfill, polyfillLoadedCallback) {
-    console.debug("Runlevel 0: Polyfill required: " + polyfill.name);
-    const script = document.createElement("script");
+    console.debug('Runlevel 0: Polyfill required: ' + polyfill.name);
+    const script = document.createElement('script');
     script.src = polyfill.url;
     script.async = false;
     if (polyfillLoadedCallback) {
@@ -1383,32 +1479,35 @@ ${math}
       };
     }
     script.onerror = function () {
-      new Error("Runlevel 0: Polyfills failed to load script " + polyfill.name);
+      new Error('Runlevel 0: Polyfills failed to load script ' + polyfill.name);
     };
     document.head.appendChild(script);
   }
 
   const polyfills = [
     {
-      name: "WebComponents",
+      name: 'WebComponents',
       support: function () {
         return (
-          "customElements" in window &&
-          "attachShadow" in Element.prototype &&
-          "getRootNode" in Element.prototype &&
-          "content" in document.createElement("template") &&
-          "Promise" in window &&
-          "from" in Array
+          'customElements' in window &&
+          'attachShadow' in Element.prototype &&
+          'getRootNode' in Element.prototype &&
+          'content' in document.createElement('template') &&
+          'Promise' in window &&
+          'from' in Array
         );
       },
-      url: "https://distill.pub/third-party/polyfills/webcomponents-lite.js",
+      url: 'https://distill.pub/third-party/polyfills/webcomponents-lite.js',
     },
     {
-      name: "IntersectionObserver",
+      name: 'IntersectionObserver',
       support: function () {
-        return "IntersectionObserver" in window && "IntersectionObserverEntry" in window;
+        return (
+          'IntersectionObserver' in window &&
+          'IntersectionObserverEntry' in window
+        );
       },
-      url: "https://distill.pub/third-party/polyfills/intersection-observer.js",
+      url: 'https://distill.pub/third-party/polyfills/intersection-observer.js',
     },
   ];
 
@@ -1421,11 +1520,15 @@ ${math}
       // Define an intermediate callback that checks if all is loaded.
       const polyfillLoaded = function (polyfill) {
         polyfill.loaded = true;
-        console.debug("Runlevel 0: Polyfill has finished loading: " + polyfill.name);
+        console.debug(
+          'Runlevel 0: Polyfill has finished loading: ' + polyfill.name,
+        );
         // console.debug(window[polyfill.name]);
         if (Polyfills.neededPolyfills.every((poly) => poly.loaded)) {
-          console.debug("Runlevel 0: All required polyfills have finished loading.");
-          console.debug("Runlevel 0->1.");
+          console.debug(
+            'Runlevel 0: All required polyfills have finished loading.',
+          );
+          console.debug('Runlevel 0->1.');
           window.distillRunlevel = 1;
           callback();
         }
@@ -1438,7 +1541,9 @@ ${math}
 
     static get neededPolyfills() {
       if (!Polyfills._neededPolyfills) {
-        Polyfills._neededPolyfills = polyfills.filter((poly) => !poly.support());
+        Polyfills._neededPolyfills = polyfills.filter(
+          (poly) => !poly.support(),
+        );
       }
       return Polyfills._neededPolyfills;
     }
@@ -1481,7 +1586,7 @@ ${math}
   // Copyright 2018 The Distill Template Authors
 
   const T$1 = Template(
-    "d-abstract",
+    'd-abstract',
     `
 <style>
   :host {
@@ -1496,11 +1601,11 @@ ${math}
     margin-bottom: 1em;
     grid-column: text-start / middle-end;
   }
-  ${body("d-abstract")}
+  ${body('d-abstract')}
 </style>
 
 <slot></slot>
-`
+`,
   );
 
   class Abstract extends T$1(HTMLElement) {}
@@ -1508,7 +1613,7 @@ ${math}
   // Copyright 2018 The Distill Template Authors
 
   const T$2 = Template(
-    "d-appendix",
+    'd-appendix',
     `
 <style>
 
@@ -1569,7 +1674,7 @@ d-appendix > distill-appendix {
 </style>
 
 `,
-    false
+    false,
   );
 
   class Appendix extends T$2(HTMLElement) {}
@@ -1595,7 +1700,7 @@ d-appendix > distill-appendix {
 
   class Article extends HTMLElement {
     static get is() {
-      return "d-article";
+      return 'd-article';
     }
 
     constructor() {
@@ -1605,16 +1710,16 @@ d-appendix > distill-appendix {
         for (const mutation of mutations) {
           for (const addedNode of mutation.addedNodes) {
             switch (addedNode.nodeName) {
-              case "#text":
+              case '#text':
                 {
                   // usually text nodes are only linebreaks.
                   const text = addedNode.nodeValue;
                   if (!isOnlyWhitespace.test(text)) {
                     console.warn(
-                      "Use of unwrapped text in distill articles is discouraged as it breaks layout! Please wrap any text in a <span> or <p> tag. We found the following text: " +
-                        text
+                      'Use of unwrapped text in distill articles is discouraged as it breaks layout! Please wrap any text in a <span> or <p> tag. We found the following text: ' +
+                        text,
                     );
-                    const wrapper = document.createElement("span");
+                    const wrapper = document.createElement('span');
                     wrapper.innerHTML = addedNode.nodeValue;
                     addedNode.parentNode.insertBefore(wrapper, addedNode);
                     addedNode.parentNode.removeChild(addedNode);
@@ -1629,18 +1734,20 @@ d-appendix > distill-appendix {
   }
 
   var commonjsGlobal =
-    typeof globalThis !== "undefined"
+    typeof globalThis !== 'undefined'
       ? globalThis
-      : typeof window !== "undefined"
+      : typeof window !== 'undefined'
         ? window
-        : typeof global !== "undefined"
+        : typeof global !== 'undefined'
           ? global
-          : typeof self !== "undefined"
+          : typeof self !== 'undefined'
             ? self
             : {};
 
   function createCommonjsModule(fn, module) {
-    return (module = { exports: {} }), fn(module, module.exports), module.exports;
+    return (
+      (module = { exports: {} }), fn(module, module.exports), module.exports
+    );
   }
 
   var bibtexParse = createCommonjsModule(function (module, exports) {
@@ -1669,13 +1776,26 @@ d-appendix > distill-appendix {
     //value_braces -> '{' .*? '"'; // not quite
     (function (exports) {
       function BibtexParser() {
-        this.months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-        this.notKey = [",", "{", "}", " ", "="];
+        this.months = [
+          'jan',
+          'feb',
+          'mar',
+          'apr',
+          'may',
+          'jun',
+          'jul',
+          'aug',
+          'sep',
+          'oct',
+          'nov',
+          'dec',
+        ];
+        this.notKey = [',', '{', '}', ' ', '='];
         this.pos = 0;
-        this.input = "";
+        this.input = '';
         this.entries = new Array();
 
-        this.currentEntry = "";
+        this.currentEntry = '';
 
         this.setInput = function (t) {
           this.input = t;
@@ -1686,22 +1806,29 @@ d-appendix > distill-appendix {
         };
 
         this.isWhitespace = function (s) {
-          return s == " " || s == "\r" || s == "\t" || s == "\n";
+          return s == ' ' || s == '\r' || s == '\t' || s == '\n';
         };
 
         this.match = function (s, canCommentOut) {
-          if (canCommentOut == undefined || canCommentOut == null) canCommentOut = true;
+          if (canCommentOut == undefined || canCommentOut == null)
+            canCommentOut = true;
           this.skipWhitespace(canCommentOut);
           if (this.input.substring(this.pos, this.pos + s.length) == s) {
             this.pos += s.length;
           } else {
-            throw "Token mismatch, expected " + s + ", found " + this.input.substring(this.pos);
+            throw (
+              'Token mismatch, expected ' +
+              s +
+              ', found ' +
+              this.input.substring(this.pos)
+            );
           }
           this.skipWhitespace(canCommentOut);
         };
 
         this.tryMatch = function (s, canCommentOut) {
-          if (canCommentOut == undefined || canCommentOut == null) canCommentOut = true;
+          if (canCommentOut == undefined || canCommentOut == null)
+            canCommentOut = true;
           this.skipWhitespace(canCommentOut);
           if (this.input.substring(this.pos, this.pos + s.length) == s) {
             return true;
@@ -1712,10 +1839,10 @@ d-appendix > distill-appendix {
 
         /* when search for a match all text can be ignored, not just white space */
         this.matchAt = function () {
-          while (this.input.length > this.pos && this.input[this.pos] != "@") {
+          while (this.input.length > this.pos && this.input[this.pos] != '@') {
             this.pos++;
           }
-          if (this.input[this.pos] == "@") {
+          if (this.input[this.pos] == '@') {
             return true;
           }
           return false;
@@ -1725,8 +1852,8 @@ d-appendix > distill-appendix {
           while (this.isWhitespace(this.input[this.pos])) {
             this.pos++;
           }
-          if (this.input[this.pos] == "%" && canCommentOut == true) {
-            while (this.input[this.pos] != "\n") {
+          if (this.input[this.pos] == '%' && canCommentOut == true) {
+            while (this.input[this.pos] != '\n') {
               this.pos++;
             }
             this.skipWhitespace(canCommentOut);
@@ -1735,40 +1862,41 @@ d-appendix > distill-appendix {
 
         this.value_braces = function () {
           var bracecount = 0;
-          this.match("{", false);
+          this.match('{', false);
           var start = this.pos;
           var escaped = false;
           while (true) {
             if (!escaped) {
-              if (this.input[this.pos] == "}") {
+              if (this.input[this.pos] == '}') {
                 if (bracecount > 0) {
                   bracecount--;
                 } else {
                   var end = this.pos;
-                  this.match("}", false);
+                  this.match('}', false);
                   return this.input.substring(start, end);
                 }
-              } else if (this.input[this.pos] == "{") {
+              } else if (this.input[this.pos] == '{') {
                 bracecount++;
               } else if (this.pos >= this.input.length - 1) {
-                throw "Unterminated value";
+                throw 'Unterminated value';
               }
             }
-            if (this.input[this.pos] == "\\" && escaped == false) escaped = true;
+            if (this.input[this.pos] == '\\' && escaped == false)
+              escaped = true;
             else escaped = false;
             this.pos++;
           }
         };
 
         this.value_comment = function () {
-          var str = "";
+          var str = '';
           var brcktCnt = 0;
-          while (!(this.tryMatch("}", false) && brcktCnt == 0)) {
+          while (!(this.tryMatch('}', false) && brcktCnt == 0)) {
             str = str + this.input[this.pos];
-            if (this.input[this.pos] == "{") brcktCnt++;
-            if (this.input[this.pos] == "}") brcktCnt--;
+            if (this.input[this.pos] == '{') brcktCnt++;
+            if (this.input[this.pos] == '}') brcktCnt--;
             if (this.pos >= this.input.length - 1) {
-              throw "Unterminated value:" + this.input.substring(start);
+              throw 'Unterminated value:' + this.input.substring(start);
             }
             this.pos++;
           }
@@ -1786,10 +1914,11 @@ d-appendix > distill-appendix {
                 this.match('"', false);
                 return this.input.substring(start, end);
               } else if (this.pos >= this.input.length - 1) {
-                throw "Unterminated value:" + this.input.substring(start);
+                throw 'Unterminated value:' + this.input.substring(start);
               }
             }
-            if (this.input[this.pos] == "\\" && escaped == false) escaped = true;
+            if (this.input[this.pos] == '\\' && escaped == false)
+              escaped = true;
             else escaped = false;
             this.pos++;
           }
@@ -1797,33 +1926,40 @@ d-appendix > distill-appendix {
 
         this.single_value = function () {
           var start = this.pos;
-          if (this.tryMatch("{")) {
+          if (this.tryMatch('{')) {
             return this.value_braces();
           } else if (this.tryMatch('"')) {
             return this.value_quotes();
           } else {
             var k = this.key();
-            if (k.match("^[0-9]+$")) return k;
-            else if (this.months.indexOf(k.toLowerCase()) >= 0) return k.toLowerCase();
-            else throw "Value expected:" + this.input.substring(start) + " for key: " + k;
+            if (k.match('^[0-9]+$')) return k;
+            else if (this.months.indexOf(k.toLowerCase()) >= 0)
+              return k.toLowerCase();
+            else
+              throw (
+                'Value expected:' +
+                this.input.substring(start) +
+                ' for key: ' +
+                k
+              );
           }
         };
 
         this.value = function () {
           var values = [];
           values.push(this.single_value());
-          while (this.tryMatch("#")) {
-            this.match("#");
+          while (this.tryMatch('#')) {
+            this.match('#');
             values.push(this.single_value());
           }
-          return values.join("");
+          return values.join('');
         };
 
         this.key = function () {
           var start = this.pos;
           while (true) {
             if (this.pos >= this.input.length) {
-              throw "Runaway key";
+              throw 'Runaway key';
             } // а-яА-Я is Cyrillic
             //console.log(this.input[this.pos]);
             if (this.notKey.indexOf(this.input[this.pos]) >= 0) {
@@ -1836,55 +1972,58 @@ d-appendix > distill-appendix {
 
         this.key_equals_value = function () {
           var key = this.key();
-          if (this.tryMatch("=")) {
-            this.match("=");
+          if (this.tryMatch('=')) {
+            this.match('=');
             var val = this.value();
             return [key, val];
           } else {
-            throw "... = value expected, equals sign missing:" + this.input.substring(this.pos);
+            throw (
+              '... = value expected, equals sign missing:' +
+              this.input.substring(this.pos)
+            );
           }
         };
 
         this.key_value_list = function () {
           var kv = this.key_equals_value();
-          this.currentEntry["entryTags"] = {};
-          this.currentEntry["entryTags"][kv[0]] = kv[1];
-          while (this.tryMatch(",")) {
-            this.match(",");
+          this.currentEntry['entryTags'] = {};
+          this.currentEntry['entryTags'][kv[0]] = kv[1];
+          while (this.tryMatch(',')) {
+            this.match(',');
             // fixes problems with commas at the end of a list
-            if (this.tryMatch("}")) {
+            if (this.tryMatch('}')) {
               break;
             }
             kv = this.key_equals_value();
-            this.currentEntry["entryTags"][kv[0]] = kv[1];
+            this.currentEntry['entryTags'][kv[0]] = kv[1];
           }
         };
 
         this.entry_body = function (d) {
           this.currentEntry = {};
-          this.currentEntry["citationKey"] = this.key();
-          this.currentEntry["entryType"] = d.substring(1);
-          this.match(",");
+          this.currentEntry['citationKey'] = this.key();
+          this.currentEntry['entryType'] = d.substring(1);
+          this.match(',');
           this.key_value_list();
           this.entries.push(this.currentEntry);
         };
 
         this.directive = function () {
-          this.match("@");
-          return "@" + this.key();
+          this.match('@');
+          return '@' + this.key();
         };
 
         this.preamble = function () {
           this.currentEntry = {};
-          this.currentEntry["entryType"] = "PREAMBLE";
-          this.currentEntry["entry"] = this.value_comment();
+          this.currentEntry['entryType'] = 'PREAMBLE';
+          this.currentEntry['entry'] = this.value_comment();
           this.entries.push(this.currentEntry);
         };
 
         this.comment = function () {
           this.currentEntry = {};
-          this.currentEntry["entryType"] = "COMMENT";
-          this.currentEntry["entry"] = this.value_comment();
+          this.currentEntry['entryType'] = 'COMMENT';
+          this.currentEntry['entry'] = this.value_comment();
           this.entries.push(this.currentEntry);
         };
 
@@ -1895,17 +2034,17 @@ d-appendix > distill-appendix {
         this.bibtex = function () {
           while (this.matchAt()) {
             var d = this.directive();
-            this.match("{");
-            if (d == "@STRING") {
+            this.match('{');
+            if (d == '@STRING') {
               this.string();
-            } else if (d == "@PREAMBLE") {
+            } else if (d == '@PREAMBLE') {
               this.preamble();
-            } else if (d == "@COMMENT") {
+            } else if (d == '@COMMENT') {
               this.comment();
             } else {
               this.entry(d);
             }
-            this.match("}");
+            this.match('}');
           }
         };
       }
@@ -1918,21 +2057,21 @@ d-appendix > distill-appendix {
 
       /* added during hackathon don't hate on me */
       exports.toBibtex = function (json) {
-        var out = "";
+        var out = '';
         for (var i in json) {
-          out += "@" + json[i].entryType;
-          out += "{";
-          if (json[i].citationKey) out += json[i].citationKey + ", ";
+          out += '@' + json[i].entryType;
+          out += '{';
+          if (json[i].citationKey) out += json[i].citationKey + ', ';
           if (json[i].entry) out += json[i].entry;
           if (json[i].entryTags) {
-            var tags = "";
+            var tags = '';
             for (var jdx in json[i].entryTags) {
-              if (tags.length != 0) tags += ", ";
-              tags += jdx + "= {" + json[i].entryTags[jdx] + "}";
+              if (tags.length != 0) tags += ', ';
+              tags += jdx + '= {' + json[i].entryTags[jdx] + '}';
             }
             out += tags;
           }
-          out += "}\n\n";
+          out += '}\n\n';
         }
         return out;
       };
@@ -1945,7 +2084,7 @@ d-appendix > distill-appendix {
 
   function normalizeTag(string) {
     return string
-      .replace(/[\t\n ]+/g, " ")
+      .replace(/[\t\n ]+/g, ' ')
       .replace(/{\\["^`.'acu~Hvs]( )?([a-zA-Z])}/g, (full, x, char) => char)
       .replace(/{\\([a-zA-Z])}/g, (full, char) => char);
   }
@@ -1980,7 +2119,7 @@ d-appendix > distill-appendix {
 
   class Bibliography extends HTMLElement {
     static get is() {
-      return "d-bibliography";
+      return 'd-bibliography';
     }
 
     constructor() {
@@ -1994,7 +2133,10 @@ d-appendix > distill-appendix {
       };
       const observer = new MutationObserver((entries) => {
         for (const entry of entries) {
-          if (entry.target.nodeName === "SCRIPT" || entry.type === "characterData") {
+          if (
+            entry.target.nodeName === 'SCRIPT' ||
+            entry.type === 'characterData'
+          ) {
             this.parseIfPossible();
           }
         }
@@ -2009,33 +2151,35 @@ d-appendix > distill-appendix {
     }
 
     parseIfPossible() {
-      const scriptTag = this.querySelector("script");
+      const scriptTag = this.querySelector('script');
       if (!scriptTag) return;
-      if (scriptTag.type == "text/bibtex") {
+      if (scriptTag.type == 'text/bibtex') {
         const newBibtex = scriptTag.textContent;
         if (this.bibtex !== newBibtex) {
           this.bibtex = newBibtex;
           const bibliography = parseBibtex(this.bibtex);
           this.notify(bibliography);
         }
-      } else if (scriptTag.type == "text/json") {
+      } else if (scriptTag.type == 'text/json') {
         const bibliography = new Map(JSON.parse(scriptTag.textContent));
         this.notify(bibliography);
       } else {
-        console.warn("Unsupported bibliography script tag type: " + scriptTag.type);
+        console.warn(
+          'Unsupported bibliography script tag type: ' + scriptTag.type,
+        );
       }
     }
 
     notify(bibliography) {
       const options = { detail: bibliography, bubbles: true };
-      const event = new CustomEvent("onBibliographyChanged", options);
+      const event = new CustomEvent('onBibliographyChanged', options);
       this.dispatchEvent(event);
     }
 
     /* observe 'src' attribute */
 
     static get observedAttributes() {
-      return ["src"];
+      return ['src'];
     }
 
     receivedBibtex(event) {
@@ -2046,9 +2190,10 @@ d-appendix > distill-appendix {
     attributeChangedCallback(name, oldValue, newValue) {
       var oReq = new XMLHttpRequest();
       oReq.onload = (e) => this.receivedBibtex(e);
-      oReq.onerror = () => console.warn(`Could not load Bibtex! (tried ${newValue})`);
-      oReq.responseType = "text";
-      oReq.open("GET", newValue, true);
+      oReq.onerror = () =>
+        console.warn(`Could not load Bibtex! (tried ${newValue})`);
+      oReq.responseType = 'text';
+      oReq.open('GET', newValue, true);
       oReq.send();
     }
   }
@@ -2092,13 +2237,13 @@ d-appendix > distill-appendix {
           .map((affiliation) =>
             affiliation.url
               ? `<a class="affiliation" href="${affiliation.url}">${affiliation.name}</a>`
-              : `<span class="affiliation">${affiliation.name}</span>`
+              : `<span class="affiliation">${affiliation.name}</span>`,
           )
-          .join(", ")}
+          .join(', ')}
         </p>
-      `
+      `,
         )
-        .join("")}
+        .join('')}
     </div>
     <div>
       <h3>Published</h3>
@@ -2116,7 +2261,7 @@ d-appendix > distill-appendix {
 
   class Byline extends HTMLElement {
     static get is() {
-      return "d-byline";
+      return 'd-byline';
     }
 
     set frontMatter(frontMatter) {
@@ -2127,7 +2272,7 @@ d-appendix > distill-appendix {
   // Copyright 2018 The Distill Template Authors
 
   const T$3 = Template(
-    "d-cite",
+    'd-cite',
     `
 <style>
 
@@ -2182,7 +2327,7 @@ ul li:last-of-type {
 <div id="citation-" class="citation">
   <span class="citation-number"></span>
 </div>
-`
+`,
   );
 
   class Cite extends T$3(HTMLElement) {
@@ -2194,10 +2339,10 @@ ul li:last-of-type {
     }
 
     connectedCallback() {
-      this.outerSpan = this.root.querySelector("#citation-");
-      this.innerSpan = this.root.querySelector(".citation-number");
-      this.hoverBox = this.root.querySelector("d-hover-box");
-      window.customElements.whenDefined("d-hover-box").then(() => {
+      this.outerSpan = this.root.querySelector('#citation-');
+      this.innerSpan = this.root.querySelector('.citation-number');
+      this.hoverBox = this.root.querySelector('d-hover-box');
+      window.customElements.whenDefined('d-hover-box').then(() => {
         this.hoverBox.listen(this);
       });
       // in case this component got connected after values were set
@@ -2220,27 +2365,27 @@ ul li:last-of-type {
     /* observe 'key' attribute */
 
     static get observedAttributes() {
-      return ["key", "bibtex-key"];
+      return ['key', 'bibtex-key'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-      const eventName = oldValue ? "onCiteKeyChanged" : "onCiteKeyCreated";
-      const keys = newValue.split(",").map((k) => k.trim());
+      const eventName = oldValue ? 'onCiteKeyChanged' : 'onCiteKeyCreated';
+      const keys = newValue.split(',').map((k) => k.trim());
       const options = { detail: [this, keys], bubbles: true };
       const event = new CustomEvent(eventName, options);
       document.dispatchEvent(event);
     }
 
     set key(value) {
-      this.setAttribute("key", value);
+      this.setAttribute('key', value);
     }
 
     get key() {
-      return this.getAttribute("key") || this.getAttribute("bibtex-key");
+      return this.getAttribute('key') || this.getAttribute('bibtex-key');
     }
 
     get keys() {
-      const result = this.key.split(",");
+      const result = this.key.split(',');
       console.log(result);
       return result;
     }
@@ -2259,9 +2404,9 @@ ul li:last-of-type {
     displayNumbers(numbers) {
       if (!this.innerSpan) return;
       const numberStrings = numbers.map((index) => {
-        return index == -1 ? "?" : index + 1 + "";
+        return index == -1 ? '?' : index + 1 + '';
       });
-      const textContent = "[" + numberStrings.join(", ") + "]";
+      const textContent = '[' + numberStrings.join(', ') + ']';
       this.innerSpan.textContent = textContent;
     }
 
@@ -2280,7 +2425,7 @@ ul li:last-of-type {
       ${entries
         .map(hover_cite)
         .map((html) => `<li>${html}</li>`)
-        .join("\n")}
+        .join('\n')}
     </ul>`;
     }
   }
@@ -2303,45 +2448,45 @@ d-citation-list .references .title {
 
   function renderCitationList(element, entries, dom = document) {
     if (entries.size > 0) {
-      element.style.display = "";
-      let list = element.querySelector(".references");
+      element.style.display = '';
+      let list = element.querySelector('.references');
       if (list) {
-        list.innerHTML = "";
+        list.innerHTML = '';
       } else {
-        const stylesTag = dom.createElement("style");
+        const stylesTag = dom.createElement('style');
         stylesTag.innerHTML = styles$1;
         element.appendChild(stylesTag);
 
-        const heading = dom.createElement("h3");
-        heading.id = "references";
-        heading.textContent = "References";
+        const heading = dom.createElement('h3');
+        heading.id = 'references';
+        heading.textContent = 'References';
         element.appendChild(heading);
 
-        list = dom.createElement("ol");
-        list.id = "references-list";
-        list.className = "references";
+        list = dom.createElement('ol');
+        list.id = 'references-list';
+        list.className = 'references';
         element.appendChild(list);
       }
 
       for (const [key, entry] of entries) {
-        const listItem = dom.createElement("li");
+        const listItem = dom.createElement('li');
         listItem.id = key;
         listItem.innerHTML = bibliography_cite(entry);
         list.appendChild(listItem);
       }
     } else {
-      element.style.display = "none";
+      element.style.display = 'none';
     }
   }
 
   class CitationList extends HTMLElement {
     static get is() {
-      return "d-citation-list";
+      return 'd-citation-list';
     }
 
     connectedCallback() {
-      if (!this.hasAttribute("distill-prerendered")) {
-        this.style.display = "none";
+      if (!this.hasAttribute('distill-prerendered')) {
+        this.style.display = 'none';
       }
     }
 
@@ -2356,9 +2501,10 @@ d-citation-list .references .title {
   ********************************************** */
 
     var _self =
-      typeof window !== "undefined"
+      typeof window !== 'undefined'
         ? window // if in browser
-        : typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope
+        : typeof WorkerGlobalScope !== 'undefined' &&
+            self instanceof WorkerGlobalScope
           ? self // if in worker
           : {}; // if in node js
 
@@ -2375,18 +2521,23 @@ d-citation-list .references .title {
 
       var _ = {
         manual: _self.Prism && _self.Prism.manual,
-        disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+        disableWorkerMessageHandler:
+          _self.Prism && _self.Prism.disableWorkerMessageHandler,
         util: {
           encode: function encode(tokens) {
             if (tokens instanceof Token) {
-              return new Token(tokens.type, encode(tokens.content), tokens.alias);
+              return new Token(
+                tokens.type,
+                encode(tokens.content),
+                tokens.alias,
+              );
             } else if (Array.isArray(tokens)) {
               return tokens.map(encode);
             } else {
               return tokens
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/\u00a0/g, " ");
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/\u00a0/g, ' ');
             }
           },
 
@@ -2395,12 +2546,12 @@ d-citation-list .references .title {
           },
 
           objId: function (obj) {
-            if (!obj["__id"]) {
-              Object.defineProperty(obj, "__id", {
+            if (!obj['__id']) {
+              Object.defineProperty(obj, '__id', {
                 value: ++uniqueId,
               });
             }
-            return obj["__id"];
+            return obj['__id'];
           },
 
           // Deep clone a language definition (e.g. to extend it)
@@ -2411,7 +2562,7 @@ d-citation-list .references .title {
             visited = visited || {};
 
             switch (type) {
-              case "Object":
+              case 'Object':
                 id = _.util.objId(o);
                 if (visited[id]) {
                   return visited[id];
@@ -2427,7 +2578,7 @@ d-citation-list .references .title {
 
                 return clone;
 
-              case "Array":
+              case 'Array':
                 id = _.util.objId(o);
                 if (visited[id]) {
                   return visited[id];
@@ -2459,9 +2610,12 @@ d-citation-list .references .title {
               element = element.parentElement;
             }
             if (element) {
-              return (element.className.match(lang) || [, "none"])[1].toLowerCase();
+              return (element.className.match(lang) || [
+                ,
+                'none',
+              ])[1].toLowerCase();
             }
-            return "none";
+            return 'none';
           },
 
           /**
@@ -2472,10 +2626,10 @@ d-citation-list .references .title {
            * @returns {HTMLScriptElement | null}
            */
           currentScript: function () {
-            if (typeof document === "undefined") {
+            if (typeof document === 'undefined') {
               return null;
             }
-            if ("currentScript" in document) {
+            if ('currentScript' in document) {
               return document.currentScript;
             }
 
@@ -2493,9 +2647,10 @@ d-citation-list .references .title {
               //    at _.util.currentScript (http://localhost/components/prism-core.js:119:5)
               //    at Global code (http://localhost/components/prism-core.js:606:1)
 
-              var src = (/at [^(\r\n]*\((.*):.+:.+\)$/i.exec(err.stack) || [])[1];
+              var src = (/at [^(\r\n]*\((.*):.+:.+\)$/i.exec(err.stack) ||
+                [])[1];
               if (src) {
-                var scripts = document.getElementsByTagName("script");
+                var scripts = document.getElementsByTagName('script');
                 for (var i in scripts) {
                   if (scripts[i].src == src) {
                     return scripts[i];
@@ -2575,10 +2730,13 @@ d-citation-list .references .title {
                 var property = o[i],
                   propertyType = _.util.type(property);
 
-                if (propertyType === "Object" && !visited[objId(property)]) {
+                if (propertyType === 'Object' && !visited[objId(property)]) {
                   visited[objId(property)] = true;
                   DFS(property, callback, null, visited);
-                } else if (propertyType === "Array" && !visited[objId(property)]) {
+                } else if (
+                  propertyType === 'Array' &&
+                  !visited[objId(property)]
+                ) {
                   visited[objId(property)] = true;
                   DFS(property, callback, i, visited);
                 }
@@ -2596,14 +2754,17 @@ d-citation-list .references .title {
           var env = {
             callback: callback,
             container: container,
-            selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
+            selector:
+              'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
           };
 
-          _.hooks.run("before-highlightall", env);
+          _.hooks.run('before-highlightall', env);
 
-          env.elements = Array.prototype.slice.apply(env.container.querySelectorAll(env.selector));
+          env.elements = Array.prototype.slice.apply(
+            env.container.querySelectorAll(env.selector),
+          );
 
-          _.hooks.run("before-all-elements-highlight", env);
+          _.hooks.run('before-all-elements-highlight', env);
 
           for (var i = 0, element; (element = env.elements[i++]); ) {
             _.highlightElement(element, async === true, env.callback);
@@ -2616,12 +2777,18 @@ d-citation-list .references .title {
           var grammar = _.languages[language];
 
           // Set language on the element, if not present
-          element.className = element.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
+          element.className =
+            element.className.replace(lang, '').replace(/\s+/g, ' ') +
+            ' language-' +
+            language;
 
           // Set language on the parent, for styling
           var parent = element.parentNode;
-          if (parent && parent.nodeName.toLowerCase() === "pre") {
-            parent.className = parent.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
+          if (parent && parent.nodeName.toLowerCase() === 'pre') {
+            parent.className =
+              parent.className.replace(lang, '').replace(/\s+/g, ' ') +
+              ' language-' +
+              language;
           }
 
           var code = element.textContent;
@@ -2636,24 +2803,24 @@ d-citation-list .references .title {
           function insertHighlightedCode(highlightedCode) {
             env.highlightedCode = highlightedCode;
 
-            _.hooks.run("before-insert", env);
+            _.hooks.run('before-insert', env);
 
             env.element.innerHTML = env.highlightedCode;
 
-            _.hooks.run("after-highlight", env);
-            _.hooks.run("complete", env);
+            _.hooks.run('after-highlight', env);
+            _.hooks.run('complete', env);
             callback && callback.call(env.element);
           }
 
-          _.hooks.run("before-sanity-check", env);
+          _.hooks.run('before-sanity-check', env);
 
           if (!env.code) {
-            _.hooks.run("complete", env);
+            _.hooks.run('complete', env);
             callback && callback.call(env.element);
             return;
           }
 
-          _.hooks.run("before-highlight", env);
+          _.hooks.run('before-highlight', env);
 
           if (!env.grammar) {
             insertHighlightedCode(_.util.encode(env.code));
@@ -2672,10 +2839,12 @@ d-citation-list .references .title {
                 language: env.language,
                 code: env.code,
                 immediateClose: true,
-              })
+              }),
             );
           } else {
-            insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+            insertHighlightedCode(
+              _.highlight(env.code, env.grammar, env.language),
+            );
           }
         },
 
@@ -2685,9 +2854,9 @@ d-citation-list .references .title {
             grammar: grammar,
             language: language,
           };
-          _.hooks.run("before-tokenize", env);
+          _.hooks.run('before-tokenize', env);
           env.tokens = _.tokenize(env.code, env.grammar);
-          _.hooks.run("after-tokenize", env);
+          _.hooks.run('after-tokenize', env);
           return Token.stringify(_.util.encode(env.tokens), env.language);
         },
 
@@ -2743,16 +2912,16 @@ d-citation-list .references .title {
         this.content = content;
         this.alias = alias;
         // Copy of the full string this token was created from
-        this.length = (matchedStr || "").length | 0;
+        this.length = (matchedStr || '').length | 0;
         this.greedy = !!greedy;
       }
 
       Token.stringify = function stringify(o, language) {
-        if (typeof o == "string") {
+        if (typeof o == 'string') {
           return o;
         }
         if (Array.isArray(o)) {
-          var s = "";
+          var s = '';
           o.forEach(function (e) {
             s += stringify(e, language);
           });
@@ -2762,8 +2931,8 @@ d-citation-list .references .title {
         var env = {
           type: o.type,
           content: stringify(o.content, language),
-          tag: "span",
-          classes: ["token", o.type],
+          tag: 'span',
+          classes: ['token', o.type],
           attributes: {},
           language: language,
         };
@@ -2777,14 +2946,31 @@ d-citation-list .references .title {
           }
         }
 
-        _.hooks.run("wrap", env);
+        _.hooks.run('wrap', env);
 
-        var attributes = "";
+        var attributes = '';
         for (var name in env.attributes) {
-          attributes += " " + name + '="' + (env.attributes[name] || "").replace(/"/g, "&quot;") + '"';
+          attributes +=
+            ' ' +
+            name +
+            '="' +
+            (env.attributes[name] || '').replace(/"/g, '&quot;') +
+            '"';
         }
 
-        return "<" + env.tag + ' class="' + env.classes.join(" ") + '"' + attributes + ">" + env.content + "</" + env.tag + ">";
+        return (
+          '<' +
+          env.tag +
+          ' class="' +
+          env.classes.join(' ') +
+          '"' +
+          attributes +
+          '>' +
+          env.content +
+          '</' +
+          env.tag +
+          '>'
+        );
       };
 
       /**
@@ -2796,7 +2982,15 @@ d-citation-list .references .title {
        * @param {boolean} [oneshot=false]
        * @param {string} [target]
        */
-      function matchGrammar(text, tokenList, grammar, startNode, startPos, oneshot, target) {
+      function matchGrammar(
+        text,
+        tokenList,
+        grammar,
+        startNode,
+        startPos,
+        oneshot,
+        target,
+      ) {
         for (var token in grammar) {
           if (!grammar.hasOwnProperty(token) || !grammar[token]) {
             continue;
@@ -2806,7 +3000,7 @@ d-citation-list .references .title {
           patterns = Array.isArray(patterns) ? patterns : [patterns];
 
           for (var j = 0; j < patterns.length; ++j) {
-            if (target && target == token + "," + j) {
+            if (target && target == token + ',' + j) {
               return;
             }
 
@@ -2820,7 +3014,7 @@ d-citation-list .references .title {
             if (greedy && !pattern.pattern.global) {
               // Without the global flag, lastIndex won't work
               var flags = pattern.pattern.toString().match(/[imsuy]*$/)[0];
-              pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+              pattern.pattern = RegExp(pattern.pattern.source, flags + 'g');
             }
 
             pattern = pattern.pattern || pattern;
@@ -2851,7 +3045,8 @@ d-citation-list .references .title {
                   break;
                 }
 
-                var from = match.index + (lookbehind && match[1] ? match[1].length : 0);
+                var from =
+                  match.index + (lookbehind && match[1] ? match[1].length : 0);
                 var to = match.index + match[0].length;
                 var p = pos;
 
@@ -2871,7 +3066,13 @@ d-citation-list .references .title {
                 }
 
                 // find the last node which is affected by this match
-                for (var k = currentNode; k !== tokenList.tail && (p < to || (typeof k.value === "string" && !k.prev.value.greedy)); k = k.next) {
+                for (
+                  var k = currentNode;
+                  k !== tokenList.tail &&
+                  (p < to ||
+                    (typeof k.value === 'string' && !k.prev.value.greedy));
+                  k = k.next
+                ) {
                   removeCount++;
                   p += k.value.length;
                 }
@@ -2913,14 +3114,29 @@ d-citation-list .references .title {
 
               removeRange(tokenList, removeFrom, removeCount);
 
-              var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias, match, greedy);
+              var wrapped = new Token(
+                token,
+                inside ? _.tokenize(match, inside) : match,
+                alias,
+                match,
+                greedy,
+              );
               currentNode = addAfter(tokenList, removeFrom, wrapped);
 
               if (after) {
                 addAfter(tokenList, currentNode, after);
               }
 
-              if (removeCount > 1) matchGrammar(text, tokenList, grammar, currentNode.prev, pos, true, token + "," + j);
+              if (removeCount > 1)
+                matchGrammar(
+                  text,
+                  tokenList,
+                  grammar,
+                  currentNode.prev,
+                  pos,
+                  true,
+                  token + ',' + j,
+                );
 
               if (oneshot) break;
             }
@@ -3012,7 +3228,7 @@ d-citation-list .references .title {
         if (!_.disableWorkerMessageHandler) {
           // In worker
           _self.addEventListener(
-            "message",
+            'message',
             function (evt) {
               var message = JSON.parse(evt.data),
                 lang = message.language,
@@ -3024,7 +3240,7 @@ d-citation-list .references .title {
                 _self.close();
               }
             },
-            false
+            false,
           );
         }
 
@@ -3037,7 +3253,7 @@ d-citation-list .references .title {
       if (script) {
         _.filename = script.src;
 
-        if (script.hasAttribute("data-manual")) {
+        if (script.hasAttribute('data-manual')) {
           _.manual = true;
         }
       }
@@ -3056,8 +3272,14 @@ d-citation-list .references .title {
         // been loaded when Prism.highlightAll() is executed, depending on how fast resources are loaded.
         // See https://github.com/PrismJS/prism/issues/2102
         var readyState = document.readyState;
-        if (readyState === "loading" || (readyState === "interactive" && script && script.defer)) {
-          document.addEventListener("DOMContentLoaded", highlightAutomaticallyCallback);
+        if (
+          readyState === 'loading' ||
+          (readyState === 'interactive' && script && script.defer)
+        ) {
+          document.addEventListener(
+            'DOMContentLoaded',
+            highlightAutomaticallyCallback,
+          );
         } else {
           if (window.requestAnimationFrame) {
             window.requestAnimationFrame(highlightAutomaticallyCallback);
@@ -3075,7 +3297,7 @@ d-citation-list .references .title {
     }
 
     // hack for components to work correctly in node.js
-    if (typeof commonjsGlobal !== "undefined") {
+    if (typeof commonjsGlobal !== 'undefined') {
       commonjsGlobal.Prism = Prism;
     }
 
@@ -3087,12 +3309,14 @@ d-citation-list .references .title {
       comment: /<!--[\s\S]*?-->/,
       prolog: /<\?[\s\S]+?\?>/,
       doctype: {
-        pattern: /<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:(?!<!--)[^"'\]]|"[^"]*"|'[^']*'|<!--[\s\S]*?-->)*\]\s*)?>/i,
+        pattern:
+          /<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:(?!<!--)[^"'\]]|"[^"]*"|'[^']*'|<!--[\s\S]*?-->)*\]\s*)?>/i,
         greedy: true,
       },
       cdata: /<!\[CDATA\[[\s\S]*?]]>/i,
       tag: {
-        pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
+        pattern:
+          /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
         greedy: true,
         inside: {
           tag: {
@@ -3102,7 +3326,7 @@ d-citation-list .references .title {
               namespace: /^[^\s>\/:]+:/,
             },
           },
-          "attr-value": {
+          'attr-value': {
             pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
             inside: {
               punctuation: [
@@ -3115,7 +3339,7 @@ d-citation-list .references .title {
             },
           },
           punctuation: /\/?>/,
-          "attr-name": {
+          'attr-name': {
             pattern: /[^\s>\/]+/,
             inside: {
               namespace: /^[^\s>\/:]+:/,
@@ -3126,16 +3350,17 @@ d-citation-list .references .title {
       entity: /&#?[\da-z]{1,8};/i,
     };
 
-    Prism.languages.markup["tag"].inside["attr-value"].inside["entity"] = Prism.languages.markup["entity"];
+    Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
+      Prism.languages.markup['entity'];
 
     // Plugin to make entity title show the real entity, idea by Roman Komarov
-    Prism.hooks.add("wrap", function (env) {
-      if (env.type === "entity") {
-        env.attributes["title"] = env.content.replace(/&amp;/, "&");
+    Prism.hooks.add('wrap', function (env) {
+      if (env.type === 'entity') {
+        env.attributes['title'] = env.content.replace(/&amp;/, '&');
       }
     });
 
-    Object.defineProperty(Prism.languages.markup.tag, "addInlined", {
+    Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
       /**
        * Adds an inlined language to markup.
        *
@@ -3149,20 +3374,20 @@ d-citation-list .references .title {
        */
       value: function addInlined(tagName, lang) {
         var includedCdataInside = {};
-        includedCdataInside["language-" + lang] = {
+        includedCdataInside['language-' + lang] = {
           pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
           lookbehind: true,
           inside: Prism.languages[lang],
         };
-        includedCdataInside["cdata"] = /^<!\[CDATA\[|\]\]>$/i;
+        includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i;
 
         var inside = {
-          "included-cdata": {
+          'included-cdata': {
             pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
             inside: includedCdataInside,
           },
         };
-        inside["language-" + lang] = {
+        inside['language-' + lang] = {
           pattern: /[\s\S]+/,
           inside: Prism.languages[lang],
         };
@@ -3170,21 +3395,24 @@ d-citation-list .references .title {
         var def = {};
         def[tagName] = {
           pattern: RegExp(
-            /(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(/__/g, function () {
-              return tagName;
-            }),
-            "i"
+            /(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(
+              /__/g,
+              function () {
+                return tagName;
+              },
+            ),
+            'i',
           ),
           lookbehind: true,
           greedy: true,
           inside: inside,
         };
 
-        Prism.languages.insertBefore("markup", "cdata", def);
+        Prism.languages.insertBefore('markup', 'cdata', def);
       },
     });
 
-    Prism.languages.xml = Prism.languages.extend("markup", {});
+    Prism.languages.xml = Prism.languages.extend('markup', {});
     Prism.languages.html = Prism.languages.markup;
     Prism.languages.mathml = Prism.languages.markup;
     Prism.languages.svg = Prism.languages.markup;
@@ -3202,23 +3430,26 @@ d-citation-list .references .title {
           pattern: /@[\w-]+[\s\S]*?(?:;|(?=\s*\{))/,
           inside: {
             rule: /^@[\w-]+/,
-            "selector-function-argument": {
-              pattern: /(\bselector\s*\((?!\s*\))\s*)(?:[^()]|\((?:[^()]|\([^()]*\))*\))+?(?=\s*\))/,
+            'selector-function-argument': {
+              pattern:
+                /(\bselector\s*\((?!\s*\))\s*)(?:[^()]|\((?:[^()]|\([^()]*\))*\))+?(?=\s*\))/,
               lookbehind: true,
-              alias: "selector",
+              alias: 'selector',
             },
             // See rest below
           },
         },
         url: {
-          pattern: RegExp("url\\((?:" + string.source + "|[^\n\r()]*)\\)", "i"),
+          pattern: RegExp('url\\((?:' + string.source + '|[^\n\r()]*)\\)', 'i'),
           greedy: true,
           inside: {
             function: /^url/i,
             punctuation: /^\(|\)$/,
           },
         },
-        selector: RegExp("[^{}\\s](?:[^{};\"']|" + string.source + ")*?(?=\\s*\\{)"),
+        selector: RegExp(
+          '[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)',
+        ),
         string: {
           pattern: string,
           greedy: true,
@@ -3229,33 +3460,33 @@ d-citation-list .references .title {
         punctuation: /[(){};:,]/,
       };
 
-      Prism.languages.css["atrule"].inside.rest = Prism.languages.css;
+      Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
 
       var markup = Prism.languages.markup;
       if (markup) {
-        markup.tag.addInlined("style", "css");
+        markup.tag.addInlined('style', 'css');
 
         Prism.languages.insertBefore(
-          "inside",
-          "attr-value",
+          'inside',
+          'attr-value',
           {
-            "style-attr": {
+            'style-attr': {
               pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
               inside: {
-                "attr-name": {
+                'attr-name': {
                   pattern: /^\s*style/i,
                   inside: markup.tag.inside,
                 },
                 punctuation: /^\s*=\s*['"]|['"]\s*$/,
-                "attr-value": {
+                'attr-value': {
                   pattern: /.+/i,
                   inside: Prism.languages.css,
                 },
               },
-              alias: "language-css",
+              alias: 'language-css',
             },
           },
-          markup.tag
+          markup.tag,
         );
       }
     })(Prism);
@@ -3280,14 +3511,16 @@ d-citation-list .references .title {
         pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
         greedy: true,
       },
-      "class-name": {
-        pattern: /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
+      'class-name': {
+        pattern:
+          /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
         lookbehind: true,
         inside: {
           punctuation: /[.\\]/,
         },
       },
-      keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+      keyword:
+        /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
       boolean: /\b(?:true|false)\b/,
       function: /\w+(?=\()/,
       number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
@@ -3299,11 +3532,12 @@ d-citation-list .references .title {
        Begin prism-javascript.js
   ********************************************** */
 
-    Prism.languages.javascript = Prism.languages.extend("clike", {
-      "class-name": [
-        Prism.languages.clike["class-name"],
+    Prism.languages.javascript = Prism.languages.extend('clike', {
+      'class-name': [
+        Prism.languages.clike['class-name'],
         {
-          pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+          pattern:
+            /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
           lookbehind: true,
         },
       ],
@@ -3321,13 +3555,16 @@ d-citation-list .references .title {
       number:
         /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
       // Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-      function: /#?[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
-      operator: /--|\+\+|\*\*=?|=>|&&|\|\||[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?[.?]?|[~:]/,
+      function:
+        /#?[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+      operator:
+        /--|\+\+|\*\*=?|=>|&&|\|\||[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?[.?]?|[~:]/,
     });
 
-    Prism.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
+    Prism.languages.javascript['class-name'][0].pattern =
+      /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
 
-    Prism.languages.insertBefore("javascript", "keyword", {
+    Prism.languages.insertBefore('javascript', 'keyword', {
       regex: {
         pattern:
           /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=(?:\s|\/\*[\s\S]*?\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
@@ -3335,14 +3572,15 @@ d-citation-list .references .title {
         greedy: true,
       },
       // This must be declared before keyword because we use "function" inside the look-forward
-      "function-variable": {
+      'function-variable': {
         pattern:
           /#?[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
-        alias: "function",
+        alias: 'function',
       },
       parameter: [
         {
-          pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+          pattern:
+            /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
           lookbehind: true,
           inside: Prism.languages.javascript,
         },
@@ -3365,22 +3603,24 @@ d-citation-list .references .title {
       constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
     });
 
-    Prism.languages.insertBefore("javascript", "string", {
-      "template-string": {
-        pattern: /`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,
+    Prism.languages.insertBefore('javascript', 'string', {
+      'template-string': {
+        pattern:
+          /`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|(?!\${)[^\\`])*`/,
         greedy: true,
         inside: {
-          "template-punctuation": {
+          'template-punctuation': {
             pattern: /^`|`$/,
-            alias: "string",
+            alias: 'string',
           },
           interpolation: {
-            pattern: /((?:^|[^\\])(?:\\{2})*)\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,
+            pattern:
+              /((?:^|[^\\])(?:\\{2})*)\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,
             lookbehind: true,
             inside: {
-              "interpolation-punctuation": {
+              'interpolation-punctuation': {
                 pattern: /^\${|}$/,
-                alias: "punctuation",
+                alias: 'punctuation',
               },
               rest: Prism.languages.javascript,
             },
@@ -3391,7 +3631,7 @@ d-citation-list .references .title {
     });
 
     if (Prism.languages.markup) {
-      Prism.languages.markup.tag.addInlined("script", "javascript");
+      Prism.languages.markup.tag.addInlined('script', 'javascript');
     }
 
     Prism.languages.js = Prism.languages.javascript;
@@ -3401,7 +3641,12 @@ d-citation-list .references .title {
   ********************************************** */
 
     (function () {
-      if (typeof self === "undefined" || !self.Prism || !self.document || !document.querySelector) {
+      if (
+        typeof self === 'undefined' ||
+        !self.Prism ||
+        !self.document ||
+        !document.querySelector
+      ) {
         return;
       }
 
@@ -3412,76 +3657,83 @@ d-citation-list .references .title {
         container = container || document;
 
         var Extensions = {
-          js: "javascript",
-          py: "python",
-          rb: "ruby",
-          ps1: "powershell",
-          psm1: "powershell",
-          sh: "bash",
-          bat: "batch",
-          h: "c",
-          tex: "latex",
+          js: 'javascript',
+          py: 'python',
+          rb: 'ruby',
+          ps1: 'powershell',
+          psm1: 'powershell',
+          sh: 'bash',
+          bat: 'batch',
+          h: 'c',
+          tex: 'latex',
         };
 
-        Array.prototype.slice.call(container.querySelectorAll("pre[data-src]")).forEach(function (pre) {
-          // ignore if already loaded
-          if (pre.hasAttribute("data-src-loaded")) {
-            return;
-          }
-
-          // load current
-          var src = pre.getAttribute("data-src");
-
-          var language,
-            parent = pre;
-          var lang = /\blang(?:uage)?-([\w-]+)\b/i;
-          while (parent && !lang.test(parent.className)) {
-            parent = parent.parentNode;
-          }
-
-          if (parent) {
-            language = (pre.className.match(lang) || [, ""])[1];
-          }
-
-          if (!language) {
-            var extension = (src.match(/\.(\w+)$/) || [, ""])[1];
-            language = Extensions[extension] || extension;
-          }
-
-          var code = document.createElement("code");
-          code.className = "language-" + language;
-
-          pre.textContent = "";
-
-          code.textContent = "Loading…";
-
-          pre.appendChild(code);
-
-          var xhr = new XMLHttpRequest();
-
-          xhr.open("GET", src, true);
-
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-              if (xhr.status < 400 && xhr.responseText) {
-                code.textContent = xhr.responseText;
-
-                Prism.highlightElement(code);
-                // mark as loaded
-                pre.setAttribute("data-src-loaded", "");
-              } else if (xhr.status >= 400) {
-                code.textContent = "✖ Error " + xhr.status + " while fetching file: " + xhr.statusText;
-              } else {
-                code.textContent = "✖ Error: File does not exist or is empty";
-              }
+        Array.prototype.slice
+          .call(container.querySelectorAll('pre[data-src]'))
+          .forEach(function (pre) {
+            // ignore if already loaded
+            if (pre.hasAttribute('data-src-loaded')) {
+              return;
             }
-          };
 
-          xhr.send(null);
-        });
+            // load current
+            var src = pre.getAttribute('data-src');
+
+            var language,
+              parent = pre;
+            var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+            while (parent && !lang.test(parent.className)) {
+              parent = parent.parentNode;
+            }
+
+            if (parent) {
+              language = (pre.className.match(lang) || [, ''])[1];
+            }
+
+            if (!language) {
+              var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+              language = Extensions[extension] || extension;
+            }
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4) {
+                if (xhr.status < 400 && xhr.responseText) {
+                  code.textContent = xhr.responseText;
+
+                  Prism.highlightElement(code);
+                  // mark as loaded
+                  pre.setAttribute('data-src-loaded', '');
+                } else if (xhr.status >= 400) {
+                  code.textContent =
+                    '✖ Error ' +
+                    xhr.status +
+                    ' while fetching file: ' +
+                    xhr.statusText;
+                } else {
+                  code.textContent =
+                    '✖ Error: File does not exist or is empty';
+                }
+              }
+            };
+
+            xhr.send(null);
+          });
       };
 
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         // execute inside handler, for dropping Event as argument
         self.Prism.fileHighlight();
       });
@@ -3493,22 +3745,24 @@ d-citation-list .references .title {
       pattern: /(^|[^\\])#.*/,
       lookbehind: true,
     },
-    "string-interpolation": {
-      pattern: /(?:f|rf|fr)(?:("""|''')[\s\S]+?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
+    'string-interpolation': {
+      pattern:
+        /(?:f|rf|fr)(?:("""|''')[\s\S]+?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,
       greedy: true,
       inside: {
         interpolation: {
           // "{" <expression> <optional "!s", "!r", or "!a"> <optional ":" format specifier> "}"
-          pattern: /((?:^|[^{])(?:{{)*){(?!{)(?:[^{}]|{(?!{)(?:[^{}]|{(?!{)(?:[^{}])+})+})+}/,
+          pattern:
+            /((?:^|[^{])(?:{{)*){(?!{)(?:[^{}]|{(?!{)(?:[^{}]|{(?!{)(?:[^{}])+})+})+}/,
           lookbehind: true,
           inside: {
-            "format-spec": {
+            'format-spec': {
               pattern: /(:)[^:(){}]+(?=}$)/,
               lookbehind: true,
             },
-            "conversion-option": {
+            'conversion-option': {
               pattern: /![sra](?=[:}]$)/,
-              alias: "punctuation",
+              alias: 'punctuation',
             },
             rest: null,
           },
@@ -3516,10 +3770,10 @@ d-citation-list .references .title {
         string: /[\s\S]+/,
       },
     },
-    "triple-quoted-string": {
+    'triple-quoted-string': {
       pattern: /(?:[rub]|rb|br)?("""|''')[\s\S]+?\1/i,
       greedy: true,
-      alias: "string",
+      alias: 'string',
     },
     string: {
       pattern: /(?:[rub]|rb|br)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i,
@@ -3529,14 +3783,14 @@ d-citation-list .references .title {
       pattern: /((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g,
       lookbehind: true,
     },
-    "class-name": {
+    'class-name': {
       pattern: /(\bclass\s+)\w+/i,
       lookbehind: true,
     },
     decorator: {
       pattern: /(^\s*)@\w+(?:\.\w+)*/im,
       lookbehind: true,
-      alias: ["annotation", "punctuation"],
+      alias: ['annotation', 'punctuation'],
       inside: {
         punctuation: /\./,
       },
@@ -3546,12 +3800,15 @@ d-citation-list .references .title {
     builtin:
       /\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b/,
     boolean: /\b(?:True|False|None)\b/,
-    number: /(?:\b(?=\d)|\B(?=\.))(?:0[bo])?(?:(?:\d|0x[\da-f])[\da-f]*\.?\d*|\.\d+)(?:e[+-]?\d+)?j?\b/i,
+    number:
+      /(?:\b(?=\d)|\B(?=\.))(?:0[bo])?(?:(?:\d|0x[\da-f])[\da-f]*\.?\d*|\.\d+)(?:e[+-]?\d+)?j?\b/i,
     operator: /[-+%=]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
     punctuation: /[{}[\];(),.:]/,
   };
 
-  Prism.languages.python["string-interpolation"].inside["interpolation"].inside.rest = Prism.languages.python;
+  Prism.languages.python['string-interpolation'].inside[
+    'interpolation'
+  ].inside.rest = Prism.languages.python;
 
   Prism.languages.py = Prism.languages.python;
 
@@ -3571,14 +3828,16 @@ d-citation-list .references .title {
       pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
       greedy: true,
     },
-    "class-name": {
-      pattern: /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
+    'class-name': {
+      pattern:
+        /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
       lookbehind: true,
       inside: {
         punctuation: /[.\\]/,
       },
     },
-    keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+    keyword:
+      /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
     boolean: /\b(?:true|false)\b/,
     function: /\w+(?=\()/,
     number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
@@ -3590,11 +3849,14 @@ d-citation-list .references .title {
     comment: /^#!.+|--(?:\[(=*)\[[\s\S]*?\]\1\]|.*)/m,
     // \z may be used to skip the following space
     string: {
-      pattern: /(["'])(?:(?!\1)[^\\\r\n]|\\z(?:\r\n|\s)|\\(?:\r\n|[\s\S]))*\1|\[(=*)\[[\s\S]*?\]\2\]/,
+      pattern:
+        /(["'])(?:(?!\1)[^\\\r\n]|\\z(?:\r\n|\s)|\\(?:\r\n|[\s\S]))*\1|\[(=*)\[[\s\S]*?\]\2\]/,
       greedy: true,
     },
-    number: /\b0x[a-f\d]+\.?[a-f\d]*(?:p[+-]?\d+)?\b|\b\d+(?:\.\B|\.?\d*(?:e[+-]?\d+)?\b)|\B\.\d+(?:e[+-]?\d+)?\b/i,
-    keyword: /\b(?:and|break|do|else|elseif|end|false|for|function|goto|if|in|local|nil|not|or|repeat|return|then|true|until|while)\b/,
+    number:
+      /\b0x[a-f\d]+\.?[a-f\d]*(?:p[+-]?\d+)?\b|\b\d+(?:\.\B|\.?\d*(?:e[+-]?\d+)?\b)|\B\.\d+(?:e[+-]?\d+)?\b/i,
+    keyword:
+      /\b(?:and|break|do|else|elseif|end|false|for|function|goto|if|in|local|nil|not|or|repeat|return|then|true|until|while)\b/,
     function: /(?!\d)\w+(?=\s*(?:[({]))/,
     operator: [
       /[-+*%^&|#]|\/\/?|<[<=]?|>[>=]?|[=~]=?/,
@@ -3613,11 +3875,11 @@ d-citation-list .references .title {
     // + make sure PS1..4 are here as they are not always set,
     // - some useless things.
     var envVars =
-      "\\b(?:BASH|BASHOPTS|BASH_ALIASES|BASH_ARGC|BASH_ARGV|BASH_CMDS|BASH_COMPLETION_COMPAT_DIR|BASH_LINENO|BASH_REMATCH|BASH_SOURCE|BASH_VERSINFO|BASH_VERSION|COLORTERM|COLUMNS|COMP_WORDBREAKS|DBUS_SESSION_BUS_ADDRESS|DEFAULTS_PATH|DESKTOP_SESSION|DIRSTACK|DISPLAY|EUID|GDMSESSION|GDM_LANG|GNOME_KEYRING_CONTROL|GNOME_KEYRING_PID|GPG_AGENT_INFO|GROUPS|HISTCONTROL|HISTFILE|HISTFILESIZE|HISTSIZE|HOME|HOSTNAME|HOSTTYPE|IFS|INSTANCE|JOB|LANG|LANGUAGE|LC_ADDRESS|LC_ALL|LC_IDENTIFICATION|LC_MEASUREMENT|LC_MONETARY|LC_NAME|LC_NUMERIC|LC_PAPER|LC_TELEPHONE|LC_TIME|LESSCLOSE|LESSOPEN|LINES|LOGNAME|LS_COLORS|MACHTYPE|MAILCHECK|MANDATORY_PATH|NO_AT_BRIDGE|OLDPWD|OPTERR|OPTIND|ORBIT_SOCKETDIR|OSTYPE|PAPERSIZE|PATH|PIPESTATUS|PPID|PS1|PS2|PS3|PS4|PWD|RANDOM|REPLY|SECONDS|SELINUX_INIT|SESSION|SESSIONTYPE|SESSION_MANAGER|SHELL|SHELLOPTS|SHLVL|SSH_AUTH_SOCK|TERM|UID|UPSTART_EVENTS|UPSTART_INSTANCE|UPSTART_JOB|UPSTART_SESSION|USER|WINDOWID|XAUTHORITY|XDG_CONFIG_DIRS|XDG_CURRENT_DESKTOP|XDG_DATA_DIRS|XDG_GREETER_DATA_DIR|XDG_MENU_PREFIX|XDG_RUNTIME_DIR|XDG_SEAT|XDG_SEAT_PATH|XDG_SESSION_DESKTOP|XDG_SESSION_ID|XDG_SESSION_PATH|XDG_SESSION_TYPE|XDG_VTNR|XMODIFIERS)\\b";
+      '\\b(?:BASH|BASHOPTS|BASH_ALIASES|BASH_ARGC|BASH_ARGV|BASH_CMDS|BASH_COMPLETION_COMPAT_DIR|BASH_LINENO|BASH_REMATCH|BASH_SOURCE|BASH_VERSINFO|BASH_VERSION|COLORTERM|COLUMNS|COMP_WORDBREAKS|DBUS_SESSION_BUS_ADDRESS|DEFAULTS_PATH|DESKTOP_SESSION|DIRSTACK|DISPLAY|EUID|GDMSESSION|GDM_LANG|GNOME_KEYRING_CONTROL|GNOME_KEYRING_PID|GPG_AGENT_INFO|GROUPS|HISTCONTROL|HISTFILE|HISTFILESIZE|HISTSIZE|HOME|HOSTNAME|HOSTTYPE|IFS|INSTANCE|JOB|LANG|LANGUAGE|LC_ADDRESS|LC_ALL|LC_IDENTIFICATION|LC_MEASUREMENT|LC_MONETARY|LC_NAME|LC_NUMERIC|LC_PAPER|LC_TELEPHONE|LC_TIME|LESSCLOSE|LESSOPEN|LINES|LOGNAME|LS_COLORS|MACHTYPE|MAILCHECK|MANDATORY_PATH|NO_AT_BRIDGE|OLDPWD|OPTERR|OPTIND|ORBIT_SOCKETDIR|OSTYPE|PAPERSIZE|PATH|PIPESTATUS|PPID|PS1|PS2|PS3|PS4|PWD|RANDOM|REPLY|SECONDS|SELINUX_INIT|SESSION|SESSIONTYPE|SESSION_MANAGER|SHELL|SHELLOPTS|SHLVL|SSH_AUTH_SOCK|TERM|UID|UPSTART_EVENTS|UPSTART_INSTANCE|UPSTART_JOB|UPSTART_SESSION|USER|WINDOWID|XAUTHORITY|XDG_CONFIG_DIRS|XDG_CURRENT_DESKTOP|XDG_DATA_DIRS|XDG_GREETER_DATA_DIR|XDG_MENU_PREFIX|XDG_RUNTIME_DIR|XDG_SEAT|XDG_SEAT_PATH|XDG_SESSION_DESKTOP|XDG_SESSION_ID|XDG_SESSION_PATH|XDG_SESSION_TYPE|XDG_VTNR|XMODIFIERS)\\b';
     var insideString = {
       environment: {
-        pattern: RegExp("\\$" + envVars),
-        alias: "constant",
+        pattern: RegExp('\\$' + envVars),
+        alias: 'constant',
       },
       variable: [
         // [0]: Arithmetic Environment
@@ -3635,7 +3897,8 @@ d-citation-list .references .title {
             ],
             number: /\b0x[\dA-Fa-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee]-?\d+)?/,
             // Operators according to https://www.gnu.org/software/bash/manual/bashref.html#Shell-Arithmetic
-            operator: /--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,
+            operator:
+              /--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,
             // If there is no $ sign at the beginning highlight (( and )) as punctuation
             punctuation: /\(\(?|\)\)?|,|;/,
           },
@@ -3656,28 +3919,29 @@ d-citation-list .references .title {
             operator: /:[-=?+]?|[!\/]|##?|%%?|\^\^?|,,?/,
             punctuation: /[\[\]]/,
             environment: {
-              pattern: RegExp("(\\{)" + envVars),
+              pattern: RegExp('(\\{)' + envVars),
               lookbehind: true,
-              alias: "constant",
+              alias: 'constant',
             },
           },
         },
         /\$(?:\w+|[#?*!@$])/,
       ],
       // Escape sequences from echo and printf's manuals, and escaped quotes.
-      entity: /\\(?:[abceEfnrtv\\"]|O?[0-7]{1,3}|x[0-9a-fA-F]{1,2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
+      entity:
+        /\\(?:[abceEfnrtv\\"]|O?[0-7]{1,3}|x[0-9a-fA-F]{1,2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
     };
 
     Prism.languages.bash = {
       shebang: {
         pattern: /^#!\s*\/.*/,
-        alias: "important",
+        alias: 'important',
       },
       comment: {
         pattern: /(^|[^"{\\$])#.*/,
         lookbehind: true,
       },
-      "function-name": [
+      'function-name': [
         // a) function foo {
         // b) foo() {
         // c) function foo() {
@@ -3686,38 +3950,39 @@ d-citation-list .references .title {
           // a) and c)
           pattern: /(\bfunction\s+)\w+(?=(?:\s*\(?:\s*\))?\s*\{)/,
           lookbehind: true,
-          alias: "function",
+          alias: 'function',
         },
         {
           // b)
           pattern: /\b\w+(?=\s*\(\s*\)\s*\{)/,
-          alias: "function",
+          alias: 'function',
         },
       ],
       // Highlight variable names as variables in for and select beginnings.
-      "for-or-select": {
+      'for-or-select': {
         pattern: /(\b(?:for|select)\s+)\w+(?=\s+in\s)/,
-        alias: "variable",
+        alias: 'variable',
         lookbehind: true,
       },
       // Highlight variable names as variables in the left-hand part
       // of assignments (“=” and “+=”).
-      "assign-left": {
+      'assign-left': {
         pattern: /(^|[\s;|&]|[<>]\()\w+(?=\+?=)/,
         inside: {
           environment: {
-            pattern: RegExp("(^|[\\s;|&]|[<>]\\()" + envVars),
+            pattern: RegExp('(^|[\\s;|&]|[<>]\\()' + envVars),
             lookbehind: true,
-            alias: "constant",
+            alias: 'constant',
           },
         },
-        alias: "variable",
+        alias: 'variable',
         lookbehind: true,
       },
       string: [
         // Support for Here-documents https://en.wikipedia.org/wiki/Here_document
         {
-          pattern: /((?:^|[^<])<<-?\s*)(\w+?)\s*(?:\r?\n|\r)[\s\S]*?(?:\r?\n|\r)\2/,
+          pattern:
+            /((?:^|[^<])<<-?\s*)(\w+?)\s*(?:\r?\n|\r)[\s\S]*?(?:\r?\n|\r)\2/,
           lookbehind: true,
           greedy: true,
           inside: insideString,
@@ -3725,21 +3990,23 @@ d-citation-list .references .title {
         // Here-document with quotes around the tag
         // → No expansion (so no “inside”).
         {
-          pattern: /((?:^|[^<])<<-?\s*)(["'])(\w+)\2\s*(?:\r?\n|\r)[\s\S]*?(?:\r?\n|\r)\3/,
+          pattern:
+            /((?:^|[^<])<<-?\s*)(["'])(\w+)\2\s*(?:\r?\n|\r)[\s\S]*?(?:\r?\n|\r)\3/,
           lookbehind: true,
           greedy: true,
         },
         // “Normal” string
         {
-          pattern: /(^|[^\\](?:\\\\)*)(["'])(?:\\[\s\S]|\$\([^)]+\)|`[^`]+`|(?!\2)[^\\])*\2/,
+          pattern:
+            /(^|[^\\](?:\\\\)*)(["'])(?:\\[\s\S]|\$\([^)]+\)|`[^`]+`|(?!\2)[^\\])*\2/,
           lookbehind: true,
           greedy: true,
           inside: insideString,
         },
       ],
       environment: {
-        pattern: RegExp("\\$?" + envVars),
-        alias: "constant",
+        pattern: RegExp('\\$?' + envVars),
+        alias: 'constant',
       },
       variable: insideString.variable,
       function: {
@@ -3748,7 +4015,8 @@ d-citation-list .references .title {
         lookbehind: true,
       },
       keyword: {
-        pattern: /(^|[\s;|&]|[<>]\()(?:if|then|else|elif|fi|for|while|in|case|esac|function|select|do|done|until)(?=$|[)\s;|&])/,
+        pattern:
+          /(^|[\s;|&]|[<>]\()(?:if|then|else|elif|fi|for|while|in|case|esac|function|select|do|done|until)(?=$|[)\s;|&])/,
         lookbehind: true,
       },
       // https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html
@@ -3757,23 +4025,24 @@ d-citation-list .references .title {
           /(^|[\s;|&]|[<>]\()(?:\.|:|break|cd|continue|eval|exec|exit|export|getopts|hash|pwd|readonly|return|shift|test|times|trap|umask|unset|alias|bind|builtin|caller|command|declare|echo|enable|help|let|local|logout|mapfile|printf|read|readarray|source|type|typeset|ulimit|unalias|set|shopt)(?=$|[)\s;|&])/,
         lookbehind: true,
         // Alias added to make those easier to distinguish from strings.
-        alias: "class-name",
+        alias: 'class-name',
       },
       boolean: {
         pattern: /(^|[\s;|&]|[<>]\()(?:true|false)(?=$|[)\s;|&])/,
         lookbehind: true,
       },
-      "file-descriptor": {
+      'file-descriptor': {
         pattern: /\B&\d\b/,
-        alias: "important",
+        alias: 'important',
       },
       operator: {
         // Lots of redirections here, but not just that.
-        pattern: /\d?<>|>\||\+=|==?|!=?|=~|<<[<-]?|[&\d]?>>|\d?[<>]&?|&[>&]?|\|[&|]?|<=?|>=?/,
+        pattern:
+          /\d?<>|>\||\+=|==?|!=?|=~|<<[<-]?|[&\d]?>>|\d?[<>]&?|&[>&]?|\|[&|]?|<=?|>=?/,
         inside: {
-          "file-descriptor": {
+          'file-descriptor': {
             pattern: /^\d/,
-            alias: "important",
+            alias: 'important',
           },
         },
       },
@@ -3786,20 +4055,20 @@ d-citation-list .references .title {
 
     /* Patterns in command substitution. */
     var toBeCopied = [
-      "comment",
-      "function-name",
-      "for-or-select",
-      "assign-left",
-      "string",
-      "environment",
-      "function",
-      "keyword",
-      "builtin",
-      "boolean",
-      "file-descriptor",
-      "operator",
-      "punctuation",
-      "number",
+      'comment',
+      'function-name',
+      'for-or-select',
+      'assign-left',
+      'string',
+      'environment',
+      'function',
+      'keyword',
+      'builtin',
+      'boolean',
+      'file-descriptor',
+      'operator',
+      'punctuation',
+      'number',
     ];
     var inside = insideString.variable[1].inside;
     for (var i = 0; i < toBeCopied.length; i++) {
@@ -3809,20 +4078,21 @@ d-citation-list .references .title {
     Prism.languages.shell = Prism.languages.bash;
   })(Prism);
 
-  Prism.languages.go = Prism.languages.extend("clike", {
+  Prism.languages.go = Prism.languages.extend('clike', {
     keyword:
       /\b(?:break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go(?:to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)\b/,
     builtin:
       /\b(?:bool|byte|complex(?:64|128)|error|float(?:32|64)|rune|string|u?int(?:8|16|32|64)?|uintptr|append|cap|close|complex|copy|delete|imag|len|make|new|panic|print(?:ln)?|real|recover)\b/,
     boolean: /\b(?:_|iota|nil|true|false)\b/,
-    operator: /[*\/%^!=]=?|\+[=+]?|-[=-]?|\|[=|]?|&(?:=|&|\^=?)?|>(?:>=?|=)?|<(?:<=?|=|-)?|:=|\.\.\./,
+    operator:
+      /[*\/%^!=]=?|\+[=+]?|-[=-]?|\|[=|]?|&(?:=|&|\^=?)?|>(?:>=?|=)?|<(?:<=?|=|-)?|:=|\.\.\./,
     number: /(?:\b0x[a-f\d]+|(?:\b\d+\.?\d*|\B\.\d+)(?:e[-+]?\d+)?)i?/i,
     string: {
       pattern: /(["'`])(?:\\[\s\S]|(?!\1)[^\\])*\1/,
       greedy: true,
     },
   });
-  delete Prism.languages.go["class-name"];
+  delete Prism.languages.go['class-name'];
 
   (function (Prism) {
     // Allow only one line break
@@ -3844,51 +4114,61 @@ d-citation-list .references .title {
         return inner;
       });
       if (starAlternative) {
-        pattern = pattern + "|" + pattern.replace(/_/g, "\\*");
+        pattern = pattern + '|' + pattern.replace(/_/g, '\\*');
       }
-      return RegExp(/((?:^|[^\\])(?:\\{2})*)/.source + "(?:" + pattern + ")");
+      return RegExp(/((?:^|[^\\])(?:\\{2})*)/.source + '(?:' + pattern + ')');
     }
 
     var tableCell = /(?:\\.|``.+?``|`[^`\r\n]+`|[^\\|\r\n`])+/.source;
-    var tableRow = /\|?__(?:\|__)+\|?(?:(?:\n|\r\n?)|$)/.source.replace(/__/g, function () {
-      return tableCell;
-    });
-    var tableLine = /\|?[ \t]*:?-{3,}:?[ \t]*(?:\|[ \t]*:?-{3,}:?[ \t]*)+\|?(?:\n|\r\n?)/.source;
+    var tableRow = /\|?__(?:\|__)+\|?(?:(?:\n|\r\n?)|$)/.source.replace(
+      /__/g,
+      function () {
+        return tableCell;
+      },
+    );
+    var tableLine =
+      /\|?[ \t]*:?-{3,}:?[ \t]*(?:\|[ \t]*:?-{3,}:?[ \t]*)+\|?(?:\n|\r\n?)/
+        .source;
 
-    Prism.languages.markdown = Prism.languages.extend("markup", {});
-    Prism.languages.insertBefore("markdown", "prolog", {
+    Prism.languages.markdown = Prism.languages.extend('markup', {});
+    Prism.languages.insertBefore('markdown', 'prolog', {
       blockquote: {
         // > ...
         pattern: /^>(?:[\t ]*>)*/m,
-        alias: "punctuation",
+        alias: 'punctuation',
       },
       table: {
-        pattern: RegExp("^" + tableRow + tableLine + "(?:" + tableRow + ")*", "m"),
+        pattern: RegExp(
+          '^' + tableRow + tableLine + '(?:' + tableRow + ')*',
+          'm',
+        ),
         inside: {
-          "table-data-rows": {
-            pattern: RegExp("^(" + tableRow + tableLine + ")(?:" + tableRow + ")*$"),
+          'table-data-rows': {
+            pattern: RegExp(
+              '^(' + tableRow + tableLine + ')(?:' + tableRow + ')*$',
+            ),
             lookbehind: true,
             inside: {
-              "table-data": {
+              'table-data': {
                 pattern: RegExp(tableCell),
                 inside: Prism.languages.markdown,
               },
               punctuation: /\|/,
             },
           },
-          "table-line": {
-            pattern: RegExp("^(" + tableRow + ")" + tableLine + "$"),
+          'table-line': {
+            pattern: RegExp('^(' + tableRow + ')' + tableLine + '$'),
             lookbehind: true,
             inside: {
               punctuation: /\||:?-{3,}:?/,
             },
           },
-          "table-header-row": {
-            pattern: RegExp("^" + tableRow + "$"),
+          'table-header-row': {
+            pattern: RegExp('^' + tableRow + '$'),
             inside: {
-              "table-header": {
+              'table-header': {
                 pattern: RegExp(tableCell),
-                alias: "important",
+                alias: 'important',
                 inside: Prism.languages.markdown,
               },
               punctuation: /\|/,
@@ -3899,15 +4179,16 @@ d-citation-list .references .title {
       code: [
         {
           // Prefixed by 4 spaces or 1 tab and preceded by an empty line
-          pattern: /((?:^|\n)[ \t]*\n|(?:^|\r\n?)[ \t]*\r\n?)(?: {4}|\t).+(?:(?:\n|\r\n?)(?: {4}|\t).+)*/,
+          pattern:
+            /((?:^|\n)[ \t]*\n|(?:^|\r\n?)[ \t]*\r\n?)(?: {4}|\t).+(?:(?:\n|\r\n?)(?: {4}|\t).+)*/,
           lookbehind: true,
-          alias: "keyword",
+          alias: 'keyword',
         },
         {
           // `code`
           // ``code``
           pattern: /``.+?``|`[^`\r\n]+`/,
-          alias: "keyword",
+          alias: 'keyword',
         },
         {
           // ```optional language
@@ -3916,11 +4197,11 @@ d-citation-list .references .title {
           pattern: /^```[\s\S]*?^```$/m,
           greedy: true,
           inside: {
-            "code-block": {
+            'code-block': {
               pattern: /^(```.*(?:\n|\r\n?))[\s\S]+?(?=(?:\n|\r\n?)^```$)/m,
               lookbehind: true,
             },
-            "code-language": {
+            'code-language': {
               pattern: /^(```).+/,
               lookbehind: true,
             },
@@ -3936,7 +4217,7 @@ d-citation-list .references .title {
           // title 2
           // -------
           pattern: /\S.*(?:\n|\r\n?)(?:==+|--+)(?=[ \t]*$)/m,
-          alias: "important",
+          alias: 'important',
           inside: {
             punctuation: /==+$|--+$/,
           },
@@ -3946,7 +4227,7 @@ d-citation-list .references .title {
           // ###### title 6
           pattern: /(^\s*)#+.+/m,
           lookbehind: true,
-          alias: "important",
+          alias: 'important',
           inside: {
             punctuation: /^#+|#+$/,
           },
@@ -3959,7 +4240,7 @@ d-citation-list .references .title {
         // -----------
         pattern: /(^\s*)([*-])(?:[\t ]*\2){2,}(?=\s*$)/m,
         lookbehind: true,
-        alias: "punctuation",
+        alias: 'punctuation',
       },
       list: {
         // * item
@@ -3968,30 +4249,35 @@ d-citation-list .references .title {
         // 1. item
         pattern: /(^\s*)(?:[*+-]|\d+\.)(?=[\t ].)/m,
         lookbehind: true,
-        alias: "punctuation",
+        alias: 'punctuation',
       },
-      "url-reference": {
+      'url-reference': {
         // [id]: http://example.com "Optional title"
         // [id]: http://example.com 'Optional title'
         // [id]: http://example.com (Optional title)
         // [id]: <http://example.com> "Optional title"
-        pattern: /!?\[[^\]]+\]:[\t ]+(?:\S+|<(?:\\.|[^>\\])+>)(?:[\t ]+(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\)))?/,
+        pattern:
+          /!?\[[^\]]+\]:[\t ]+(?:\S+|<(?:\\.|[^>\\])+>)(?:[\t ]+(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\)))?/,
         inside: {
           variable: {
             pattern: /^(!?\[)[^\]]+/,
             lookbehind: true,
           },
-          string: /(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))$/,
+          string:
+            /(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))$/,
           punctuation: /^[\[\]!:]|[<>]/,
         },
-        alias: "url",
+        alias: 'url',
       },
       bold: {
         // **strong**
         // __strong__
 
         // allow one nested instance of italic text using the same delimiter
-        pattern: createInline(/__(?:(?!_)<inner>|_(?:(?!_)<inner>)+_)+__/.source, true),
+        pattern: createInline(
+          /__(?:(?!_)<inner>|_(?:(?!_)<inner>)+_)+__/.source,
+          true,
+        ),
         lookbehind: true,
         greedy: true,
         inside: {
@@ -4008,7 +4294,10 @@ d-citation-list .references .title {
         // _em_
 
         // allow one nested instance of bold text using the same delimiter
-        pattern: createInline(/_(?:(?!_)<inner>|__(?:(?!_)<inner>)+__)+_/.source, true),
+        pattern: createInline(
+          /_(?:(?!_)<inner>|__(?:(?!_)<inner>)+__)+_/.source,
+          true,
+        ),
         lookbehind: true,
         greedy: true,
         inside: {
@@ -4039,7 +4328,11 @@ d-citation-list .references .title {
         // [example](http://example.com "Optional title")
         // [example][id]
         // [example] [id]
-        pattern: createInline(/!?\[(?:(?!\])<inner>)+\](?:\([^\s)]+(?:[\t ]+"(?:\\.|[^"\\])*")?\)| ?\[(?:(?!\])<inner>)+\])/.source, false),
+        pattern: createInline(
+          /!?\[(?:(?!\])<inner>)+\](?:\([^\s)]+(?:[\t ]+"(?:\\.|[^"\\])*")?\)| ?\[(?:(?!\])<inner>)+\])/
+            .source,
+          false,
+        ),
         lookbehind: true,
         greedy: true,
         inside: {
@@ -4059,28 +4352,29 @@ d-citation-list .references .title {
       },
     });
 
-    ["url", "bold", "italic", "strike"].forEach(function (token) {
-      ["url", "bold", "italic", "strike"].forEach(function (inside) {
+    ['url', 'bold', 'italic', 'strike'].forEach(function (token) {
+      ['url', 'bold', 'italic', 'strike'].forEach(function (inside) {
         if (token !== inside) {
-          Prism.languages.markdown[token].inside.content.inside[inside] = Prism.languages.markdown[inside];
+          Prism.languages.markdown[token].inside.content.inside[inside] =
+            Prism.languages.markdown[inside];
         }
       });
     });
 
-    Prism.hooks.add("after-tokenize", function (env) {
-      if (env.language !== "markdown" && env.language !== "md") {
+    Prism.hooks.add('after-tokenize', function (env) {
+      if (env.language !== 'markdown' && env.language !== 'md') {
         return;
       }
 
       function walkTokens(tokens) {
-        if (!tokens || typeof tokens === "string") {
+        if (!tokens || typeof tokens === 'string') {
           return;
         }
 
         for (var i = 0, l = tokens.length; i < l; i++) {
           var token = tokens[i];
 
-          if (token.type !== "code") {
+          if (token.type !== 'code') {
             walkTokens(token.content);
             continue;
           }
@@ -4102,19 +4396,27 @@ d-citation-list .references .title {
           var codeLang = token.content[1];
           var codeBlock = token.content[3];
 
-          if (codeLang && codeBlock && codeLang.type === "code-language" && codeBlock.type === "code-block" && typeof codeLang.content === "string") {
+          if (
+            codeLang &&
+            codeBlock &&
+            codeLang.type === 'code-language' &&
+            codeBlock.type === 'code-block' &&
+            typeof codeLang.content === 'string'
+          ) {
             // this might be a language that Prism does not support
 
             // do some replacements to support C++, C#, and F#
-            var lang = codeLang.content.replace(/\b#/g, "sharp").replace(/\b\+\+/g, "pp");
+            var lang = codeLang.content
+              .replace(/\b#/g, 'sharp')
+              .replace(/\b\+\+/g, 'pp');
             // only use the first word
-            lang = (/[a-z][\w-]*/i.exec(lang) || [""])[0].toLowerCase();
-            var alias = "language-" + lang;
+            lang = (/[a-z][\w-]*/i.exec(lang) || [''])[0].toLowerCase();
+            var alias = 'language-' + lang;
 
             // add alias
             if (!codeBlock.alias) {
               codeBlock.alias = [alias];
-            } else if (typeof codeBlock.alias === "string") {
+            } else if (typeof codeBlock.alias === 'string') {
               codeBlock.alias = [codeBlock.alias, alias];
             } else {
               codeBlock.alias.push(alias);
@@ -4126,12 +4428,12 @@ d-citation-list .references .title {
       walkTokens(env.tokens);
     });
 
-    Prism.hooks.add("wrap", function (env) {
-      if (env.type !== "code-block") {
+    Prism.hooks.add('wrap', function (env) {
+      if (env.type !== 'code-block') {
         return;
       }
 
-      var codeLang = "";
+      var codeLang = '';
       for (var i = 0, l = env.classes.length; i < l; i++) {
         var cls = env.classes[i];
         var match = /language-(.+)/.exec(cls);
@@ -4144,20 +4446,28 @@ d-citation-list .references .title {
       var grammar = Prism.languages[codeLang];
 
       if (!grammar) {
-        if (codeLang && codeLang !== "none" && Prism.plugins.autoloader) {
-          var id = "md-" + new Date().valueOf() + "-" + Math.floor(Math.random() * 1e16);
-          env.attributes["id"] = id;
+        if (codeLang && codeLang !== 'none' && Prism.plugins.autoloader) {
+          var id =
+            'md-' +
+            new Date().valueOf() +
+            '-' +
+            Math.floor(Math.random() * 1e16);
+          env.attributes['id'] = id;
 
           Prism.plugins.autoloader.loadLanguages(codeLang, function () {
             var ele = document.getElementById(id);
             if (ele) {
-              ele.innerHTML = Prism.highlight(ele.textContent, Prism.languages[codeLang], codeLang);
+              ele.innerHTML = Prism.highlight(
+                ele.textContent,
+                Prism.languages[codeLang],
+                codeLang,
+              );
             }
           });
         }
       } else {
         // reverse Prism.util.encode
-        var code = env.content.replace(/&lt;/g, "<").replace(/&amp;/g, "&");
+        var code = env.content.replace(/&lt;/g, '<').replace(/&amp;/g, '&');
 
         env.content = Prism.highlight(code, grammar, codeLang);
       }
@@ -4175,8 +4485,10 @@ d-citation-list .references .title {
     keyword:
       /\b(?:abstract|baremodule|begin|bitstype|break|catch|ccall|const|continue|do|else|elseif|end|export|finally|for|function|global|if|immutable|import|importall|in|let|local|macro|module|print|println|quote|return|struct|try|type|typealias|using|while)\b/,
     boolean: /\b(?:true|false)\b/,
-    number: /(?:\b(?=\d)|\B(?=\.))(?:0[box])?(?:[\da-f]+\.?\d*|\.\d+)(?:[efp][+-]?\d+)?j?/i,
-    operator: /[-+*^%÷&$\\]=?|\/[\/=]?|!=?=?|\|[=>]?|<(?:<=?|[=:])?|>(?:=|>>?=?)?|==?=?|[~≠≤≥]/,
+    number:
+      /(?:\b(?=\d)|\B(?=\.))(?:0[box])?(?:[\da-f]+\.?\d*|\.\d+)(?:[efp][+-]?\d+)?j?/i,
+    operator:
+      /[-+*^%÷&$\\]=?|\/[\/=]?|!=?=?|\|[=>]?|<(?:<=?|[=:])?|>(?:=|>>?=?)?|==?=?|[~≠≤≥]/,
     punctuation: /[{}[\];(),.:]/,
     constant: /\b(?:(?:NaN|Inf)(?:16|32|64)?)\b/,
   };
@@ -4187,7 +4499,7 @@ d-citation-list .references .title {
   // Copyright 2018 The Distill Template Authors
 
   const T$4 = Template(
-    "d-code",
+    'd-code',
     `
 <style>
 
@@ -4211,37 +4523,39 @@ ${css}
 
 <code id="code-container"></code>
 
-`
+`,
   );
 
   class Code extends Mutating(T$4(HTMLElement)) {
     renderContent() {
       // check if language can be highlighted
-      this.languageName = this.getAttribute("language");
+      this.languageName = this.getAttribute('language');
       if (!this.languageName) {
         console.warn(
-          'You need to provide a language attribute to your <d-code> block to let us know how to highlight your code; e.g.:\n <d-code language="python">zeros = np.zeros(shape)</d-code>.'
+          'You need to provide a language attribute to your <d-code> block to let us know how to highlight your code; e.g.:\n <d-code language="python">zeros = np.zeros(shape)</d-code>.',
         );
         return;
       }
       const language = prism.languages[this.languageName];
       if (language == undefined) {
-        console.warn(`Distill does not yet support highlighting your code block in "${this.languageName}'.`);
+        console.warn(
+          `Distill does not yet support highlighting your code block in "${this.languageName}'.`,
+        );
         return;
       }
 
       let content = this.textContent;
-      const codeTag = this.shadowRoot.querySelector("#code-container");
+      const codeTag = this.shadowRoot.querySelector('#code-container');
 
-      if (this.hasAttribute("block")) {
+      if (this.hasAttribute('block')) {
         // normalize the tab indents
-        content = content.replace(/\n/, "");
+        content = content.replace(/\n/, '');
         const tabs = content.match(/\s*/);
-        content = content.replace(new RegExp("\n" + tabs, "g"), "\n");
+        content = content.replace(new RegExp('\n' + tabs, 'g'), '\n');
         content = content.trim();
         // wrap code block in pre tag if needed
         if (codeTag.parentNode instanceof ShadowRoot) {
-          const preTag = document.createElement("pre");
+          const preTag = document.createElement('pre');
           this.shadowRoot.removeChild(codeTag);
           preTag.appendChild(codeTag);
           this.shadowRoot.appendChild(preTag);
@@ -4256,7 +4570,7 @@ ${css}
   // Copyright 2018 The Distill Template Authors
 
   const T$5 = Template(
-    "d-footnote",
+    'd-footnote',
     `
 <style>
 
@@ -4297,7 +4611,7 @@ span {
   <span id="fn-" data-hover-ref=""></span>
 </sup>
 
-`
+`,
   );
 
   class Footnote extends T$5(HTMLElement) {
@@ -4315,7 +4629,7 @@ span {
 
     notify() {
       const options = { detail: this, bubbles: true };
-      const event = new CustomEvent("onFootnoteChanged", options);
+      const event = new CustomEvent('onFootnoteChanged', options);
       document.dispatchEvent(event);
     }
 
@@ -4324,23 +4638,23 @@ span {
       // const slot = this.shadowRoot.querySelector('#slot');
       // console.warn(slot.textContent);
       // slot.addEventListener('slotchange', this.notify);
-      this.hoverBox = this.root.querySelector("d-hover-box");
-      window.customElements.whenDefined("d-hover-box").then(() => {
+      this.hoverBox = this.root.querySelector('d-hover-box');
+      window.customElements.whenDefined('d-hover-box').then(() => {
         this.hoverBox.listen(this);
       });
       // create numeric ID
       Footnote.currentFootnoteId += 1;
       const IdString = Footnote.currentFootnoteId.toString();
-      this.root.host.id = "d-footnote-" + IdString;
+      this.root.host.id = 'd-footnote-' + IdString;
 
       // set up hidden hover box
-      const id = "dt-fn-hover-box-" + IdString;
+      const id = 'dt-fn-hover-box-' + IdString;
       this.hoverBox.id = id;
 
       // set up visible footnote marker
-      const span = this.root.querySelector("#fn-");
-      span.setAttribute("id", "fn-" + IdString);
-      span.setAttribute("data-hover-ref", id);
+      const span = this.root.querySelector('#fn-');
+      span.setAttribute('id', 'fn-' + IdString);
+      span.setAttribute('data-hover-ref', id);
       span.textContent = IdString;
     }
   }
@@ -4350,7 +4664,7 @@ span {
   // Copyright 2018 The Distill Template Authors
 
   const T$6 = Template(
-    "d-footnote-list",
+    'd-footnote-list',
     `
 <style>
 
@@ -4372,16 +4686,16 @@ d-footnote-list a.footnote-backlink {
 <h3>Footnotes</h3>
 <ol></ol>
 `,
-    false
+    false,
   );
 
   class FootnoteList extends T$6(HTMLElement) {
     connectedCallback() {
       super.connectedCallback();
 
-      this.list = this.root.querySelector("ol");
+      this.list = this.root.querySelector('ol');
       // footnotes list is initially hidden
-      this.root.style.display = "none";
+      this.root.style.display = 'none';
       // look through document and register existing footnotes
       // Store.subscribeTo('footnotes', (footnote) => {
       //   this.renderFootnote(footnote);
@@ -4390,28 +4704,28 @@ d-footnote-list a.footnote-backlink {
 
     // TODO: could optimize this to accept individual footnotes?
     set footnotes(footnotes) {
-      this.list.innerHTML = "";
+      this.list.innerHTML = '';
       if (footnotes.length) {
         // ensure footnote list is visible
-        this.root.style.display = "";
+        this.root.style.display = '';
 
         for (const footnote of footnotes) {
           // construct and append list item to show footnote
-          const listItem = document.createElement("li");
-          listItem.id = footnote.id + "-listing";
+          const listItem = document.createElement('li');
+          listItem.id = footnote.id + '-listing';
           listItem.innerHTML = footnote.innerHTML;
 
-          const backlink = document.createElement("a");
-          backlink.setAttribute("class", "footnote-backlink");
-          backlink.textContent = "[↩]";
-          backlink.href = "#" + footnote.id;
+          const backlink = document.createElement('a');
+          backlink.setAttribute('class', 'footnote-backlink');
+          backlink.textContent = '[↩]';
+          backlink.href = '#' + footnote.id;
 
           listItem.appendChild(backlink);
           this.list.appendChild(listItem);
         }
       } else {
         // ensure footnote list is invisible
-        this.root.style.display = "none";
+        this.root.style.display = 'none';
       }
     }
   }
@@ -4419,7 +4733,7 @@ d-footnote-list a.footnote-backlink {
   // Copyright 2018 The Distill Template Authors
 
   const T$7 = Template(
-    "d-hover-box",
+    'd-hover-box',
     `
 <style>
 
@@ -4463,7 +4777,7 @@ d-footnote-list a.footnote-backlink {
     <slot></slot>
   </div>
 </div>
-`
+`,
   );
 
   class HoverBox extends T$7(HTMLElement) {
@@ -4482,45 +4796,45 @@ d-footnote-list a.footnote-backlink {
 
     bindDivEvents(element) {
       // For mice, same behavior as hovering on links
-      element.addEventListener("mouseover", () => {
+      element.addEventListener('mouseover', () => {
         if (!this.visible) this.showAtNode(element);
         this.stopTimeout();
       });
-      element.addEventListener("mouseout", () => {
+      element.addEventListener('mouseout', () => {
         this.extendTimeout(500);
       });
       // Don't trigger body touchstart event when touching within box
       element.addEventListener(
-        "touchstart",
+        'touchstart',
         (event) => {
           event.stopPropagation();
         },
-        { passive: true }
+        { passive: true },
       );
       // Close box when touching outside box
       document.body.addEventListener(
-        "touchstart",
+        'touchstart',
         () => {
           this.hide();
         },
-        { passive: true }
+        { passive: true },
       );
     }
 
     bindTriggerEvents(node) {
-      node.addEventListener("mouseover", () => {
+      node.addEventListener('mouseover', () => {
         if (!this.visible) {
           this.showAtNode(node);
         }
         this.stopTimeout();
       });
 
-      node.addEventListener("mouseout", () => {
+      node.addEventListener('mouseout', () => {
         this.extendTimeout(300);
       });
 
       node.addEventListener(
-        "touchstart",
+        'touchstart',
         (event) => {
           if (this.visible) {
             this.hide();
@@ -4530,15 +4844,15 @@ d-footnote-list a.footnote-backlink {
           // Don't trigger body touchstart event when touching link
           event.stopPropagation();
         },
-        { passive: true }
+        { passive: true },
       );
     }
 
     show(position) {
       this.visible = true;
-      this.style.display = "block";
+      this.style.display = 'block';
       // 10px extra offset from element
-      this.style.top = Math.round(position[1] + 10) + "px";
+      this.style.top = Math.round(position[1] + 10) + 'px';
     }
 
     showAtNode(node) {
@@ -4549,7 +4863,7 @@ d-footnote-list a.footnote-backlink {
 
     hide() {
       this.visible = false;
-      this.style.display = "none";
+      this.style.display = 'none';
       this.stopTimeout();
     }
 
@@ -4583,14 +4897,14 @@ d-footnote-list a.footnote-backlink {
 
   class Title extends HTMLElement {
     static get is() {
-      return "d-title";
+      return 'd-title';
     }
   }
 
   // Copyright 2018 The Distill Template Authors
 
   const T$8 = Template(
-    "d-references",
+    'd-references',
     `
 <style>
 d-references {
@@ -4598,7 +4912,7 @@ d-references {
 }
 </style>
 `,
-    false
+    false,
   );
 
   class References extends T$8(HTMLElement) {}
@@ -4619,14 +4933,14 @@ d-references {
 
   class TOC extends HTMLElement {
     static get is() {
-      return "d-toc";
+      return 'd-toc';
     }
 
     connectedCallback() {
-      if (!this.getAttribute("prerendered")) {
+      if (!this.getAttribute('prerendered')) {
         window.onload = () => {
-          const article = document.querySelector("d-article");
-          const headings = article.querySelectorAll("h2, h3");
+          const article = document.querySelector('d-article');
+          const headings = article.querySelectorAll('h2, h3');
           renderTOC(this, headings);
         };
       }
@@ -4662,23 +4976,24 @@ d-references {
 
     for (const el of headings) {
       // should element be included in TOC?
-      const isInTitle = el.parentElement.tagName == "D-TITLE";
-      const isException = el.getAttribute("no-toc");
+      const isInTitle = el.parentElement.tagName == 'D-TITLE';
+      const isException = el.getAttribute('no-toc');
       if (isInTitle || isException) continue;
       // create TOC entry
       const title = el.textContent;
-      const link = "#" + el.getAttribute("id");
+      const link = '#' + el.getAttribute('id');
 
-      let newLine = "<li>" + '<a href="' + link + '">' + title + "</a>" + "</li>";
-      if (el.tagName == "H3") {
-        newLine = "<ul>" + newLine + "</ul>";
+      let newLine =
+        '<li>' + '<a href="' + link + '">' + title + '</a>' + '</li>';
+      if (el.tagName == 'H3') {
+        newLine = '<ul>' + newLine + '</ul>';
       } else {
-        newLine += "<br>";
+        newLine += '<br>';
       }
       ToC += newLine;
     }
 
-    ToC += "</ul></nav>";
+    ToC += '</ul></nav>';
     element.innerHTML = ToC;
   }
 
@@ -4713,7 +5028,7 @@ d-references {
 
   class Figure extends HTMLElement {
     static get is() {
-      return "d-figure";
+      return 'd-figure';
     }
 
     static get readyQueue() {
@@ -4753,7 +5068,7 @@ d-references {
     }
 
     connectedCallback() {
-      this.loadsWhileScrolling = this.hasAttribute("loadsWhileScrolling");
+      this.loadsWhileScrolling = this.hasAttribute('loadsWhileScrolling');
       Figure.marginObserver.observe(this);
       Figure.directObserver.observe(this);
     }
@@ -4775,7 +5090,7 @@ d-references {
         const viewportHeight = window.innerHeight;
         const margin = Math.floor(2 * viewportHeight);
         const options = {
-          rootMargin: margin + "px 0px " + margin + "px 0px",
+          rootMargin: margin + 'px 0px ' + margin + 'px 0px',
           threshold: 0.01,
         };
         const callback = Figure.didObserveMarginIntersection;
@@ -4796,10 +5111,13 @@ d-references {
 
     static get directObserver() {
       if (!Figure._directObserver) {
-        Figure._directObserver = new IntersectionObserver(Figure.didObserveDirectIntersection, {
-          rootMargin: "0px",
-          threshold: [0, 1.0],
-        });
+        Figure._directObserver = new IntersectionObserver(
+          Figure.didObserveDirectIntersection,
+          {
+            rootMargin: '0px',
+            threshold: [0, 1.0],
+          },
+        );
       }
       return Figure._directObserver;
     }
@@ -4827,13 +5145,13 @@ d-references {
       super.addEventListener(eventName, callback);
       // if we had already dispatched something while presumingly no one was listening, we do so again
       // debugger
-      if (eventName === "ready") {
+      if (eventName === 'ready') {
         if (Figure.readyQueue.indexOf(this) !== -1) {
           this._ready = false;
           Figure.runReadyQueue();
         }
       }
-      if (eventName === "onscreen") {
+      if (eventName === 'onscreen') {
         this.onscreen();
       }
     }
@@ -4844,26 +5162,26 @@ d-references {
       // debugger
       this._ready = true;
       Figure.marginObserver.unobserve(this);
-      const event = new CustomEvent("ready");
+      const event = new CustomEvent('ready');
       this.dispatchEvent(event);
     }
 
     onscreen() {
       this._onscreen = true;
       this._offscreen = false;
-      const event = new CustomEvent("onscreen");
+      const event = new CustomEvent('onscreen');
       this.dispatchEvent(event);
     }
 
     offscreen() {
       this._onscreen = false;
       this._offscreen = true;
-      const event = new CustomEvent("offscreen");
+      const event = new CustomEvent('offscreen');
       this.dispatchEvent(event);
     }
   }
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     Figure.isScrolling = false;
     let timeout;
     const resetTimer = () => {
@@ -4874,7 +5192,7 @@ d-references {
         Figure.runReadyQueue();
       }, 500);
     };
-    window.addEventListener("scroll", resetTimer, true);
+    window.addEventListener('scroll', resetTimer, true);
   }
 
   // Copyright 2018 The Distill Template Authors
@@ -4882,9 +5200,9 @@ d-references {
   // This overlay is not secure.
   // It is only meant as a social deterrent.
 
-  const productionHostname = "distill.pub";
+  const productionHostname = 'distill.pub';
   const T$9 = Template(
-    "d-interstitial",
+    'd-interstitial',
     `
 <style>
 
@@ -4986,7 +5304,7 @@ p small {
     <p><small>Enter the password we shared with you as part of the review process to view the article.</small></p>
   </div>
 </div>
-`
+`,
   );
 
   class Interstitial extends T$9(HTMLElement) {
@@ -4994,7 +5312,9 @@ p small {
       if (this.shouldRemoveSelf()) {
         this.parentElement.removeChild(this);
       } else {
-        const passwordInput = this.root.querySelector("#interstitial-password-input");
+        const passwordInput = this.root.querySelector(
+          '#interstitial-password-input',
+        );
         passwordInput.oninput = (event) => this.passwordChanged(event);
       }
     }
@@ -5002,11 +5322,11 @@ p small {
     passwordChanged(event) {
       const entered = event.target.value;
       if (entered === this.password) {
-        console.log("Correct password entered.");
+        console.log('Correct password entered.');
         this.parentElement.removeChild(this);
-        if (typeof Storage !== "undefined") {
-          console.log("Saved that correct password was entered.");
-          localStorage.setItem(this.localStorageIdentifier(), "true");
+        if (typeof Storage !== 'undefined') {
+          console.log('Saved that correct password was entered.');
+          localStorage.setItem(this.localStorageIdentifier(), 'true');
         }
       }
     }
@@ -5014,13 +5334,15 @@ p small {
     shouldRemoveSelf() {
       // should never be visible in production
       if (window && window.location.hostname === productionHostname) {
-        console.warn("Interstitial found on production, hiding it.");
+        console.warn('Interstitial found on production, hiding it.');
         return true;
       }
       // should only have to enter password once
-      if (typeof Storage !== "undefined") {
-        if (localStorage.getItem(this.localStorageIdentifier()) === "true") {
-          console.log("Loaded that correct password was entered before; skipping interstitial.");
+      if (typeof Storage !== 'undefined') {
+        if (localStorage.getItem(this.localStorageIdentifier()) === 'true') {
+          console.log(
+            'Loaded that correct password was entered before; skipping interstitial.',
+          );
           return true;
         }
       }
@@ -5029,9 +5351,9 @@ p small {
     }
 
     localStorageIdentifier() {
-      const prefix = "distill-drafts";
-      const suffix = "interstitial-password-correct";
-      return prefix + (window ? window.location.pathname : "-") + suffix;
+      const prefix = 'distill-drafts';
+      const suffix = 'interstitial-password-correct';
+      return prefix + (window ? window.location.pathname : '-') + suffix;
     }
   }
 
@@ -5075,7 +5397,14 @@ p small {
   var bisectRight = ascendingBisect.right;
 
   function range(start, stop, step) {
-    (start = +start), (stop = +stop), (step = (n = arguments.length) < 2 ? ((stop = start), (start = 0), 1) : n < 3 ? 1 : +step);
+    (start = +start),
+      (stop = +stop),
+      (step =
+        (n = arguments.length) < 2
+          ? ((stop = start), (start = 0), 1)
+          : n < 3
+            ? 1
+            : +step);
 
     var i = -1,
       n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
@@ -5102,7 +5431,8 @@ p small {
     (stop = +stop), (start = +start), (count = +count);
     if (start === stop && count > 0) return [start];
     if ((reverse = stop < start)) (n = start), (start = stop), (stop = n);
-    if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
+    if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step))
+      return [];
 
     if (step > 0) {
       start = Math.ceil(start / step);
@@ -5126,8 +5456,10 @@ p small {
       power = Math.floor(Math.log(step) / Math.LN10),
       error = step / Math.pow(10, power);
     return power >= 0
-      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
-      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
+      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) *
+          Math.pow(10, power)
+      : -Math.pow(10, -power) /
+          (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
   }
 
   function tickStep(start, stop, count) {
@@ -5170,16 +5502,16 @@ p small {
   var darker = 0.7;
   var brighter = 1 / darker;
 
-  var reI = "\\s*([+-]?\\d+)\\s*",
-    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
-    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
+  var reI = '\\s*([+-]?\\d+)\\s*',
+    reN = '\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*',
+    reP = '\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*',
     reHex = /^#([0-9a-f]{3,8})$/,
-    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
-    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
-    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
-    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
-    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
-    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
+    reRgbInteger = new RegExp('^rgb\\(' + [reI, reI, reI] + '\\)$'),
+    reRgbPercent = new RegExp('^rgb\\(' + [reP, reP, reP] + '\\)$'),
+    reRgbaInteger = new RegExp('^rgba\\(' + [reI, reI, reI, reN] + '\\)$'),
+    reRgbaPercent = new RegExp('^rgba\\(' + [reP, reP, reP, reN] + '\\)$'),
+    reHslPercent = new RegExp('^hsl\\(' + [reN, reP, reP] + '\\)$'),
+    reHslaPercent = new RegExp('^hsla\\(' + [reN, reP, reP, reN] + '\\)$');
 
   var named = {
     aliceblue: 0xf0f8ff,
@@ -5360,39 +5692,59 @@ p small {
 
   function color(format) {
     var m, l;
-    format = (format + "").trim().toLowerCase();
+    format = (format + '').trim().toLowerCase();
     return (m = reHex.exec(format))
       ? ((l = m[1].length),
         (m = parseInt(m[1], 16)),
         l === 6
           ? rgbn(m) // #ff0000
           : l === 3
-            ? new Rgb(((m >> 8) & 0xf) | ((m >> 4) & 0xf0), ((m >> 4) & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
+            ? new Rgb(
+                ((m >> 8) & 0xf) | ((m >> 4) & 0xf0),
+                ((m >> 4) & 0xf) | (m & 0xf0),
+                ((m & 0xf) << 4) | (m & 0xf),
+                1,
+              ) // #f00
             : l === 8
-              ? rgba((m >> 24) & 0xff, (m >> 16) & 0xff, (m >> 8) & 0xff, (m & 0xff) / 0xff) // #ff000000
+              ? rgba(
+                  (m >> 24) & 0xff,
+                  (m >> 16) & 0xff,
+                  (m >> 8) & 0xff,
+                  (m & 0xff) / 0xff,
+                ) // #ff000000
               : l === 4
                 ? rgba(
                     ((m >> 12) & 0xf) | ((m >> 8) & 0xf0),
                     ((m >> 8) & 0xf) | ((m >> 4) & 0xf0),
                     ((m >> 4) & 0xf) | (m & 0xf0),
-                    (((m & 0xf) << 4) | (m & 0xf)) / 0xff
+                    (((m & 0xf) << 4) | (m & 0xf)) / 0xff,
                   ) // #f000
                 : null) // invalid hex
       : (m = reRgbInteger.exec(format))
         ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
         : (m = reRgbPercent.exec(format))
-          ? new Rgb((m[1] * 255) / 100, (m[2] * 255) / 100, (m[3] * 255) / 100, 1) // rgb(100%, 0%, 0%)
+          ? new Rgb(
+              (m[1] * 255) / 100,
+              (m[2] * 255) / 100,
+              (m[3] * 255) / 100,
+              1,
+            ) // rgb(100%, 0%, 0%)
           : (m = reRgbaInteger.exec(format))
             ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
             : (m = reRgbaPercent.exec(format))
-              ? rgba((m[1] * 255) / 100, (m[2] * 255) / 100, (m[3] * 255) / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+              ? rgba(
+                  (m[1] * 255) / 100,
+                  (m[2] * 255) / 100,
+                  (m[3] * 255) / 100,
+                  m[4],
+                ) // rgb(100%, 0%, 0%, 1)
               : (m = reHslPercent.exec(format))
                 ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
                 : (m = reHslaPercent.exec(format))
                   ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
                   : named.hasOwnProperty(format)
                     ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
-                    : format === "transparent"
+                    : format === 'transparent'
                       ? new Rgb(NaN, NaN, NaN, 0)
                       : null;
   }
@@ -5414,7 +5766,9 @@ p small {
   }
 
   function rgb(r, g, b, opacity) {
-    return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+    return arguments.length === 1
+      ? rgbConvert(r)
+      : new Rgb(r, g, b, opacity == null ? 1 : opacity);
   }
 
   function Rgb(r, g, b, opacity) {
@@ -5455,30 +5809,30 @@ p small {
       formatHex: rgb_formatHex,
       formatRgb: rgb_formatRgb,
       toString: rgb_formatRgb,
-    })
+    }),
   );
 
   function rgb_formatHex() {
-    return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+    return '#' + hex(this.r) + hex(this.g) + hex(this.b);
   }
 
   function rgb_formatRgb() {
     var a = this.opacity;
     a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
     return (
-      (a === 1 ? "rgb(" : "rgba(") +
+      (a === 1 ? 'rgb(' : 'rgba(') +
       Math.max(0, Math.min(255, Math.round(this.r) || 0)) +
-      ", " +
+      ', ' +
       Math.max(0, Math.min(255, Math.round(this.g) || 0)) +
-      ", " +
+      ', ' +
       Math.max(0, Math.min(255, Math.round(this.b) || 0)) +
-      (a === 1 ? ")" : ", " + a + ")")
+      (a === 1 ? ')' : ', ' + a + ')')
     );
   }
 
   function hex(value) {
     value = Math.max(0, Math.min(255, Math.round(value) || 0));
-    return (value < 16 ? "0" : "") + value.toString(16);
+    return (value < 16 ? '0' : '') + value.toString(16);
   }
 
   function hsla(h, s, l, a) {
@@ -5515,7 +5869,9 @@ p small {
   }
 
   function hsl(h, s, l, opacity) {
-    return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+    return arguments.length === 1
+      ? hslConvert(h)
+      : new Hsl(h, s, l, opacity == null ? 1 : opacity);
   }
 
   function Hsl(h, s, l, opacity) {
@@ -5543,31 +5899,50 @@ p small {
           l = this.l,
           m2 = l + (l < 0.5 ? l : 1 - l) * s,
           m1 = 2 * l - m2;
-        return new Rgb(hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2), hsl2rgb(h, m1, m2), hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2), this.opacity);
+        return new Rgb(
+          hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+          hsl2rgb(h, m1, m2),
+          hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+          this.opacity,
+        );
       },
       displayable: function () {
-        return ((0 <= this.s && this.s <= 1) || isNaN(this.s)) && 0 <= this.l && this.l <= 1 && 0 <= this.opacity && this.opacity <= 1;
+        return (
+          ((0 <= this.s && this.s <= 1) || isNaN(this.s)) &&
+          0 <= this.l &&
+          this.l <= 1 &&
+          0 <= this.opacity &&
+          this.opacity <= 1
+        );
       },
       formatHsl: function () {
         var a = this.opacity;
         a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
         return (
-          (a === 1 ? "hsl(" : "hsla(") +
+          (a === 1 ? 'hsl(' : 'hsla(') +
           (this.h || 0) +
-          ", " +
+          ', ' +
           (this.s || 0) * 100 +
-          "%, " +
+          '%, ' +
           (this.l || 0) * 100 +
-          "%" +
-          (a === 1 ? ")" : ", " + a + ")")
+          '%' +
+          (a === 1 ? ')' : ', ' + a + ')')
         );
       },
-    })
+    }),
   );
 
   /* From FvD 13.37, CSS Color Module Level 3 */
   function hsl2rgb(h, m1, m2) {
-    return (h < 60 ? m1 + ((m2 - m1) * h) / 60 : h < 180 ? m2 : h < 240 ? m1 + ((m2 - m1) * (240 - h)) / 60 : m1) * 255;
+    return (
+      (h < 60
+        ? m1 + ((m2 - m1) * h) / 60
+        : h < 180
+          ? m2
+          : h < 240
+            ? m1 + ((m2 - m1) * (240 - h)) / 60
+            : m1) * 255
+    );
   }
 
   var deg2rad = Math.PI / 180;
@@ -5602,7 +5977,9 @@ p small {
   }
 
   function lab(l, a, b, opacity) {
-    return arguments.length === 1 ? labConvert(l) : new Lab(l, a, b, opacity == null ? 1 : opacity);
+    return arguments.length === 1
+      ? labConvert(l)
+      : new Lab(l, a, b, opacity == null ? 1 : opacity);
   }
 
   function Lab(l, a, b, opacity) {
@@ -5617,10 +5994,20 @@ p small {
     lab,
     extend(Color, {
       brighter: function (k) {
-        return new Lab(this.l + K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+        return new Lab(
+          this.l + K * (k == null ? 1 : k),
+          this.a,
+          this.b,
+          this.opacity,
+        );
       },
       darker: function (k) {
-        return new Lab(this.l - K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+        return new Lab(
+          this.l - K * (k == null ? 1 : k),
+          this.a,
+          this.b,
+          this.opacity,
+        );
       },
       rgb: function () {
         var y = (this.l + 16) / 116,
@@ -5633,10 +6020,10 @@ p small {
           lrgb2rgb(3.1338561 * x - 1.6168667 * y - 0.4906146 * z),
           lrgb2rgb(-0.9787684 * x + 1.9161415 * y + 0.033454 * z),
           lrgb2rgb(0.0719453 * x - 0.2289914 * y + 1.4052427 * z),
-          this.opacity
+          this.opacity,
         );
       },
-    })
+    }),
   );
 
   function xyz2lab(t) {
@@ -5648,23 +6035,35 @@ p small {
   }
 
   function lrgb2rgb(x) {
-    return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055);
+    return (
+      255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055)
+    );
   }
 
   function rgb2lrgb(x) {
-    return (x /= 255) <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+    return (x /= 255) <= 0.04045
+      ? x / 12.92
+      : Math.pow((x + 0.055) / 1.055, 2.4);
   }
 
   function hclConvert(o) {
     if (o instanceof Hcl) return new Hcl(o.h, o.c, o.l, o.opacity);
     if (!(o instanceof Lab)) o = labConvert(o);
-    if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
+    if (o.a === 0 && o.b === 0)
+      return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
     var h = Math.atan2(o.b, o.a) * rad2deg;
-    return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
+    return new Hcl(
+      h < 0 ? h + 360 : h,
+      Math.sqrt(o.a * o.a + o.b * o.b),
+      o.l,
+      o.opacity,
+    );
   }
 
   function hcl(h, c, l, opacity) {
-    return arguments.length === 1 ? hclConvert(h) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
+    return arguments.length === 1
+      ? hclConvert(h)
+      : new Hcl(h, c, l, opacity == null ? 1 : opacity);
   }
 
   function Hcl(h, c, l, opacity) {
@@ -5685,15 +6084,25 @@ p small {
     hcl,
     extend(Color, {
       brighter: function (k) {
-        return new Hcl(this.h, this.c, this.l + K * (k == null ? 1 : k), this.opacity);
+        return new Hcl(
+          this.h,
+          this.c,
+          this.l + K * (k == null ? 1 : k),
+          this.opacity,
+        );
       },
       darker: function (k) {
-        return new Hcl(this.h, this.c, this.l - K * (k == null ? 1 : k), this.opacity);
+        return new Hcl(
+          this.h,
+          this.c,
+          this.l - K * (k == null ? 1 : k),
+          this.opacity,
+        );
       },
       rgb: function () {
         return hcl2lab(this).rgb();
       },
-    })
+    }),
   );
 
   var A = -0.14861,
@@ -5720,7 +6129,9 @@ p small {
   }
 
   function cubehelix(h, s, l, opacity) {
-    return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
+    return arguments.length === 1
+      ? cubehelixConvert(h)
+      : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
   }
 
   function Cubehelix(h, s, l, opacity) {
@@ -5748,9 +6159,14 @@ p small {
           a = isNaN(this.s) ? 0 : this.s * l * (1 - l),
           cosh = Math.cos(h),
           sinh = Math.sin(h);
-        return new Rgb(255 * (l + a * (A * cosh + B * sinh)), 255 * (l + a * (C * cosh + D * sinh)), 255 * (l + a * (E * cosh)), this.opacity);
+        return new Rgb(
+          255 * (l + a * (A * cosh + B * sinh)),
+          255 * (l + a * (C * cosh + D * sinh)),
+          255 * (l + a * (E * cosh)),
+          this.opacity,
+        );
       },
-    })
+    }),
   );
 
   function constant(x) {
@@ -5802,7 +6218,7 @@ p small {
         start.g = g(t);
         start.b = b(t);
         start.opacity = opacity(t);
-        return start + "";
+        return start + '';
       };
     }
 
@@ -5868,8 +6284,8 @@ p small {
       c = {},
       k;
 
-    if (a === null || typeof a !== "object") a = {};
-    if (b === null || typeof b !== "object") b = {};
+    if (a === null || typeof a !== 'object') a = {};
+    if (b === null || typeof b !== 'object') b = {};
 
     for (k in b) {
       if (k in a) {
@@ -5886,7 +6302,7 @@ p small {
   }
 
   var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
-    reB = new RegExp(reA.source, "g");
+    reB = new RegExp(reA.source, 'g');
 
   function zero(b) {
     return function () {
@@ -5896,7 +6312,7 @@ p small {
 
   function one(b) {
     return function (t) {
-      return b(t) + "";
+      return b(t) + '';
     };
   }
 
@@ -5910,7 +6326,7 @@ p small {
       q = []; // number interpolators
 
     // Coerce inputs to strings.
-    (a = a + ""), (b = b + "");
+    (a = a + ''), (b = b + '');
 
     // Interpolate pairs of numbers in a & b.
     while ((am = reA.exec(a)) && (bm = reB.exec(b))) {
@@ -5948,18 +6364,18 @@ p small {
       : ((b = q.length),
         function (t) {
           for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
-          return s.join("");
+          return s.join('');
         });
   }
 
   function interpolate(a, b) {
     var t = typeof b,
       c;
-    return b == null || t === "boolean"
+    return b == null || t === 'boolean'
       ? constant(b)
-      : (t === "number"
+      : (t === 'number'
           ? interpolateNumber
-          : t === "string"
+          : t === 'string'
             ? (c = color(b))
               ? ((b = c), rgb$1)
               : string
@@ -5971,7 +6387,9 @@ p small {
                   ? numberArray
                   : Array.isArray(b)
                     ? genericArray
-                    : (typeof b.valueOf !== "function" && typeof b.toString !== "function") || isNaN(b)
+                    : (typeof b.valueOf !== 'function' &&
+                          typeof b.toString !== 'function') ||
+                        isNaN(b)
                       ? object
                       : interpolateNumber)(a, b);
   }
@@ -6056,7 +6474,12 @@ p small {
   }
 
   function copy(source, target) {
-    return target.domain(source.domain()).range(source.range()).interpolate(source.interpolate()).clamp(source.clamp()).unknown(source.unknown());
+    return target
+      .domain(source.domain())
+      .range(source.range())
+      .interpolate(source.interpolate())
+      .clamp(source.clamp())
+      .unknown(source.unknown());
   }
 
   function transformer() {
@@ -6080,31 +6503,53 @@ p small {
     }
 
     function scale(x) {
-      return isNaN((x = +x)) ? unknown : (output || (output = piecewise(domain.map(transform), range, interpolate$1)))(transform(clamp(x)));
+      return isNaN((x = +x))
+        ? unknown
+        : (
+            output ||
+            (output = piecewise(domain.map(transform), range, interpolate$1))
+          )(transform(clamp(x)));
     }
 
     scale.invert = function (y) {
-      return clamp(untransform((input || (input = piecewise(range, domain.map(transform), interpolateNumber)))(y)));
+      return clamp(
+        untransform(
+          (
+            input ||
+            (input = piecewise(range, domain.map(transform), interpolateNumber))
+          )(y),
+        ),
+      );
     };
 
     scale.domain = function (_) {
-      return arguments.length ? ((domain = Array.from(_, number)), rescale()) : domain.slice();
+      return arguments.length
+        ? ((domain = Array.from(_, number)), rescale())
+        : domain.slice();
     };
 
     scale.range = function (_) {
-      return arguments.length ? ((range = Array.from(_)), rescale()) : range.slice();
+      return arguments.length
+        ? ((range = Array.from(_)), rescale())
+        : range.slice();
     };
 
     scale.rangeRound = function (_) {
-      return (range = Array.from(_)), (interpolate$1 = interpolateRound), rescale();
+      return (
+        (range = Array.from(_)), (interpolate$1 = interpolateRound), rescale()
+      );
     };
 
     scale.clamp = function (_) {
-      return arguments.length ? ((clamp = _ ? true : identity), rescale()) : clamp !== identity;
+      return arguments.length
+        ? ((clamp = _ ? true : identity), rescale())
+        : clamp !== identity;
     };
 
     scale.interpolate = function (_) {
-      return arguments.length ? ((interpolate$1 = _), rescale()) : interpolate$1;
+      return arguments.length
+        ? ((interpolate$1 = _), rescale())
+        : interpolate$1;
     };
 
     scale.unknown = function (_) {
@@ -6125,13 +6570,22 @@ p small {
   // significant digits p, where x is positive and p is in [1, 21] or undefined.
   // For example, formatDecimal(1.23) returns ["123", 0].
   function formatDecimal(x, p) {
-    if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
+    if (
+      (i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf('e')) <
+      0
+    )
+      return null; // NaN, ±Infinity
     var i,
       coefficient = x.slice(0, i);
 
     // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
     // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
-    return [coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient, +x.slice(i + 1)];
+    return [
+      coefficient.length > 1
+        ? coefficient[0] + coefficient.slice(2)
+        : coefficient,
+      +x.slice(i + 1),
+    ];
   }
 
   function exponent(x) {
@@ -6166,10 +6620,12 @@ p small {
   }
 
   // [[fill]align][sign][symbol][0][width][,][.precision][~][type]
-  var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+  var re =
+    /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
 
   function formatSpecifier(specifier) {
-    if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+    if (!(match = re.exec(specifier)))
+      throw new Error('invalid format: ' + specifier);
     var match;
     return new FormatSpecifier({
       fill: match[1],
@@ -6188,16 +6644,17 @@ p small {
   formatSpecifier.prototype = FormatSpecifier.prototype; // instanceof
 
   function FormatSpecifier(specifier) {
-    this.fill = specifier.fill === undefined ? " " : specifier.fill + "";
-    this.align = specifier.align === undefined ? ">" : specifier.align + "";
-    this.sign = specifier.sign === undefined ? "-" : specifier.sign + "";
-    this.symbol = specifier.symbol === undefined ? "" : specifier.symbol + "";
+    this.fill = specifier.fill === undefined ? ' ' : specifier.fill + '';
+    this.align = specifier.align === undefined ? '>' : specifier.align + '';
+    this.sign = specifier.sign === undefined ? '-' : specifier.sign + '';
+    this.symbol = specifier.symbol === undefined ? '' : specifier.symbol + '';
     this.zero = !!specifier.zero;
     this.width = specifier.width === undefined ? undefined : +specifier.width;
     this.comma = !!specifier.comma;
-    this.precision = specifier.precision === undefined ? undefined : +specifier.precision;
+    this.precision =
+      specifier.precision === undefined ? undefined : +specifier.precision;
     this.trim = !!specifier.trim;
-    this.type = specifier.type === undefined ? "" : specifier.type + "";
+    this.type = specifier.type === undefined ? '' : specifier.type + '';
   }
 
   FormatSpecifier.prototype.toString = function () {
@@ -6206,11 +6663,13 @@ p small {
       this.align +
       this.sign +
       this.symbol +
-      (this.zero ? "0" : "") +
-      (this.width === undefined ? "" : Math.max(1, this.width | 0)) +
-      (this.comma ? "," : "") +
-      (this.precision === undefined ? "" : "." + Math.max(0, this.precision | 0)) +
-      (this.trim ? "~" : "") +
+      (this.zero ? '0' : '') +
+      (this.width === undefined ? '' : Math.max(1, this.width | 0)) +
+      (this.comma ? ',' : '') +
+      (this.precision === undefined
+        ? ''
+        : '.' + Math.max(0, this.precision | 0)) +
+      (this.trim ? '~' : '') +
       this.type
     );
   };
@@ -6219,10 +6678,10 @@ p small {
   function formatTrim(s) {
     out: for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
       switch (s[i]) {
-        case ".":
+        case '.':
           i0 = i1 = i;
           break;
-        case "0":
+        case '0':
           if (i0 === 0) i0 = i;
           i1 = i;
           break;
@@ -6239,41 +6698,49 @@ p small {
 
   function formatPrefixAuto(x, p) {
     var d = formatDecimal(x, p);
-    if (!d) return x + "";
+    if (!d) return x + '';
     var coefficient = d[0],
       exponent = d[1],
-      i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
+      i =
+        exponent -
+        (prefixExponent =
+          Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) +
+        1,
       n = coefficient.length;
     return i === n
       ? coefficient
       : i > n
-        ? coefficient + new Array(i - n + 1).join("0")
+        ? coefficient + new Array(i - n + 1).join('0')
         : i > 0
-          ? coefficient.slice(0, i) + "." + coefficient.slice(i)
-          : "0." + new Array(1 - i).join("0") + formatDecimal(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+          ? coefficient.slice(0, i) + '.' + coefficient.slice(i)
+          : '0.' +
+            new Array(1 - i).join('0') +
+            formatDecimal(x, Math.max(0, p + i - 1))[0]; // less than 1y!
   }
 
   function formatRounded(x, p) {
     var d = formatDecimal(x, p);
-    if (!d) return x + "";
+    if (!d) return x + '';
     var coefficient = d[0],
       exponent = d[1];
     return exponent < 0
-      ? "0." + new Array(-exponent).join("0") + coefficient
+      ? '0.' + new Array(-exponent).join('0') + coefficient
       : coefficient.length > exponent + 1
-        ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
-        : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+        ? coefficient.slice(0, exponent + 1) +
+          '.' +
+          coefficient.slice(exponent + 1)
+        : coefficient + new Array(exponent - coefficient.length + 2).join('0');
   }
 
   var formatTypes = {
-    "%": function (x, p) {
+    '%': function (x, p) {
       return (x * 100).toFixed(p);
     },
     b: function (x) {
       return Math.round(x).toString(2);
     },
     c: function (x) {
-      return x + "";
+      return x + '';
     },
     d: function (x) {
       return Math.round(x).toString(10);
@@ -6308,20 +6775,46 @@ p small {
   }
 
   var map = Array.prototype.map,
-    prefixes = ["y", "z", "a", "f", "p", "n", "µ", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
+    prefixes = [
+      'y',
+      'z',
+      'a',
+      'f',
+      'p',
+      'n',
+      'µ',
+      'm',
+      '',
+      'k',
+      'M',
+      'G',
+      'T',
+      'P',
+      'E',
+      'Z',
+      'Y',
+    ];
 
   function formatLocale(locale) {
     var group =
         locale.grouping === undefined || locale.thousands === undefined
           ? identity$1
-          : formatGroup(map.call(locale.grouping, Number), locale.thousands + ""),
-      currencyPrefix = locale.currency === undefined ? "" : locale.currency[0] + "",
-      currencySuffix = locale.currency === undefined ? "" : locale.currency[1] + "",
-      decimal = locale.decimal === undefined ? "." : locale.decimal + "",
-      numerals = locale.numerals === undefined ? identity$1 : formatNumerals(map.call(locale.numerals, String)),
-      percent = locale.percent === undefined ? "%" : locale.percent + "",
-      minus = locale.minus === undefined ? "-" : locale.minus + "",
-      nan = locale.nan === undefined ? "NaN" : locale.nan + "";
+          : formatGroup(
+              map.call(locale.grouping, Number),
+              locale.thousands + '',
+            ),
+      currencyPrefix =
+        locale.currency === undefined ? '' : locale.currency[0] + '',
+      currencySuffix =
+        locale.currency === undefined ? '' : locale.currency[1] + '',
+      decimal = locale.decimal === undefined ? '.' : locale.decimal + '',
+      numerals =
+        locale.numerals === undefined
+          ? identity$1
+          : formatNumerals(map.call(locale.numerals, String)),
+      percent = locale.percent === undefined ? '%' : locale.percent + '',
+      minus = locale.minus === undefined ? '-' : locale.minus + '',
+      nan = locale.nan === undefined ? 'NaN' : locale.nan + '';
 
     function newFormat(specifier) {
       specifier = formatSpecifier(specifier);
@@ -6338,17 +6831,27 @@ p small {
         type = specifier.type;
 
       // The "n" type is an alias for ",g".
-      if (type === "n") (comma = true), (type = "g");
+      if (type === 'n') (comma = true), (type = 'g');
       // The "" type, and any invalid type, is an alias for ".12~g".
-      else if (!formatTypes[type]) precision === undefined && (precision = 12), (trim = true), (type = "g");
+      else if (!formatTypes[type])
+        precision === undefined && (precision = 12),
+          (trim = true),
+          (type = 'g');
 
       // If zero fill is specified, padding goes after sign and before digits.
-      if (zero || (fill === "0" && align === "=")) (zero = true), (fill = "0"), (align = "=");
+      if (zero || (fill === '0' && align === '='))
+        (zero = true), (fill = '0'), (align = '=');
 
       // Compute the prefix and suffix.
       // For SI-prefix, the suffix is lazily computed.
-      var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
-        suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "";
+      var prefix =
+          symbol === '$'
+            ? currencyPrefix
+            : symbol === '#' && /[boxX]/.test(type)
+              ? '0' + type.toLowerCase()
+              : '',
+        suffix =
+          symbol === '$' ? currencySuffix : /[%p]/.test(type) ? percent : '';
 
       // What format function should we use?
       // Is this an integer type?
@@ -6360,7 +6863,12 @@ p small {
       // or clamp the specified precision to the supported range.
       // For significant precision, it must be in [1, 21].
       // For fixed precision, it must be in [0, 20].
-      precision = precision === undefined ? 6 : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
+      precision =
+        precision === undefined
+          ? 6
+          : /[gprs]/.test(type)
+            ? Math.max(1, Math.min(21, precision))
+            : Math.max(0, Math.min(20, precision));
 
       function format(value) {
         var valuePrefix = prefix,
@@ -6369,9 +6877,9 @@ p small {
           n,
           c;
 
-        if (type === "c") {
+        if (type === 'c') {
           valueSuffix = formatType(value) + valueSuffix;
-          value = "";
+          value = '';
         } else {
           value = +value;
 
@@ -6385,11 +6893,22 @@ p small {
           if (trim) value = formatTrim(value);
 
           // If a negative value rounds to zero after formatting, and no explicit positive sign is requested, hide the sign.
-          if (valueNegative && +value === 0 && sign !== "+") valueNegative = false;
+          if (valueNegative && +value === 0 && sign !== '+')
+            valueNegative = false;
 
           // Compute the prefix and suffix.
-          valuePrefix = (valueNegative ? (sign === "(" ? sign : minus) : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
-          valueSuffix = (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
+          valuePrefix =
+            (valueNegative
+              ? sign === '('
+                ? sign
+                : minus
+              : sign === '-' || sign === '('
+                ? ''
+                : sign) + valuePrefix;
+          valueSuffix =
+            (type === 's' ? prefixes[8 + prefixExponent / 3] : '') +
+            valueSuffix +
+            (valueNegative && sign === '(' ? ')' : '');
 
           // Break the formatted value into the integer “value” part that can be
           // grouped, and fractional or exponential “suffix” part that is not.
@@ -6397,7 +6916,9 @@ p small {
             (i = -1), (n = value.length);
             while (++i < n) {
               if (((c = value.charCodeAt(i)), 48 > c || c > 57)) {
-                valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+                valueSuffix =
+                  (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) +
+                  valueSuffix;
                 value = value.slice(0, i);
                 break;
               }
@@ -6410,21 +6931,32 @@ p small {
 
         // Compute the padding.
         var length = valuePrefix.length + value.length + valueSuffix.length,
-          padding = length < width ? new Array(width - length + 1).join(fill) : "";
+          padding =
+            length < width ? new Array(width - length + 1).join(fill) : '';
 
         // If the fill character is "0", grouping is applied after padding.
-        if (comma && zero) (value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity)), (padding = "");
+        if (comma && zero)
+          (value = group(
+            padding + value,
+            padding.length ? width - valueSuffix.length : Infinity,
+          )),
+            (padding = '');
 
         // Reconstruct the final output based on the desired alignment.
         switch (align) {
-          case "<":
+          case '<':
             value = valuePrefix + value + valueSuffix + padding;
             break;
-          case "=":
+          case '=':
             value = valuePrefix + padding + value + valueSuffix;
             break;
-          case "^":
-            value = padding.slice(0, (length = padding.length >> 1)) + valuePrefix + value + valueSuffix + padding.slice(length);
+          case '^':
+            value =
+              padding.slice(0, (length = padding.length >> 1)) +
+              valuePrefix +
+              value +
+              valueSuffix +
+              padding.slice(length);
             break;
           default:
             value = padding + valuePrefix + value + valueSuffix;
@@ -6435,14 +6967,18 @@ p small {
       }
 
       format.toString = function () {
-        return specifier + "";
+        return specifier + '';
       };
 
       return format;
     }
 
     function formatPrefix(specifier, value) {
-      var f = newFormat(((specifier = formatSpecifier(specifier)), (specifier.type = "f"), specifier)),
+      var f = newFormat(
+          ((specifier = formatSpecifier(specifier)),
+          (specifier.type = 'f'),
+          specifier),
+        ),
         e = Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3,
         k = Math.pow(10, -e),
         prefix = prefixes[8 + e / 3];
@@ -6462,11 +6998,11 @@ p small {
   var formatPrefix;
 
   defaultLocale({
-    decimal: ".",
-    thousands: ",",
+    decimal: '.',
+    thousands: ',',
     grouping: [3],
-    currency: ["$", ""],
-    minus: "-",
+    currency: ['$', ''],
+    minus: '-',
   });
 
   function defaultLocale(definition) {
@@ -6481,7 +7017,11 @@ p small {
   }
 
   function precisionPrefix(step, value) {
-    return Math.max(0, Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3 - exponent(Math.abs(step)));
+    return Math.max(
+      0,
+      Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3 -
+        exponent(Math.abs(step)),
+    );
   }
 
   function precisionRound(step, max) {
@@ -6492,25 +7032,41 @@ p small {
   function tickFormat(start, stop, count, specifier) {
     var step = tickStep(start, stop, count),
       precision;
-    specifier = formatSpecifier(specifier == null ? ",f" : specifier);
+    specifier = formatSpecifier(specifier == null ? ',f' : specifier);
     switch (specifier.type) {
-      case "s": {
+      case 's': {
         var value = Math.max(Math.abs(start), Math.abs(stop));
-        if (specifier.precision == null && !isNaN((precision = precisionPrefix(step, value)))) specifier.precision = precision;
+        if (
+          specifier.precision == null &&
+          !isNaN((precision = precisionPrefix(step, value)))
+        )
+          specifier.precision = precision;
         return formatPrefix(specifier, value);
       }
-      case "":
-      case "e":
-      case "g":
-      case "p":
-      case "r": {
-        if (specifier.precision == null && !isNaN((precision = precisionRound(step, Math.max(Math.abs(start), Math.abs(stop))))))
-          specifier.precision = precision - (specifier.type === "e");
+      case '':
+      case 'e':
+      case 'g':
+      case 'p':
+      case 'r': {
+        if (
+          specifier.precision == null &&
+          !isNaN(
+            (precision = precisionRound(
+              step,
+              Math.max(Math.abs(start), Math.abs(stop)),
+            )),
+          )
+        )
+          specifier.precision = precision - (specifier.type === 'e');
         break;
       }
-      case "f":
-      case "%": {
-        if (specifier.precision == null && !isNaN((precision = precisionFixed(step)))) specifier.precision = precision - (specifier.type === "%") * 2;
+      case 'f':
+      case '%': {
+        if (
+          specifier.precision == null &&
+          !isNaN((precision = precisionFixed(step)))
+        )
+          specifier.precision = precision - (specifier.type === '%') * 2;
         break;
       }
     }
@@ -6527,7 +7083,12 @@ p small {
 
     scale.tickFormat = function (count, specifier) {
       var d = domain();
-      return tickFormat(d[0], d[d.length - 1], count == null ? 10 : count, specifier);
+      return tickFormat(
+        d[0],
+        d[d.length - 1],
+        count == null ? 10 : count,
+        specifier,
+      );
     };
 
     scale.nice = function (count) {
@@ -6590,7 +7151,10 @@ p small {
 
   function newInterval(floori, offseti, count, field) {
     function interval(date) {
-      return floori((date = arguments.length === 0 ? new Date() : new Date(+date))), date;
+      return (
+        floori((date = arguments.length === 0 ? new Date() : new Date(+date))),
+        date
+      );
     }
 
     interval.floor = function (date) {
@@ -6598,7 +7162,12 @@ p small {
     };
 
     interval.ceil = function (date) {
-      return floori((date = new Date(date - 1))), offseti(date, 1), floori(date), date;
+      return (
+        floori((date = new Date(date - 1))),
+        offseti(date, 1),
+        floori(date),
+        date
+      );
     };
 
     interval.round = function (date) {
@@ -6608,7 +7177,10 @@ p small {
     };
 
     interval.offset = function (date, step) {
-      return offseti((date = new Date(+date)), step == null ? 1 : Math.floor(step)), date;
+      return (
+        offseti((date = new Date(+date)), step == null ? 1 : Math.floor(step)),
+        date
+      );
     };
 
     interval.range = function (start, stop, step) {
@@ -6617,7 +7189,10 @@ p small {
       start = interval.ceil(start);
       step = step == null ? 1 : Math.floor(step);
       if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
-      do range.push((previous = new Date(+start))), offseti(start, step), floori(start);
+      do
+        range.push((previous = new Date(+start))),
+          offseti(start, step),
+          floori(start);
       while (previous < start && start < stop);
       return range;
     };
@@ -6625,7 +7200,8 @@ p small {
     interval.filter = function (test) {
       return newInterval(
         function (date) {
-          if (date >= date) while ((floori(date), !test(date))) date.setTime(date - 1);
+          if (date >= date)
+            while ((floori(date), !test(date))) date.setTime(date - 1);
         },
         function (date, step) {
           if (date >= date) {
@@ -6638,7 +7214,7 @@ p small {
                 while ((offseti(date, +1), !test(date))) {} // eslint-disable-line no-empty
               }
           }
-        }
+        },
       );
     };
 
@@ -6662,7 +7238,7 @@ p small {
                     }
                   : function (d) {
                       return interval.count(0, d) % step === 0;
-                    }
+                    },
               );
       };
     }
@@ -6679,7 +7255,7 @@ p small {
     },
     function (start, end) {
       return end - start;
-    }
+    },
   );
 
   // An optimized implementation for this simple case.
@@ -6696,7 +7272,7 @@ p small {
       },
       function (start, end) {
         return (end - start) / k;
-      }
+      },
     );
   };
 
@@ -6718,12 +7294,14 @@ p small {
     },
     function (date) {
       return date.getUTCSeconds();
-    }
+    },
   );
 
   var minute = newInterval(
     function (date) {
-      date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond);
+      date.setTime(
+        date - date.getMilliseconds() - date.getSeconds() * durationSecond,
+      );
     },
     function (date, step) {
       date.setTime(+date + step * durationMinute);
@@ -6733,12 +7311,17 @@ p small {
     },
     function (date) {
       return date.getMinutes();
-    }
+    },
   );
 
   var hour = newInterval(
     function (date) {
-      date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond - date.getMinutes() * durationMinute);
+      date.setTime(
+        date -
+          date.getMilliseconds() -
+          date.getSeconds() * durationSecond -
+          date.getMinutes() * durationMinute,
+      );
     },
     function (date, step) {
       date.setTime(+date + step * durationHour);
@@ -6748,7 +7331,7 @@ p small {
     },
     function (date) {
       return date.getHours();
-    }
+    },
   );
 
   var day = newInterval(
@@ -6759,11 +7342,17 @@ p small {
       date.setDate(date.getDate() + step);
     },
     function (start, end) {
-      return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationDay;
+      return (
+        (end -
+          start -
+          (end.getTimezoneOffset() - start.getTimezoneOffset()) *
+            durationMinute) /
+        durationDay
+      );
     },
     function (date) {
       return date.getDate() - 1;
-    }
+    },
   );
 
   function weekday(i) {
@@ -6776,8 +7365,14 @@ p small {
         date.setDate(date.getDate() + step * 7);
       },
       function (start, end) {
-        return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
-      }
+        return (
+          (end -
+            start -
+            (end.getTimezoneOffset() - start.getTimezoneOffset()) *
+              durationMinute) /
+          durationWeek
+        );
+      },
     );
   }
 
@@ -6798,11 +7393,15 @@ p small {
       date.setMonth(date.getMonth() + step);
     },
     function (start, end) {
-      return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+      return (
+        end.getMonth() -
+        start.getMonth() +
+        (end.getFullYear() - start.getFullYear()) * 12
+      );
     },
     function (date) {
       return date.getMonth();
-    }
+    },
   );
 
   var year = newInterval(
@@ -6818,7 +7417,7 @@ p small {
     },
     function (date) {
       return date.getFullYear();
-    }
+    },
   );
 
   // An optimized implementation for this simple case.
@@ -6833,7 +7432,7 @@ p small {
           },
           function (date, step) {
             date.setFullYear(date.getFullYear() + step * k);
-          }
+          },
         );
   };
 
@@ -6849,7 +7448,7 @@ p small {
     },
     function (date) {
       return date.getUTCMinutes();
-    }
+    },
   );
 
   var utcHour = newInterval(
@@ -6864,7 +7463,7 @@ p small {
     },
     function (date) {
       return date.getUTCHours();
-    }
+    },
   );
 
   var utcDay = newInterval(
@@ -6879,7 +7478,7 @@ p small {
     },
     function (date) {
       return date.getUTCDate() - 1;
-    }
+    },
   );
 
   function utcWeekday(i) {
@@ -6893,7 +7492,7 @@ p small {
       },
       function (start, end) {
         return (end - start) / durationWeek;
-      }
+      },
     );
   }
 
@@ -6914,11 +7513,15 @@ p small {
       date.setUTCMonth(date.getUTCMonth() + step);
     },
     function (start, end) {
-      return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+      return (
+        end.getUTCMonth() -
+        start.getUTCMonth() +
+        (end.getUTCFullYear() - start.getUTCFullYear()) * 12
+      );
     },
     function (date) {
       return date.getUTCMonth();
-    }
+    },
   );
 
   var utcYear = newInterval(
@@ -6934,7 +7537,7 @@ p small {
     },
     function (date) {
       return date.getUTCFullYear();
-    }
+    },
   );
 
   // An optimized implementation for this simple case.
@@ -6949,7 +7552,7 @@ p small {
           },
           function (date, step) {
             date.setUTCFullYear(date.getUTCFullYear() + step * k);
-          }
+          },
         );
   };
 
@@ -7026,7 +7629,7 @@ p small {
       y: formatYear,
       Y: formatFullYear,
       Z: formatZone,
-      "%": formatLiteralPercent,
+      '%': formatLiteralPercent,
     };
 
     var utcFormats = {
@@ -7059,7 +7662,7 @@ p small {
       y: formatUTCYear,
       Y: formatUTCFullYear,
       Z: formatUTCZone,
-      "%": formatLiteralPercent,
+      '%': formatLiteralPercent,
     };
 
     var parses = {
@@ -7092,7 +7695,7 @@ p small {
       y: parseYear,
       Y: parseFullYear,
       Z: parseZone,
-      "%": parseLiteralPercent,
+      '%': parseLiteralPercent,
     };
 
     // These recursive directive definitions must be deferred.
@@ -7118,8 +7721,9 @@ p small {
         while (++i < n) {
           if (specifier.charCodeAt(i) === 37) {
             string.push(specifier.slice(j, i));
-            if ((pad = pads[(c = specifier.charAt(++i))]) != null) c = specifier.charAt(++i);
-            else pad = c === "e" ? " " : "0";
+            if ((pad = pads[(c = specifier.charAt(++i))]) != null)
+              c = specifier.charAt(++i);
+            else pad = c === 'e' ? ' ' : '0';
             if ((format = formats[c])) c = format(date, pad);
             string.push(c);
             j = i + 1;
@@ -7127,38 +7731,39 @@ p small {
         }
 
         string.push(specifier.slice(j, i));
-        return string.join("");
+        return string.join('');
       };
     }
 
     function newParse(specifier, Z) {
       return function (string) {
         var d = newDate(1900, undefined, 1),
-          i = parseSpecifier(d, specifier, (string += ""), 0),
+          i = parseSpecifier(d, specifier, (string += ''), 0),
           week,
           day$1;
         if (i != string.length) return null;
 
         // If a UNIX timestamp is specified, return it.
-        if ("Q" in d) return new Date(d.Q);
-        if ("s" in d) return new Date(d.s * 1000 + ("L" in d ? d.L : 0));
+        if ('Q' in d) return new Date(d.Q);
+        if ('s' in d) return new Date(d.s * 1000 + ('L' in d ? d.L : 0));
 
         // If this is utcParse, never use the local timezone.
-        if (Z && !("Z" in d)) d.Z = 0;
+        if (Z && !('Z' in d)) d.Z = 0;
 
         // The am-pm flag is 0 for AM, and 1 for PM.
-        if ("p" in d) d.H = (d.H % 12) + d.p * 12;
+        if ('p' in d) d.H = (d.H % 12) + d.p * 12;
 
         // If the month was not specified, inherit from the quarter.
-        if (d.m === undefined) d.m = "q" in d ? d.q : 0;
+        if (d.m === undefined) d.m = 'q' in d ? d.q : 0;
 
         // Convert day-of-week and week-of-year to day-of-year.
-        if ("V" in d) {
+        if ('V' in d) {
           if (d.V < 1 || d.V > 53) return null;
-          if (!("w" in d)) d.w = 1;
-          if ("Z" in d) {
+          if (!('w' in d)) d.w = 1;
+          if ('Z' in d) {
             (week = utcDate(newDate(d.y, 0, 1))), (day$1 = week.getUTCDay());
-            week = day$1 > 4 || day$1 === 0 ? utcMonday.ceil(week) : utcMonday(week);
+            week =
+              day$1 > 4 || day$1 === 0 ? utcMonday.ceil(week) : utcMonday(week);
             week = utcDay.offset(week, (d.V - 1) * 7);
             d.y = week.getUTCFullYear();
             d.m = week.getUTCMonth();
@@ -7171,16 +7776,22 @@ p small {
             d.m = week.getMonth();
             d.d = week.getDate() + ((d.w + 6) % 7);
           }
-        } else if ("W" in d || "U" in d) {
-          if (!("w" in d)) d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
-          day$1 = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
+        } else if ('W' in d || 'U' in d) {
+          if (!('w' in d)) d.w = 'u' in d ? d.u % 7 : 'W' in d ? 1 : 0;
+          day$1 =
+            'Z' in d
+              ? utcDate(newDate(d.y, 0, 1)).getUTCDay()
+              : localDate(newDate(d.y, 0, 1)).getDay();
           d.m = 0;
-          d.d = "W" in d ? ((d.w + 6) % 7) + d.W * 7 - ((day$1 + 5) % 7) : d.w + d.U * 7 - ((day$1 + 6) % 7);
+          d.d =
+            'W' in d
+              ? ((d.w + 6) % 7) + d.W * 7 - ((day$1 + 5) % 7)
+              : d.w + d.U * 7 - ((day$1 + 6) % 7);
         }
 
         // If a time zone is specified, all fields are interpreted as UTC and then
         // offset according to the specified time zone.
-        if ("Z" in d) {
+        if ('Z' in d) {
           d.H += (d.Z / 100) | 0;
           d.M += d.Z % 100;
           return utcDate(d);
@@ -7215,27 +7826,37 @@ p small {
 
     function parsePeriod(d, string, i) {
       var n = periodRe.exec(string.slice(i));
-      return n ? ((d.p = periodLookup[n[0].toLowerCase()]), i + n[0].length) : -1;
+      return n
+        ? ((d.p = periodLookup[n[0].toLowerCase()]), i + n[0].length)
+        : -1;
     }
 
     function parseShortWeekday(d, string, i) {
       var n = shortWeekdayRe.exec(string.slice(i));
-      return n ? ((d.w = shortWeekdayLookup[n[0].toLowerCase()]), i + n[0].length) : -1;
+      return n
+        ? ((d.w = shortWeekdayLookup[n[0].toLowerCase()]), i + n[0].length)
+        : -1;
     }
 
     function parseWeekday(d, string, i) {
       var n = weekdayRe.exec(string.slice(i));
-      return n ? ((d.w = weekdayLookup[n[0].toLowerCase()]), i + n[0].length) : -1;
+      return n
+        ? ((d.w = weekdayLookup[n[0].toLowerCase()]), i + n[0].length)
+        : -1;
     }
 
     function parseShortMonth(d, string, i) {
       var n = shortMonthRe.exec(string.slice(i));
-      return n ? ((d.m = shortMonthLookup[n[0].toLowerCase()]), i + n[0].length) : -1;
+      return n
+        ? ((d.m = shortMonthLookup[n[0].toLowerCase()]), i + n[0].length)
+        : -1;
     }
 
     function parseMonth(d, string, i) {
       var n = monthRe.exec(string.slice(i));
-      return n ? ((d.m = monthLookup[n[0].toLowerCase()]), i + n[0].length) : -1;
+      return n
+        ? ((d.m = monthLookup[n[0].toLowerCase()]), i + n[0].length)
+        : -1;
     }
 
     function parseLocaleDateTime(d, string, i) {
@@ -7300,28 +7921,28 @@ p small {
 
     return {
       format: function (specifier) {
-        var f = newFormat((specifier += ""), formats);
+        var f = newFormat((specifier += ''), formats);
         f.toString = function () {
           return specifier;
         };
         return f;
       },
       parse: function (specifier) {
-        var p = newParse((specifier += ""), false);
+        var p = newParse((specifier += ''), false);
         p.toString = function () {
           return specifier;
         };
         return p;
       },
       utcFormat: function (specifier) {
-        var f = newFormat((specifier += ""), utcFormats);
+        var f = newFormat((specifier += ''), utcFormats);
         f.toString = function () {
           return specifier;
         };
         return f;
       },
       utcParse: function (specifier) {
-        var p = newParse((specifier += ""), true);
+        var p = newParse((specifier += ''), true);
         p.toString = function () {
           return specifier;
         };
@@ -7330,24 +7951,29 @@ p small {
     };
   }
 
-  var pads = { "-": "", _: " ", 0: "0" },
+  var pads = { '-': '', _: ' ', 0: '0' },
     numberRe = /^\s*\d+/, // note: ignores next directive
     percentRe = /^%/,
     requoteRe = /[\\^$*+?|[\]().{}]/g;
 
   function pad(value, fill, width) {
-    var sign = value < 0 ? "-" : "",
-      string = (sign ? -value : value) + "",
+    var sign = value < 0 ? '-' : '',
+      string = (sign ? -value : value) + '',
       length = string.length;
-    return sign + (length < width ? new Array(width - length + 1).join(fill) + string : string);
+    return (
+      sign +
+      (length < width
+        ? new Array(width - length + 1).join(fill) + string
+        : string)
+    );
   }
 
   function requote(s) {
-    return s.replace(requoteRe, "\\$&");
+    return s.replace(requoteRe, '\\$&');
   }
 
   function formatRe(names) {
-    return new RegExp("^(?:" + names.map(requote).join("|") + ")", "i");
+    return new RegExp('^(?:' + names.map(requote).join('|') + ')', 'i');
   }
 
   function formatLookup(names) {
@@ -7390,12 +8016,16 @@ p small {
 
   function parseYear(d, string, i) {
     var n = numberRe.exec(string.slice(i, i + 2));
-    return n ? ((d.y = +n[0] + (+n[0] > 68 ? 1900 : 2000)), i + n[0].length) : -1;
+    return n
+      ? ((d.y = +n[0] + (+n[0] > 68 ? 1900 : 2000)), i + n[0].length)
+      : -1;
   }
 
   function parseZone(d, string, i) {
     var n = /^(Z)|([+-]\d\d)(?::?(\d\d))?/.exec(string.slice(i, i + 6));
-    return n ? ((d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00"))), i + n[0].length) : -1;
+    return n
+      ? ((d.Z = n[1] ? 0 : -(n[2] + (n[3] || '00'))), i + n[0].length)
+      : -1;
   }
 
   function parseQuarter(d, string, i) {
@@ -7479,7 +8109,7 @@ p small {
   }
 
   function formatMicroseconds(d, p) {
-    return formatMilliseconds(d, p) + "000";
+    return formatMilliseconds(d, p) + '000';
   }
 
   function formatMonthNumber(d, p) {
@@ -7527,7 +8157,11 @@ p small {
 
   function formatZone(d) {
     var z = d.getTimezoneOffset();
-    return (z > 0 ? "-" : ((z *= -1), "+")) + pad((z / 60) | 0, "0", 2) + pad(z % 60, "0", 2);
+    return (
+      (z > 0 ? '-' : ((z *= -1), '+')) +
+      pad((z / 60) | 0, '0', 2) +
+      pad(z % 60, '0', 2)
+    );
   }
 
   function formatUTCDayOfMonth(d, p) {
@@ -7551,7 +8185,7 @@ p small {
   }
 
   function formatUTCMicroseconds(d, p) {
-    return formatUTCMilliseconds(d, p) + "000";
+    return formatUTCMilliseconds(d, p) + '000';
   }
 
   function formatUTCMonthNumber(d, p) {
@@ -7578,7 +8212,11 @@ p small {
   function formatUTCWeekNumberISO(d, p) {
     var day = d.getUTCDay();
     d = day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
-    return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p, 2);
+    return pad(
+      utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4),
+      p,
+      2,
+    );
   }
 
   function formatUTCWeekdayNumberSunday(d) {
@@ -7598,11 +8236,11 @@ p small {
   }
 
   function formatUTCZone() {
-    return "+0000";
+    return '+0000';
   }
 
   function formatLiteralPercent() {
-    return "%";
+    return '%';
   }
 
   function formatUnixTimestamp(d) {
@@ -7620,14 +8258,48 @@ p small {
   var utcParse;
 
   defaultLocale$1({
-    dateTime: "%x, %X",
-    date: "%-m/%-d/%Y",
-    time: "%-I:%M:%S %p",
-    periods: ["AM", "PM"],
-    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    dateTime: '%x, %X',
+    date: '%-m/%-d/%Y',
+    time: '%-I:%M:%S %p',
+    periods: ['AM', 'PM'],
+    days: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+    shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    months: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    shortMonths: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
   });
 
   function defaultLocale$1(definition) {
@@ -7639,26 +8311,31 @@ p small {
     return locale$1;
   }
 
-  var isoSpecifier = "%Y-%m-%dT%H:%M:%S.%LZ";
+  var isoSpecifier = '%Y-%m-%dT%H:%M:%S.%LZ';
 
   function formatIsoNative(date) {
     return date.toISOString();
   }
 
-  var formatIso = Date.prototype.toISOString ? formatIsoNative : utcFormat(isoSpecifier);
+  var formatIso = Date.prototype.toISOString
+    ? formatIsoNative
+    : utcFormat(isoSpecifier);
 
   function parseIsoNative(string) {
     var date = new Date(string);
     return isNaN(date) ? null : date;
   }
 
-  var parseIso = +new Date("2000-01-01T00:00:00.000Z") ? parseIsoNative : utcParse(isoSpecifier);
+  var parseIso = +new Date('2000-01-01T00:00:00.000Z')
+    ? parseIsoNative
+    : utcParse(isoSpecifier);
 
   var noop = { value: function () {} };
 
   function dispatch() {
     for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
-      if (!(t = arguments[i] + "") || t in _ || /[\s.]/.test(t)) throw new Error("illegal type: " + t);
+      if (!(t = arguments[i] + '') || t in _ || /[\s.]/.test(t))
+        throw new Error('illegal type: ' + t);
       _[t] = [];
     }
     return new Dispatch(_);
@@ -7673,10 +8350,11 @@ p small {
       .trim()
       .split(/^|\s+/)
       .map(function (t) {
-        var name = "",
-          i = t.indexOf(".");
+        var name = '',
+          i = t.indexOf('.');
         if (i >= 0) (name = t.slice(i + 1)), (t = t.slice(0, i));
-        if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
+        if (t && !types.hasOwnProperty(t))
+          throw new Error('unknown type: ' + t);
         return { type: t, name: name };
       });
   }
@@ -7685,23 +8363,28 @@ p small {
     constructor: Dispatch,
     on: function (typename, callback) {
       var _ = this._,
-        T = parseTypenames(typename + "", _),
+        T = parseTypenames(typename + '', _),
         t,
         i = -1,
         n = T.length;
 
       // If no callback was specified, return the callback of the given type and name.
       if (arguments.length < 2) {
-        while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
+        while (++i < n)
+          if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name)))
+            return t;
         return;
       }
 
       // If a type was specified, set the callback for the given type and name.
       // Otherwise, if a null callback was specified, remove callbacks of the given name.
-      if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
+      if (callback != null && typeof callback !== 'function')
+        throw new Error('invalid callback: ' + callback);
       while (++i < n) {
-        if ((t = (typename = T[i]).type)) _[t] = set(_[t], typename.name, callback);
-        else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
+        if ((t = (typename = T[i]).type))
+          _[t] = set(_[t], typename.name, callback);
+        else if (callback == null)
+          for (t in _) _[t] = set(_[t], typename.name, null);
       }
 
       return this;
@@ -7713,13 +8396,19 @@ p small {
       return new Dispatch(copy);
     },
     call: function (type, that) {
-      if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
-      if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-      for (t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+      if ((n = arguments.length - 2) > 0)
+        for (var args = new Array(n), i = 0, n, t; i < n; ++i)
+          args[i] = arguments[i + 2];
+      if (!this._.hasOwnProperty(type))
+        throw new Error('unknown type: ' + type);
+      for (t = this._[type], i = 0, n = t.length; i < n; ++i)
+        t[i].value.apply(that, args);
     },
     apply: function (type, that, args) {
-      if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-      for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+      if (!this._.hasOwnProperty(type))
+        throw new Error('unknown type: ' + type);
+      for (var t = this._[type], i = 0, n = t.length; i < n; ++i)
+        t[i].value.apply(that, args);
     },
   };
 
@@ -7742,28 +8431,33 @@ p small {
     return type;
   }
 
-  var xhtml = "http://www.w3.org/1999/xhtml";
+  var xhtml = 'http://www.w3.org/1999/xhtml';
 
   var namespaces = {
-    svg: "http://www.w3.org/2000/svg",
+    svg: 'http://www.w3.org/2000/svg',
     xhtml: xhtml,
-    xlink: "http://www.w3.org/1999/xlink",
-    xml: "http://www.w3.org/XML/1998/namespace",
-    xmlns: "http://www.w3.org/2000/xmlns/",
+    xlink: 'http://www.w3.org/1999/xlink',
+    xml: 'http://www.w3.org/XML/1998/namespace',
+    xmlns: 'http://www.w3.org/2000/xmlns/',
   };
 
   function namespace(name) {
-    var prefix = (name += ""),
-      i = prefix.indexOf(":");
-    if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
-    return namespaces.hasOwnProperty(prefix) ? { space: namespaces[prefix], local: name } : name;
+    var prefix = (name += ''),
+      i = prefix.indexOf(':');
+    if (i >= 0 && (prefix = name.slice(0, i)) !== 'xmlns')
+      name = name.slice(i + 1);
+    return namespaces.hasOwnProperty(prefix)
+      ? { space: namespaces[prefix], local: name }
+      : name;
   }
 
   function creatorInherit(name) {
     return function () {
       var document = this.ownerDocument,
         uri = this.namespaceURI;
-      return uri === xhtml && document.documentElement.namespaceURI === xhtml ? document.createElement(name) : document.createElementNS(uri, name);
+      return uri === xhtml && document.documentElement.namespaceURI === xhtml
+        ? document.createElement(name)
+        : document.createElementNS(uri, name);
     };
   }
 
@@ -7789,12 +8483,31 @@ p small {
   }
 
   function selection_select(select) {
-    if (typeof select !== "function") select = selector(select);
+    if (typeof select !== 'function') select = selector(select);
 
-    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-      for (var group = groups[j], n = group.length, subgroup = (subgroups[j] = new Array(n)), node, subnode, i = 0; i < n; ++i) {
-        if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
-          if ("__data__" in node) subnode.__data__ = node.__data__;
+    for (
+      var groups = this._groups,
+        m = groups.length,
+        subgroups = new Array(m),
+        j = 0;
+      j < m;
+      ++j
+    ) {
+      for (
+        var group = groups[j],
+          n = group.length,
+          subgroup = (subgroups[j] = new Array(n)),
+          node,
+          subnode,
+          i = 0;
+        i < n;
+        ++i
+      ) {
+        if (
+          (node = group[i]) &&
+          (subnode = select.call(node, node.__data__, i, group))
+        ) {
+          if ('__data__' in node) subnode.__data__ = node.__data__;
           subgroup[i] = subnode;
         }
       }
@@ -7816,9 +8529,17 @@ p small {
   }
 
   function selection_selectAll(select) {
-    if (typeof select !== "function") select = selectorAll(select);
+    if (typeof select !== 'function') select = selectorAll(select);
 
-    for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+    for (
+      var groups = this._groups,
+        m = groups.length,
+        subgroups = [],
+        parents = [],
+        j = 0;
+      j < m;
+      ++j
+    ) {
       for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
         if ((node = group[i])) {
           subgroups.push(select.call(node, node.__data__, i, group));
@@ -7837,10 +8558,25 @@ p small {
   }
 
   function selection_filter(match) {
-    if (typeof match !== "function") match = matcher(match);
+    if (typeof match !== 'function') match = matcher(match);
 
-    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-      for (var group = groups[j], n = group.length, subgroup = (subgroups[j] = []), node, i = 0; i < n; ++i) {
+    for (
+      var groups = this._groups,
+        m = groups.length,
+        subgroups = new Array(m),
+        j = 0;
+      j < m;
+      ++j
+    ) {
+      for (
+        var group = groups[j],
+          n = group.length,
+          subgroup = (subgroups[j] = []),
+          node,
+          i = 0;
+        i < n;
+        ++i
+      ) {
         if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
           subgroup.push(node);
         }
@@ -7855,7 +8591,10 @@ p small {
   }
 
   function selection_enter() {
-    return new Selection(this._enter || this._groups.map(sparse), this._parents);
+    return new Selection(
+      this._enter || this._groups.map(sparse),
+      this._parents,
+    );
   }
 
   function EnterNode(parent, datum) {
@@ -7888,7 +8627,7 @@ p small {
     };
   }
 
-  var keyPrefix = "$"; // Protect against keys like “__proto__”.
+  var keyPrefix = '$'; // Protect against keys like “__proto__”.
 
   function bindIndex(parent, group, enter, update, exit, data) {
     var i = 0,
@@ -7929,7 +8668,8 @@ p small {
     // If multiple nodes have the same key, the duplicates are added to exit.
     for (i = 0; i < groupLength; ++i) {
       if ((node = group[i])) {
-        keyValues[i] = keyValue = keyPrefix + key.call(node, node.__data__, i, group);
+        keyValues[i] = keyValue =
+          keyPrefix + key.call(node, node.__data__, i, group);
         if (keyValue in nodeByKeyValue) {
           exit[i] = node;
         } else {
@@ -7973,9 +8713,17 @@ p small {
       parents = this._parents,
       groups = this._groups;
 
-    if (typeof value !== "function") value = constant$2(value);
+    if (typeof value !== 'function') value = constant$2(value);
 
-    for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
+    for (
+      var m = groups.length,
+        update = new Array(m),
+        enter = new Array(m),
+        exit = new Array(m),
+        j = 0;
+      j < m;
+      ++j
+    ) {
       var parent = parents[j],
         group = groups[j],
         groupLength = group.length,
@@ -8013,7 +8761,10 @@ p small {
     var enter = this.enter(),
       update = this,
       exit = this.exit();
-    enter = typeof onenter === "function" ? onenter(enter) : enter.append(onenter + "");
+    enter =
+      typeof onenter === 'function'
+        ? onenter(enter)
+        : enter.append(onenter + '');
     if (onupdate != null) update = onupdate(update);
     if (onexit == null) exit.remove();
     else onexit(exit);
@@ -8032,7 +8783,16 @@ p small {
       j < m;
       ++j
     ) {
-      for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = (merges[j] = new Array(n)), node, i = 0; i < n; ++i) {
+      for (
+        var group0 = groups0[j],
+          group1 = groups1[j],
+          n = group0.length,
+          merge = (merges[j] = new Array(n)),
+          node,
+          i = 0;
+        i < n;
+        ++i
+      ) {
         if ((node = group0[i] || group1[i])) {
           merge[i] = node;
         }
@@ -8048,9 +8808,14 @@ p small {
 
   function selection_order() {
     for (var groups = this._groups, j = -1, m = groups.length; ++j < m; ) {
-      for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0; ) {
+      for (
+        var group = groups[j], i = group.length - 1, next = group[i], node;
+        --i >= 0;
+
+      ) {
         if ((node = group[i])) {
-          if (next && node.compareDocumentPosition(next) ^ 4) next.parentNode.insertBefore(node, next);
+          if (next && node.compareDocumentPosition(next) ^ 4)
+            next.parentNode.insertBefore(node, next);
           next = node;
         }
       }
@@ -8066,8 +8831,23 @@ p small {
       return a && b ? compare(a.__data__, b.__data__) : !a - !b;
     }
 
-    for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
-      for (var group = groups[j], n = group.length, sortgroup = (sortgroups[j] = new Array(n)), node, i = 0; i < n; ++i) {
+    for (
+      var groups = this._groups,
+        m = groups.length,
+        sortgroups = new Array(m),
+        j = 0;
+      j < m;
+      ++j
+    ) {
+      for (
+        var group = groups[j],
+          n = group.length,
+          sortgroup = (sortgroups[j] = new Array(n)),
+          node,
+          i = 0;
+        i < n;
+        ++i
+      ) {
         if ((node = group[i])) {
           sortgroup[i] = node;
         }
@@ -8176,7 +8956,9 @@ p small {
 
     if (arguments.length < 2) {
       var node = this.node();
-      return fullname.local ? node.getAttributeNS(fullname.space, fullname.local) : node.getAttribute(fullname);
+      return fullname.local
+        ? node.getAttributeNS(fullname.space, fullname.local)
+        : node.getAttribute(fullname);
     }
 
     return this.each(
@@ -8184,13 +8966,13 @@ p small {
         ? fullname.local
           ? attrRemoveNS
           : attrRemove
-        : typeof value === "function"
+        : typeof value === 'function'
           ? fullname.local
             ? attrFunctionNS
             : attrFunction
           : fullname.local
             ? attrConstantNS
-            : attrConstant)(fullname, value)
+            : attrConstant)(fullname, value),
     );
   }
 
@@ -8225,13 +9007,20 @@ p small {
   function selection_style(name, value, priority) {
     return arguments.length > 1
       ? this.each(
-          (value == null ? styleRemove : typeof value === "function" ? styleFunction : styleConstant)(name, value, priority == null ? "" : priority)
+          (value == null
+            ? styleRemove
+            : typeof value === 'function'
+              ? styleFunction
+              : styleConstant)(name, value, priority == null ? '' : priority),
         )
       : styleValue(this.node(), name);
   }
 
   function styleValue(node, name) {
-    return node.style.getPropertyValue(name) || defaultView(node).getComputedStyle(node, null).getPropertyValue(name);
+    return (
+      node.style.getPropertyValue(name) ||
+      defaultView(node).getComputedStyle(node, null).getPropertyValue(name)
+    );
   }
 
   function propertyRemove(name) {
@@ -8256,7 +9045,13 @@ p small {
 
   function selection_property(name, value) {
     return arguments.length > 1
-      ? this.each((value == null ? propertyRemove : typeof value === "function" ? propertyFunction : propertyConstant)(name, value))
+      ? this.each(
+          (value == null
+            ? propertyRemove
+            : typeof value === 'function'
+              ? propertyFunction
+              : propertyConstant)(name, value),
+        )
       : this.node()[name];
   }
 
@@ -8270,7 +9065,7 @@ p small {
 
   function ClassList(node) {
     this._node = node;
-    this._names = classArray(node.getAttribute("class") || "");
+    this._names = classArray(node.getAttribute('class') || '');
   }
 
   ClassList.prototype = {
@@ -8278,14 +9073,14 @@ p small {
       var i = this._names.indexOf(name);
       if (i < 0) {
         this._names.push(name);
-        this._node.setAttribute("class", this._names.join(" "));
+        this._node.setAttribute('class', this._names.join(' '));
       }
     },
     remove: function (name) {
       var i = this._names.indexOf(name);
       if (i >= 0) {
         this._names.splice(i, 1);
-        this._node.setAttribute("class", this._names.join(" "));
+        this._node.setAttribute('class', this._names.join(' '));
       }
     },
     contains: function (name) {
@@ -8326,7 +9121,7 @@ p small {
   }
 
   function selection_classed(name, value) {
-    var names = classArray(name + "");
+    var names = classArray(name + '');
 
     if (arguments.length < 2) {
       var list = classList(this.node()),
@@ -8336,11 +9131,17 @@ p small {
       return true;
     }
 
-    return this.each((typeof value === "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
+    return this.each(
+      (typeof value === 'function'
+        ? classedFunction
+        : value
+          ? classedTrue
+          : classedFalse)(names, value),
+    );
   }
 
   function textRemove() {
-    this.textContent = "";
+    this.textContent = '';
   }
 
   function textConstant(value) {
@@ -8352,18 +9153,24 @@ p small {
   function textFunction(value) {
     return function () {
       var v = value.apply(this, arguments);
-      this.textContent = v == null ? "" : v;
+      this.textContent = v == null ? '' : v;
     };
   }
 
   function selection_text(value) {
     return arguments.length
-      ? this.each(value == null ? textRemove : (typeof value === "function" ? textFunction : textConstant)(value))
+      ? this.each(
+          value == null
+            ? textRemove
+            : (typeof value === 'function' ? textFunction : textConstant)(
+                value,
+              ),
+        )
       : this.node().textContent;
   }
 
   function htmlRemove() {
-    this.innerHTML = "";
+    this.innerHTML = '';
   }
 
   function htmlConstant(value) {
@@ -8375,13 +9182,19 @@ p small {
   function htmlFunction(value) {
     return function () {
       var v = value.apply(this, arguments);
-      this.innerHTML = v == null ? "" : v;
+      this.innerHTML = v == null ? '' : v;
     };
   }
 
   function selection_html(value) {
     return arguments.length
-      ? this.each(value == null ? htmlRemove : (typeof value === "function" ? htmlFunction : htmlConstant)(value))
+      ? this.each(
+          value == null
+            ? htmlRemove
+            : (typeof value === 'function' ? htmlFunction : htmlConstant)(
+                value,
+              ),
+        )
       : this.node().innerHTML;
   }
 
@@ -8394,7 +9207,8 @@ p small {
   }
 
   function lower() {
-    if (this.previousSibling) this.parentNode.insertBefore(this, this.parentNode.firstChild);
+    if (this.previousSibling)
+      this.parentNode.insertBefore(this, this.parentNode.firstChild);
   }
 
   function selection_lower() {
@@ -8402,7 +9216,7 @@ p small {
   }
 
   function selection_append(name) {
-    var create = typeof name === "function" ? name : creator(name);
+    var create = typeof name === 'function' ? name : creator(name);
     return this.select(function () {
       return this.appendChild(create.apply(this, arguments));
     });
@@ -8413,10 +9227,18 @@ p small {
   }
 
   function selection_insert(name, before) {
-    var create = typeof name === "function" ? name : creator(name),
-      select = before == null ? constantNull : typeof before === "function" ? before : selector(before);
+    var create = typeof name === 'function' ? name : creator(name),
+      select =
+        before == null
+          ? constantNull
+          : typeof before === 'function'
+            ? before
+            : selector(before);
     return this.select(function () {
-      return this.insertBefore(create.apply(this, arguments), select.apply(this, arguments) || null);
+      return this.insertBefore(
+        create.apply(this, arguments),
+        select.apply(this, arguments) || null,
+      );
     });
   }
 
@@ -8446,17 +9268,19 @@ p small {
   }
 
   function selection_datum(value) {
-    return arguments.length ? this.property("__data__", value) : this.node().__data__;
+    return arguments.length
+      ? this.property('__data__', value)
+      : this.node().__data__;
   }
 
   var filterEvents = {};
 
   var event = null;
 
-  if (typeof document !== "undefined") {
+  if (typeof document !== 'undefined') {
     var element = document.documentElement;
-    if (!("onmouseenter" in element)) {
-      filterEvents = { mouseenter: "mouseover", mouseleave: "mouseout" };
+    if (!('onmouseenter' in element)) {
+      filterEvents = { mouseenter: 'mouseover', mouseleave: 'mouseout' };
     }
   }
 
@@ -8464,7 +9288,10 @@ p small {
     listener = contextListener(listener, index, group);
     return function (event) {
       var related = event.relatedTarget;
-      if (!related || (related !== this && !(related.compareDocumentPosition(this) & 8))) {
+      if (
+        !related ||
+        (related !== this && !(related.compareDocumentPosition(this) & 8))
+      ) {
         listener.call(this, event);
       }
     };
@@ -8487,8 +9314,8 @@ p small {
       .trim()
       .split(/^|\s+/)
       .map(function (t) {
-        var name = "",
-          i = t.indexOf(".");
+        var name = '',
+          i = t.indexOf('.');
         if (i >= 0) (name = t.slice(i + 1)), (t = t.slice(0, i));
         return { type: t, name: name };
       });
@@ -8499,7 +9326,11 @@ p small {
       var on = this.__on;
       if (!on) return;
       for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
-        if (((o = on[j]), (!typename.type || o.type === typename.type) && o.name === typename.name)) {
+        if (
+          ((o = on[j]),
+          (!typename.type || o.type === typename.type) &&
+            o.name === typename.name)
+        ) {
           this.removeEventListener(o.type, o.listener, o.capture);
         } else {
           on[++i] = o;
@@ -8511,7 +9342,9 @@ p small {
   }
 
   function onAdd(typename, value, capture) {
-    var wrap = filterEvents.hasOwnProperty(typename.type) ? filterContextListener : contextListener;
+    var wrap = filterEvents.hasOwnProperty(typename.type)
+      ? filterContextListener
+      : contextListener;
     return function (d, i, group) {
       var on = this.__on,
         o,
@@ -8520,7 +9353,11 @@ p small {
         for (var j = 0, m = on.length; j < m; ++j) {
           if ((o = on[j]).type === typename.type && o.name === typename.name) {
             this.removeEventListener(o.type, o.listener, o.capture);
-            this.addEventListener(o.type, (o.listener = listener), (o.capture = capture));
+            this.addEventListener(
+              o.type,
+              (o.listener = listener),
+              (o.capture = capture),
+            );
             o.value = value;
             return;
           }
@@ -8539,7 +9376,7 @@ p small {
   }
 
   function selection_on(typename, value, capture) {
-    var typenames = parseTypenames$1(typename + ""),
+    var typenames = parseTypenames$1(typename + ''),
       i,
       n = typenames.length,
       t;
@@ -8578,11 +9415,13 @@ p small {
     var window = defaultView(node),
       event = window.CustomEvent;
 
-    if (typeof event === "function") {
+    if (typeof event === 'function') {
       event = new event(type, params);
     } else {
-      event = window.document.createEvent("Event");
-      if (params) event.initEvent(type, params.bubbles, params.cancelable), (event.detail = params.detail);
+      event = window.document.createEvent('Event');
+      if (params)
+        event.initEvent(type, params.bubbles, params.cancelable),
+          (event.detail = params.detail);
       else event.initEvent(type, false, false);
     }
 
@@ -8602,7 +9441,12 @@ p small {
   }
 
   function selection_dispatch(type, params) {
-    return this.each((typeof params === "function" ? dispatchFunction : dispatchConstant)(type, params));
+    return this.each(
+      (typeof params === 'function' ? dispatchFunction : dispatchConstant)(
+        type,
+        params,
+      ),
+    );
   }
 
   var root = [null];
@@ -8652,8 +9496,11 @@ p small {
   };
 
   function select(selector) {
-    return typeof selector === "string"
-      ? new Selection([[document.querySelector(selector)]], [document.documentElement])
+    return typeof selector === 'string'
+      ? new Selection(
+          [[document.querySelector(selector)]],
+          [document.documentElement],
+        )
       : new Selection([[selector]], root);
   }
 
@@ -8675,7 +9522,10 @@ p small {
     }
 
     var rect = node.getBoundingClientRect();
-    return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
+    return [
+      event.clientX - rect.left - node.clientLeft,
+      event.clientY - rect.top - node.clientTop,
+    ];
   }
 
   function mouse(node) {
@@ -8685,7 +9535,8 @@ p small {
   }
 
   function touch(node, touches, identifier) {
-    if (arguments.length < 3) (identifier = touches), (touches = sourceEvent().changedTouches);
+    if (arguments.length < 3)
+      (identifier = touches), (touches = sourceEvent().changedTouches);
 
     for (var i = 0, n = touches ? touches.length : 0, touch; i < n; ++i) {
       if ((touch = touches[i]).identifier === identifier) {
@@ -8707,26 +9558,26 @@ p small {
 
   function nodrag(view) {
     var root = view.document.documentElement,
-      selection = select(view).on("dragstart.drag", noevent, true);
-    if ("onselectstart" in root) {
-      selection.on("selectstart.drag", noevent, true);
+      selection = select(view).on('dragstart.drag', noevent, true);
+    if ('onselectstart' in root) {
+      selection.on('selectstart.drag', noevent, true);
     } else {
       root.__noselect = root.style.MozUserSelect;
-      root.style.MozUserSelect = "none";
+      root.style.MozUserSelect = 'none';
     }
   }
 
   function yesdrag(view, noclick) {
     var root = view.document.documentElement,
-      selection = select(view).on("dragstart.drag", null);
+      selection = select(view).on('dragstart.drag', null);
     if (noclick) {
-      selection.on("click.drag", noevent, true);
+      selection.on('click.drag', noevent, true);
       setTimeout(function () {
-        selection.on("click.drag", null);
+        selection.on('click.drag', null);
       }, 0);
     }
-    if ("onselectstart" in root) {
-      selection.on("selectstart.drag", null);
+    if ('onselectstart' in root) {
+      selection.on('selectstart.drag', null);
     } else {
       root.style.MozUserSelect = root.__noselect;
       delete root.__noselect;
@@ -8739,7 +9590,18 @@ p small {
     };
   }
 
-  function DragEvent(target, type, subject, id, active, x, y, dx, dy, dispatch) {
+  function DragEvent(
+    target,
+    type,
+    subject,
+    id,
+    active,
+    x,
+    y,
+    dx,
+    dy,
+    dispatch,
+  ) {
     this.target = target;
     this.type = type;
     this.subject = subject;
@@ -8771,7 +9633,7 @@ p small {
   }
 
   function defaultTouchable() {
-    return navigator.maxTouchPoints || "ontouchstart" in this;
+    return navigator.maxTouchPoints || 'ontouchstart' in this;
   }
 
   function drag() {
@@ -8780,7 +9642,7 @@ p small {
       subject = defaultSubject,
       touchable = defaultTouchable,
       gestures = {},
-      listeners = dispatch("start", "drag", "end"),
+      listeners = dispatch('start', 'drag', 'end'),
       active = 0,
       mousedownx,
       mousedowny,
@@ -8790,26 +9652,34 @@ p small {
 
     function drag(selection) {
       selection
-        .on("mousedown.drag", mousedowned)
+        .on('mousedown.drag', mousedowned)
         .filter(touchable)
-        .on("touchstart.drag", touchstarted)
-        .on("touchmove.drag", touchmoved)
-        .on("touchend.drag touchcancel.drag", touchended)
-        .style("touch-action", "none")
-        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+        .on('touchstart.drag', touchstarted)
+        .on('touchmove.drag', touchmoved)
+        .on('touchend.drag touchcancel.drag', touchended)
+        .style('touch-action', 'none')
+        .style('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
     }
 
     function mousedowned() {
       if (touchending || !filter.apply(this, arguments)) return;
-      var gesture = beforestart("mouse", container.apply(this, arguments), mouse, this, arguments);
+      var gesture = beforestart(
+        'mouse',
+        container.apply(this, arguments),
+        mouse,
+        this,
+        arguments,
+      );
       if (!gesture) return;
-      select(event.view).on("mousemove.drag", mousemoved, true).on("mouseup.drag", mouseupped, true);
+      select(event.view)
+        .on('mousemove.drag', mousemoved, true)
+        .on('mouseup.drag', mouseupped, true);
       nodrag(event.view);
       nopropagation();
       mousemoving = false;
       mousedownx = event.clientX;
       mousedowny = event.clientY;
-      gesture("start");
+      gesture('start');
     }
 
     function mousemoved() {
@@ -8819,14 +9689,14 @@ p small {
           dy = event.clientY - mousedowny;
         mousemoving = dx * dx + dy * dy > clickDistance2;
       }
-      gestures.mouse("drag");
+      gestures.mouse('drag');
     }
 
     function mouseupped() {
-      select(event.view).on("mousemove.drag mouseup.drag", null);
+      select(event.view).on('mousemove.drag mouseup.drag', null);
       yesdrag(event.view, mousemoving);
       noevent();
-      gestures.mouse("end");
+      gestures.mouse('end');
     }
 
     function touchstarted() {
@@ -8838,9 +9708,17 @@ p small {
         gesture;
 
       for (i = 0; i < n; ++i) {
-        if ((gesture = beforestart(touches[i].identifier, c, touch, this, arguments))) {
+        if (
+          (gesture = beforestart(
+            touches[i].identifier,
+            c,
+            touch,
+            this,
+            arguments,
+          ))
+        ) {
           nopropagation();
-          gesture("start");
+          gesture('start');
         }
       }
     }
@@ -8854,7 +9732,7 @@ p small {
       for (i = 0; i < n; ++i) {
         if ((gesture = gestures[touches[i].identifier])) {
           noevent();
-          gesture("drag");
+          gesture('drag');
         }
       }
     }
@@ -8872,7 +9750,7 @@ p small {
       for (i = 0; i < n; ++i) {
         if ((gesture = gestures[touches[i].identifier])) {
           nopropagation();
-          gesture("end");
+          gesture('end');
         }
       }
     }
@@ -8885,12 +9763,27 @@ p small {
         sublisteners = listeners.copy();
 
       if (
-        !customEvent(new DragEvent(drag, "beforestart", s, id, active, p[0], p[1], 0, 0, sublisteners), function () {
-          if ((event.subject = s = subject.apply(that, args)) == null) return false;
-          dx = s.x - p[0] || 0;
-          dy = s.y - p[1] || 0;
-          return true;
-        })
+        !customEvent(
+          new DragEvent(
+            drag,
+            'beforestart',
+            s,
+            id,
+            active,
+            p[0],
+            p[1],
+            0,
+            0,
+            sublisteners,
+          ),
+          function () {
+            if ((event.subject = s = subject.apply(that, args)) == null)
+              return false;
+            dx = s.x - p[0] || 0;
+            dy = s.y - p[1] || 0;
+            return true;
+          },
+        )
       )
         return;
 
@@ -8898,38 +9791,57 @@ p small {
         var p0 = p,
           n;
         switch (type) {
-          case "start":
+          case 'start':
             (gestures[id] = gesture), (n = active++);
             break;
-          case "end":
+          case 'end':
             delete gestures[id], --active; // nobreak
-          case "drag":
+          case 'drag':
             (p = point(container, id)), (n = active);
             break;
         }
         customEvent(
-          new DragEvent(drag, type, s, id, n, p[0] + dx, p[1] + dy, p[0] - p0[0], p[1] - p0[1], sublisteners),
+          new DragEvent(
+            drag,
+            type,
+            s,
+            id,
+            n,
+            p[0] + dx,
+            p[1] + dy,
+            p[0] - p0[0],
+            p[1] - p0[1],
+            sublisteners,
+          ),
           sublisteners.apply,
           sublisteners,
-          [type, that, args]
+          [type, that, args],
         );
       };
     }
 
     drag.filter = function (_) {
-      return arguments.length ? ((filter = typeof _ === "function" ? _ : constant$3(!!_)), drag) : filter;
+      return arguments.length
+        ? ((filter = typeof _ === 'function' ? _ : constant$3(!!_)), drag)
+        : filter;
     };
 
     drag.container = function (_) {
-      return arguments.length ? ((container = typeof _ === "function" ? _ : constant$3(_)), drag) : container;
+      return arguments.length
+        ? ((container = typeof _ === 'function' ? _ : constant$3(_)), drag)
+        : container;
     };
 
     drag.subject = function (_) {
-      return arguments.length ? ((subject = typeof _ === "function" ? _ : constant$3(_)), drag) : subject;
+      return arguments.length
+        ? ((subject = typeof _ === 'function' ? _ : constant$3(_)), drag)
+        : subject;
     };
 
     drag.touchable = function (_) {
-      return arguments.length ? ((touchable = typeof _ === "function" ? _ : constant$3(!!_)), drag) : touchable;
+      return arguments.length
+        ? ((touchable = typeof _ === 'function' ? _ : constant$3(!!_)), drag)
+        : touchable;
     };
 
     drag.on = function () {
@@ -8938,7 +9850,9 @@ p small {
     };
 
     drag.clickDistance = function (_) {
-      return arguments.length ? ((clickDistance2 = (_ = +_) * _), drag) : Math.sqrt(clickDistance2);
+      return arguments.length
+        ? ((clickDistance2 = (_ = +_) * _), drag)
+        : Math.sqrt(clickDistance2);
     };
 
     return drag;
@@ -8947,7 +9861,7 @@ p small {
   // Copyright 2018 The Distill Template Authors
 
   const T$a = Template(
-    "d-slider",
+    'd-slider',
     `
 <style>
   :host {
@@ -9043,7 +9957,7 @@ p small {
     </div>
     <div class='ticks'></div>
   </div>
-`
+`,
   );
 
   // ARIA
@@ -9064,25 +9978,28 @@ p small {
   class Slider extends T$a(HTMLElement) {
     connectedCallback() {
       this.connected = true;
-      this.setAttribute("role", "slider");
+      this.setAttribute('role', 'slider');
       // Makes the element tab-able.
-      if (!this.hasAttribute("tabindex")) {
-        this.setAttribute("tabindex", 0);
+      if (!this.hasAttribute('tabindex')) {
+        this.setAttribute('tabindex', 0);
       }
 
       // Keeps track of keyboard vs. mouse interactions for focus rings
       this.mouseEvent = false;
 
       // Handles to shadow DOM elements
-      this.knob = this.root.querySelector(".knob-container");
-      this.background = this.root.querySelector(".background");
-      this.trackFill = this.root.querySelector(".track-fill");
-      this.track = this.root.querySelector(".track");
+      this.knob = this.root.querySelector('.knob-container');
+      this.background = this.root.querySelector('.background');
+      this.trackFill = this.root.querySelector('.track-fill');
+      this.track = this.root.querySelector('.track');
 
       // Default values for attributes
       this.min = this.min ? this.min : 0;
       this.max = this.max ? this.max : 100;
-      this.scale = linear$1().domain([this.min, this.max]).range([0, 1]).clamp(true);
+      this.scale = linear$1()
+        .domain([this.min, this.max])
+        .range([0, 1])
+        .clamp(true);
 
       this.origin = this.origin !== undefined ? this.origin : this.min;
       this.step = this.step ? this.step : 1;
@@ -9093,63 +10010,73 @@ p small {
 
       this.drag = drag()
         .container(this.background)
-        .on("start", () => {
+        .on('start', () => {
           this.mouseEvent = true;
-          this.background.classList.add("mousedown");
+          this.background.classList.add('mousedown');
           this.changeValue = this.value;
           this.dragUpdate();
         })
-        .on("drag", () => {
+        .on('drag', () => {
           this.dragUpdate();
         })
-        .on("end", () => {
+        .on('end', () => {
           this.mouseEvent = false;
-          this.background.classList.remove("mousedown");
+          this.background.classList.remove('mousedown');
           this.dragUpdate();
           if (this.changeValue !== this.value) this.dispatchChange();
           this.changeValue = this.value;
         });
       this.drag(select(this.background));
 
-      this.addEventListener("focusin", () => {
+      this.addEventListener('focusin', () => {
         if (!this.mouseEvent) {
-          this.background.classList.add("focus");
+          this.background.classList.add('focus');
         }
       });
-      this.addEventListener("focusout", () => {
-        this.background.classList.remove("focus");
+      this.addEventListener('focusout', () => {
+        this.background.classList.remove('focus');
       });
-      this.addEventListener("keydown", this.onKeyDown);
+      this.addEventListener('keydown', this.onKeyDown);
     }
 
     static get observedAttributes() {
-      return ["min", "max", "value", "step", "ticks", "origin", "tickValues", "tickLabels"];
+      return [
+        'min',
+        'max',
+        'value',
+        'step',
+        'ticks',
+        'origin',
+        'tickValues',
+        'tickLabels',
+      ];
     }
 
     attributeChangedCallback(attr, oldValue, newValue) {
-      if (isNaN(newValue) || newValue === undefined || newValue === null) return;
-      if (attr == "min") {
+      if (isNaN(newValue) || newValue === undefined || newValue === null)
+        return;
+      if (attr == 'min') {
         this.min = +newValue;
-        this.setAttribute("aria-valuemin", this.min);
+        this.setAttribute('aria-valuemin', this.min);
       }
-      if (attr == "max") {
+      if (attr == 'max') {
         this.max = +newValue;
-        this.setAttribute("aria-valuemax", this.max);
+        this.setAttribute('aria-valuemax', this.max);
       }
-      if (attr == "value") {
+      if (attr == 'value') {
         this.update(+newValue);
       }
-      if (attr == "origin") {
+      if (attr == 'origin') {
         this.origin = +newValue;
         // this.update(this.value);
       }
-      if (attr == "step") {
+      if (attr == 'step') {
         if (newValue > 0) {
           this.step = +newValue;
         }
       }
-      if (attr == "ticks") {
-        this.ticks = newValue === "" ? true : newValue;
+      if (attr == 'ticks') {
+        this.ticks = newValue === '' ? true : newValue;
       }
     }
 
@@ -9186,7 +10113,7 @@ p small {
           break;
       }
       if (stopPropagation) {
-        this.background.classList.add("focus");
+        this.background.classList.add('focus');
         event.preventDefault();
         event.stopPropagation();
         if (this.changeValue !== this.value) this.dispatchChange();
@@ -9210,53 +10137,55 @@ p small {
 
     update(value) {
       let v = value;
-      if (this.step !== "any") {
+      if (this.step !== 'any') {
         v = this.quantizeValue(value, this.step);
       }
       v = this.validateValueRange(this.min, this.max, v);
       if (this.connected) {
-        this.knob.style.left = this.scale(v) * 100 + "%";
-        this.trackFill.style.width = this.scale(this.min + Math.abs(v - this.origin)) * 100 + "%";
-        this.trackFill.style.left = this.scale(Math.min(v, this.origin)) * 100 + "%";
+        this.knob.style.left = this.scale(v) * 100 + '%';
+        this.trackFill.style.width =
+          this.scale(this.min + Math.abs(v - this.origin)) * 100 + '%';
+        this.trackFill.style.left =
+          this.scale(Math.min(v, this.origin)) * 100 + '%';
       }
       if (this.value !== v) {
         this.value = v;
-        this.setAttribute("aria-valuenow", this.value);
+        this.setAttribute('aria-valuenow', this.value);
         this.dispatchInput();
       }
     }
 
     // Dispatches only on a committed change (basically only on mouseup).
     dispatchChange() {
-      const e = new Event("change");
+      const e = new Event('change');
       this.dispatchEvent(e, {});
     }
 
     // Dispatches on each value change.
     dispatchInput() {
-      const e = new Event("input");
+      const e = new Event('input');
       this.dispatchEvent(e, {});
     }
 
     renderTicks() {
-      const ticksContainer = this.root.querySelector(".ticks");
+      const ticksContainer = this.root.querySelector('.ticks');
       if (this.ticks !== false) {
         let tickData = [];
         if (this.ticks > 0) {
           tickData = this.scale.ticks(this.ticks);
-        } else if (this.step === "any") {
+        } else if (this.step === 'any') {
           tickData = this.scale.ticks();
         } else {
           tickData = range(this.min, this.max + 1e-6, this.step);
         }
         tickData.forEach((d) => {
-          const tick = document.createElement("div");
-          tick.classList.add("tick");
-          tick.style.left = this.scale(d) * 100 + "%";
+          const tick = document.createElement('div');
+          tick.classList.add('tick');
+          tick.style.left = this.scale(d) * 100 + '%';
           ticksContainer.appendChild(tick);
         });
       } else {
-        ticksContainer.style.display = "none";
+        ticksContainer.style.display = 'none';
       }
     }
   }
@@ -9344,7 +10273,7 @@ distill-header .nav a {
 
   // Copyright 2018 The Distill Template Authors
 
-  const T$b = Template("distill-header", headerTemplate, false);
+  const T$b = Template('distill-header', headerTemplate, false);
 
   class DistillHeader extends T$b(HTMLElement) {}
 
@@ -9381,7 +10310,7 @@ distill-header .nav a {
   function appendixTemplate(frontMatter) {
     let html = styles$2;
 
-    if (typeof frontMatter.githubUrl !== "undefined") {
+    if (typeof frontMatter.githubUrl !== 'undefined') {
       html += `
     <h3 id="updates-and-corrections">Updates and Corrections</h3>
     <p>`;
@@ -9389,25 +10318,31 @@ distill-header .nav a {
         html += `<a href="${frontMatter.githubCompareUpdatesUrl}">View all changes</a> to this article since it was first published.`;
       }
       html += `
-    If you see mistakes or want to suggest changes, please <a href="${frontMatter.githubUrl + "/issues/new"}">create an issue on GitHub</a>. </p>
+    If you see mistakes or want to suggest changes, please <a href="${
+      frontMatter.githubUrl + '/issues/new'
+    }">create an issue on GitHub</a>. </p>
     `;
     }
 
     const journal = frontMatter.journal;
-    if (typeof journal !== "undefined" && journal.title === "Distill") {
+    if (typeof journal !== 'undefined' && journal.title === 'Distill') {
       html += `
     <h3 id="reuse">Reuse</h3>
     <p>Diagrams and text are licensed under Creative Commons Attribution <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> with the <a class="github" href="${frontMatter.githubUrl}">source available on GitHub</a>, unless noted otherwise. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: “Figure from …”.</p>
     `;
     }
 
-    if (typeof frontMatter.publishedDate !== "undefined") {
+    if (typeof frontMatter.publishedDate !== 'undefined') {
       html += `
     <h3 id="citation">Citation</h3>
     <p>For attribution in academic contexts, please cite this work as</p>
-    <pre class="citation short">${frontMatter.concatenatedAuthors}, "${frontMatter.title}", Distill, ${frontMatter.publishedYear}.</pre>
+    <pre class="citation short">${frontMatter.concatenatedAuthors}, "${
+      frontMatter.title
+    }", Distill, ${frontMatter.publishedYear}.</pre>
     <p>BibTeX citation</p>
-    <pre class="citation long">${serializeFrontmatterToBibtex(frontMatter)}</pre>
+    <pre class="citation long">${serializeFrontmatterToBibtex(
+      frontMatter,
+    )}</pre>
     `;
     }
 
@@ -9416,7 +10351,7 @@ distill-header .nav a {
 
   class DistillAppendix extends HTMLElement {
     static get is() {
-      return "distill-appendix";
+      return 'distill-appendix';
     }
 
     set frontMatter(frontMatter) {
@@ -9499,7 +10434,7 @@ distill-header .nav a {
 
   // Copyright 2018 The Distill Template Authors
 
-  const T$c = Template("distill-footer", footerTemplate);
+  const T$c = Template('distill-footer', footerTemplate);
 
   class DistillFooter extends T$c(HTMLElement) {}
 
@@ -9509,34 +10444,38 @@ distill-header .nav a {
   let runlevel = 0;
   const initialize = function () {
     if (window.distill.runlevel < 1) {
-      throw new Error("Insufficient Runlevel for Distill Template!");
+      throw new Error('Insufficient Runlevel for Distill Template!');
     }
 
     /* 1. Flag that we're being loaded */
-    if ("distill" in window && window.distill.templateIsLoading) {
-      throw new Error("Runlevel 1: Distill Template is getting loaded more than once, aborting!");
+    if ('distill' in window && window.distill.templateIsLoading) {
+      throw new Error(
+        'Runlevel 1: Distill Template is getting loaded more than once, aborting!',
+      );
     } else {
       window.distill.templateIsLoading = true;
-      console.debug("Runlevel 1: Distill Template has started loading.");
+      console.debug('Runlevel 1: Distill Template has started loading.');
     }
 
     /* 2. Add styles if they weren't added during prerendering */
     makeStyleTag(document);
-    console.debug("Runlevel 1: Static Distill styles have been added.");
-    console.debug("Runlevel 1->2.");
+    console.debug('Runlevel 1: Static Distill styles have been added.');
+    console.debug('Runlevel 1->2.');
     window.distill.runlevel += 1;
 
     /* 3. Register Controller listener functions */
     /* Needs to happen before components to their connected callbacks have a controller to talk to. */
-    for (const [functionName, callback] of Object.entries(Controller.listeners)) {
-      if (typeof callback === "function") {
+    for (const [functionName, callback] of Object.entries(
+      Controller.listeners,
+    )) {
+      if (typeof callback === 'function') {
         document.addEventListener(functionName, callback);
       } else {
-        console.error("Runlevel 2: Controller listeners need to be functions!");
+        console.error('Runlevel 2: Controller listeners need to be functions!');
       }
     }
-    console.debug("Runlevel 2: We can now listen to controller events.");
-    console.debug("Runlevel 2->3.");
+    console.debug('Runlevel 2: We can now listen to controller events.');
+    console.debug('Runlevel 2->3.');
     window.distill.runlevel += 1;
 
     /* 4. Register components */
@@ -9565,16 +10504,18 @@ distill-header .nav a {
     const distillComponents = [DistillHeader, DistillAppendix, DistillFooter];
 
     if (window.distill.runlevel < 2) {
-      throw new Error("Insufficient Runlevel for adding custom elements!");
+      throw new Error('Insufficient Runlevel for adding custom elements!');
     }
     const allComponents = components.concat(distillComponents);
     for (const component of allComponents) {
-      console.debug("Runlevel 2: Registering custom element: " + component.is);
+      console.debug('Runlevel 2: Registering custom element: ' + component.is);
       customElements.define(component.is, component);
     }
 
-    console.debug("Runlevel 3: Distill Template finished registering custom elements.");
-    console.debug("Runlevel 3->4.");
+    console.debug(
+      'Runlevel 3: Distill Template finished registering custom elements.',
+    );
+    console.debug('Runlevel 3->4.');
     window.distill.runlevel += 1;
 
     // If template was added after DOMContentLoaded we may have missed that event.
@@ -9583,7 +10524,7 @@ distill-header .nav a {
       Controller.listeners.DOMContentLoaded();
     }
 
-    console.debug("Runlevel 4: Distill Template initialisation complete.");
+    console.debug('Runlevel 4: Distill Template initialisation complete.');
     window.distill.templateIsLoading = false;
     window.distill.templateHasLoaded = true;
   };
@@ -9592,12 +10533,12 @@ distill-header .nav a {
 
   /* 0. Check browser feature support; synchronously polyfill if needed */
   if (Polyfills.browserSupportsAllFeatures()) {
-    console.debug("Runlevel 0: No need for polyfills.");
-    console.debug("Runlevel 0->1.");
+    console.debug('Runlevel 0: No need for polyfills.');
+    console.debug('Runlevel 0->1.');
     window.distill.runlevel += 1;
     window.distill.initialize();
   } else {
-    console.debug("Runlevel 0: Distill Template is loading polyfills.");
+    console.debug('Runlevel 0: Distill Template is loading polyfills.');
     Polyfills.load(window.distill.initialize);
   }
 });

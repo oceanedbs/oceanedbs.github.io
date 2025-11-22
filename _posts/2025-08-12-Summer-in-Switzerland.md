@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A summer in Switzerland -  2025
-date: 2024-06-01 10:00:00
+date: 2025-08-12 10:00:00
 description: Photography taken during a hiking week, in Switzerland. From Interlaken to Grindelwald.
 tags: photography
 categories: photography

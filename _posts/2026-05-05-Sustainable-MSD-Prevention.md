@@ -2,7 +2,7 @@
 layout: post
 title: Presentation at the Sustainable MSD prevention
 date: 2026-05-05 16:00:00
-description: Invited Presentation at the Sustainable MSD Prevention : New Challenges for Reasearch and Practice
+description: Invited Presentation at the Sustainable MSD Prevention - New Challenges for Reasearch and Practice
 tags: research
 thumbnail: assets/img/post_preview/MSD_Prevention.png
 categories: research

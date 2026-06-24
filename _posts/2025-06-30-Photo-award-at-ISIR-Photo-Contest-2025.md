@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Photo award at ISIR Photo Contest 2025
-date: 2025-06-31 14:00:00
+date: 2025-06-30 14:00:00
 description: Jury award and Public award for 2 pictures at the ISIR photo contest
 tags: photography
 thumbnail: assets/img/post_preview/isir_award1.jpg
